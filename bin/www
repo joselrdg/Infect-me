@@ -44,7 +44,7 @@ server.on('error', error => {
 // Initialization on port
 const PORT = process.env.PORT || 3000;
 server.listen(PORT, () => {
-  console.log(`Infect Me running on port ${PORT} 🎧 🥁 🎸 🔊`);
+  console.log(`Infect-me running on port ${PORT} 🎧 🥁 🎸 🔊`);
 });
 
 
