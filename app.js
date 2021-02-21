@@ -3,7 +3,6 @@ const createError = require("http-errors");
 const express = require("express");
 const favicon = require('serve-favicon');
 const logger = require("morgan");
-
 const routes = require("./routes/index.routes");
 const path = require('path');
 
@@ -28,13 +27,10 @@ app.set("view engine", "hbs");
 app.use(favicon(path.join(__dirname, 'public', 'images', 'favicon.ico')));
 
 // Web Title
-app.locals.title = 'Addicta';
+app.locals.title = 'Infect-me';
 
 // Routes
-const routes = require("./routes/index.routes");
-const user = require("./routes/user.routes");
 app.use('/', routes);
-app.use('/', user);
 module.exports = app;
 
 
