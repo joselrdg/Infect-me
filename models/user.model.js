@@ -7,10 +7,15 @@ const SALT_ROUNDS = 10;
 
 const userSchema = new mongoose.Schema(
     {
+        userName: {
+            type: String,
+            required: 'You need to add a user name',
+            unique:true,
+            trim:true
+        },    
         email: {
             type: String,
             required: 'You need to add an email',
-            unique: true,
             lowercase: true,
             match: [EMAIL_PATTERN, 'Invalid email'],
             trim: true
@@ -19,6 +24,10 @@ const userSchema = new mongoose.Schema(
             type: String,
             required: 'The password is required',
             match: [PASSWORD_PATTERN, 'Your password must contain at least 1 number, 1 uppercase, 1 lowercase and 8 characters']
+        },
+        role: {
+            type:String,
+            default:['USER']
         }
     }
 )
