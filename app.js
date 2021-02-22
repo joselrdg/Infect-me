@@ -4,13 +4,18 @@ const express = require("express");
 const favicon = require('serve-favicon');
 const logger = require("morgan");
 const routes = require("./routes/index.routes");
-const path = require('path');
-
-
+const passport = require ("passport");
 //Session
 const session = require("./config/session.config");
+const path = require('path');  
 
+
+
+
+// database configuration
 require("./config/db.config");
+// passport configuration
+require("./config/passport.config")
 require('./config/hbs.config');
 
 
@@ -22,12 +27,23 @@ app.use(express.static("public"));
 
 app.use(logger("dev"));
 app.use(session);
+// initialize and user passport session
+app.use(passport.initialize());
+app.use(passport.session()); 
 app.set("views", __dirname + "/views");
 app.set("view engine", "hbs");
 app.use(favicon(path.join(__dirname, 'public', 'images', 'favicon.ico')));
 
 // Web Title
 app.locals.title = 'Infect-me';
+
+// save and use user logged
+app.use((req,res,next) => {
+    req.currentUser = req.user;
+    res.locals.currentUser = req.user;
+    next();
+});
+
 
 // Routes
 app.use('/', routes);

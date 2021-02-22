@@ -1,13 +1,18 @@
-
-// Session handle
-const session = require("session");
-const MongoStore = require("conect-mongo")(session);
-const bcrypt = require("bcrypt");
-const User = require('../models/user.model')
-
-// Passport Handle
+// Passport Handler
 const passport = require("passport");
+// mongo handler
+const mongoose= require("mongoose");
+
+// Passport strategy Handler
 const LocalStrategy = require('passport-local').Strategy;
+
+const User = require('../models/user.model')
+// Session handler
+//const session = require("session");
+//const bcrypt = require("bcrypt");
+
+
+
 
 passport.serializeUser((user,next) => {
     next(null,user._id)
@@ -28,18 +33,41 @@ passport.use('local-Auth',new LocalStrategy (
     usernameField: 'userName',
     passwordField: 'password'    
 },
-(req,res,next) =>{
-    User.findOne(userName)
+(userName,password,next) =>{
+    User.findOne({userName : userName})
     .then((user) => {
         if (!user) {
+            // user doesn't exist
             return next(null,false,{message: `User or password is not correct`});
-        }
+        } else {
+            //check password
+            return user.checkPassword(password)
+            .then( match => {
+                if(match) {
+                    //password correct
+                    if (user.active) {
+                        // user active logged
+                        next(null,user);
 
-        // VALIDAR LA CONSTRASEÑA UTILIZANDO BCRYPT
-        next(null,user);
+                    } else 
+                    {
+                        // user doesn't active
+                        next(null,false, {message: `Active your account. Check your email box`});
+                    }
+                } else {
+                    // password incorrect
+                    return next(null,false,{message: `User or password is not correct`});
+                }
+            })
+
+        } 
+
+        
+       
     })
-}
-)
+    .catch(next)
+} // end second parameter 
+) // localStrategy instance
 );
 
 

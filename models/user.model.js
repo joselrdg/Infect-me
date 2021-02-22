@@ -27,8 +27,32 @@ const userSchema = new mongoose.Schema(
         },
         role: {
             type:String,
-            default:['USER']
+            default:'USER'
+        },
+        social : {
+            google: String
+        },
+        picture : {
+            type: String,
+            default: '../public/images/userIcon.png'
+        },
+        active: {
+            type: Boolean,
+            default:false
+        },
+        activationToken: {
+            type: String,
+            default: () => {
+                return (
+                    Math.random().toString(36).substring(2, 15) +
+                    Math.random().toString(36).substring(2, 15) +
+                    Math.random().toString(36).substring(2, 15) +
+                    Math.random().toString(36).substring(2, 15) 
+                )
+            }
+
         }
+
     }
 )
 
