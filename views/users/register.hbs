@@ -1,18 +1,35 @@
+<div class="text-center form-signin-container">
+    <main class="form-signin">
+        <form action="/register" method="POST">
+            <img class="mb-4" src="/docs/5.0/assets/brand/bootstrap-logo.svg" alt="logo" width="72" height="57">
+            <h1 class="h3 mb-3 fw-normal">Please sign in</h1>
+            <label for="inputUserName" class="visually-hidden">User Name</label>
+            <input type="text" id="userName" value="{{user.userName}}"
+                class="form-control {{#if errors.userName}}is-invalid{{/if}}" placeholder="User name" name="userName"
+                required="" autofocus="">
+            {{#if errors.userName}}
+            <div class="invalid-feedback">
+                {{errors.userName}}
+            </div>
+            {{/if}}
+            <label for="inputEmail" class="visually-hidden">Email address</label>
+            <input type="email" id="email" value="{{user.email}}" class="form-control {{#if errors.email}}is-invalid{{/if}}" placeholder="Email address" name="email" required=""
+                autofocus="">
+           {{#if errors.email}}
+            <div class="invalid-feedback">
+                {{errors.email}}
+            </div>
+            {{/if}}
+            <label for="inputPassword" class="visually-hidden">Password</label>
+            <input type="password" id="password" class="form-control {{#if errors.password}}is-invalid{{/if}}" placeholder="Password" name="password" required="">
+           {{#if errors.password}}
+            <div class="invalid-feedback">
+                {{errors.password}}
+            </div>
+            {{/if}}
 
-<div class="text-center form-signin-container"> 
-<main class="form-signin">
-    <form>
-        <img class="mb-4" src="/docs/5.0/assets/brand/bootstrap-logo.svg" alt="logo" width="72" height="57">
-        <h1 class="h3 mb-3 fw-normal">Please sign in</h1>
-        <label for="inputUserName" class="visually-hidden">User Name</label>
-        <input type="text" id="inputuserName" class="form-control" placeholder="User name" name="username"required="" autofocus="">
-        <label for="inputEmail" class="visually-hidden">Email address</label>
-        <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required="" autofocus="">
-        <label for="inputPassword" class="visually-hidden">Password</label>
-        <input type="password" id="inputPassword" class="form-control" placeholder="Password" required="">
-       
-        <button class="w-100 btn btn-lg btn-primary" type="submit">Sign in</button>
-      
-    </form>
-</main>
+            <button class="w-100 btn btn-lg btn-primary" type="submit">Sign in</button>
+
+        </form>
+    </main>
 </div>

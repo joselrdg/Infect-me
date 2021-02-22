@@ -8,10 +8,15 @@ const SALT_ROUNDS = 10;
 
 const userSchema = new mongoose.Schema(
     {
+        userName: {
+            type: String,
+            required: [true, 'Username is required.'],
+            unique:true,
+            trim:true
+        },    
         email: {
             type: String,
             required: 'You need to add an email',
-            unique: true,
             lowercase: true,
             match: [EMAIL_PATTERN, 'Invalid email'],
             trim: true
@@ -21,21 +26,37 @@ const userSchema = new mongoose.Schema(
             required: 'The password is required',
             match: [PASSWORD_PATTERN, 'Your password must contain at least 1 number, 1 uppercase, 1 lowercase and 8 characters']
         },
-        username: {
-            type: String,
-            trim: true,
-            required: [true, 'Username is required.'],
-            unique: true
-          },
-          image: {
-            type: String
-            // ,
-            // required: [true, 'Image is required.']
-          },
-          age: {
+        age: {
             type: Number,
             required: true,
-          }
+          },
+        role: {
+            type:String,
+            default:'USER'
+        },
+        social : {
+            google: String
+        },
+        picture : {
+            type: String,
+            default: '../public/images/userIcon.png'
+        },
+        active: {
+            type: Boolean,
+            default:false
+        },
+        activationToken: {
+            type: String,
+            default: () => {
+                return (
+                    Math.random().toString(36).substring(2, 15) +
+                    Math.random().toString(36).substring(2, 15) +
+                    Math.random().toString(36).substring(2, 15) +
+                    Math.random().toString(36).substring(2, 15) 
+                )
+            }
+
+        }
     },
     {
       timestamps: true
