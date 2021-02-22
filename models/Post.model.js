@@ -14,7 +14,7 @@ const postSchema = new mongoose.Schema({
         type: String,
         required: true 
     },
-    image: {
+    image: { // mirar si subir enlace o archivo o video...
         type: String
     },
     tags: [String]

@@ -17,4 +17,7 @@ router.post('/logout', secure.isAuthenticated, usersController.logout)
 
 router.get('/profile', secure.isAuthenticated, usersController.profile)
 
+// posts
+// router.get("/posts", secure.isAuthenticated, postController.list)
+
 module.exports = router;

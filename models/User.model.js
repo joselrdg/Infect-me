@@ -29,8 +29,8 @@ const userSchema = new mongoose.Schema(
           },
           image: {
             type: String
-            ,
-            required: [true, 'Image is required.']
+            // ,
+            // required: [true, 'Image is required.']
           },
           age: {
             type: Number,
@@ -47,23 +47,23 @@ const userSchema = new mongoose.Schema(
     }
 )
 
-userSchema.methods.checkPassword = function (passwordToCheck) {
-    return bcrypt.compare(passwordToCheck, this.password);
-};
+// userSchema.methods.checkPassword = function (passwordToCheck) {
+//     return bcrypt.compare(passwordToCheck, this.password);
+// };
 
-userSchema.pre('save', function (next) {
-    const user = this
+// userSchema.pre('save', function (next) {
+//     const user = this
 
-    if (user.isModified('password')) {
-        bcrypt.hash(user.password, SALT_ROUNDS)
-            .then(hash => {
-                this.password = hash
-                next()
-            })
-    } else {
-        next()
-    }
-})
+//     if (user.isModified('password')) {
+//         bcrypt.hash(user.password, SALT_ROUNDS)
+//             .then(hash => {
+//                 this.password = hash
+//                 next()
+//             })
+//     } else {
+//         next()
+//     }
+// })
 
 userSchema.virtual("posts", {
     ref: "Post",
