@@ -1,14 +1,52 @@
-<header>
-<h1>{{title}}</h1>
-<p class="lead">Bienvendido a  {{title}}.La web de los fantaticos.</p> 
+<section id="main" class="container-fluid mx-0 px-0 position-relative">
+    <div id="carouselExampleSlidesOnly " class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-inner">
+            <div class="carousel-item active" data-bs-interval="10000">
+                <img src="./images/simon-weisser-unsplash.jpg" class="d-block w-100" alt="...">
+            </div>
+            <div class="carousel-item" data-bs-interval="10000">
+                <img src="./images/oscar-soderlund-unsplash.jpg" class="d-block w-100" alt="...">
+            </div>
+            <div class="carousel-item" data-bs-interval="10000">
+                <img src="./images/jose-antonio-gallego-unsplash.jpg" class="d-block w-100" alt="...">
+            </div>
 
-</header>
-<main>
-<p>Selecciona tus categorías favoritas</p>
-<p>busca topic de los que eres fanatico dentro de  esas categorias</p>
-<p>Unete al topic y consulta los posts de los otros fanáticos. Añade tus propios post</p>
-<p>Crea nuevos topic e invita al resto de fanáticos a unirse.</p>
-</main>
-<footer>
+            <div class="position-absolute top-50 start-50 translate-middle text-light">
+                <div class="d-flex flex-column text-center">
+                    <img src="./images/logo-white.png" alt="infect me logo">
+                    <h3 class="my-5">
+                        {{!-- Construye tu mundo, <br> --}}
+                        Homenajea tus aficiones, comparte, <br>
+                        y encuentra a otra gente como tú.</h3>
+                    {{!-- <div> --}}
+                        <a class="btn btn-secondary my-2  mx-5" style="background-color: #fb369b;" href="/login">Empezar</a>
+                        <a class="btn btn-secondary  mx-5" style="background-color: #3c98e9;" href="/register">Registrase</a>
+                    {{!-- </div> --}}
+                </div>
+            </div>
+        </div>
+    </div>
 
-</footer>
+</section>
+
+<section id="whatIsIt">
+    <h2>Explora grupos por categoría</h2>
+    <header>
+        <h1>{{title}}</h1>
+        <p class="lead">Bienvendido a {{title}}.La web de los fantaticos.</p>
+
+    </header>
+
+    <main>
+        <p>Selecciona tus categorías favoritas</p>
+        <p>busca topic de los que eres fanatico dentro de esas categorias</p>
+        <p>Unete al topic y consulta los posts de los otros fanáticos. Añade tus propios post</p>
+        <p>Crea nuevos topic e invita al resto de fanáticos a unirse.</p>
+    </main>
+</section>
+
+
+
+<script>
+    document.getElementById('navbarHome').style.display = 'none';
+</script>

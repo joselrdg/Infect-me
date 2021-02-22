@@ -1,4 +1,17 @@
+/* clores:
+rosa: #fb369b
+azul/morado oscuro: #1c2550
+azul claro: #3c98e9
+azul casi negro: #001a33
+amarillo: #fdcf1b
+*/
+
 body {
+}
+
+#whatIsIt {
+  background-color:#fdcf1b;
+  height:80vw;
 }
 
 .form-signin-container {
