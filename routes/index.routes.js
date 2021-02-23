@@ -12,6 +12,7 @@ router.post('/register', secure.isNotAuthenticated, usersController.doRegister)
 
 router.get('/login', secure.isNotAuthenticated, usersController.login)
 router.post('/login', secure.isNotAuthenticated, usersController.doLogin)
+router.get('/activate/:activationToken',secure.isNotAuthenticated, usersController.activate)
 
 router.post('/logout', secure.isAuthenticated, usersController.logout)
 
