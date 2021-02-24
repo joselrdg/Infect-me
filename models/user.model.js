@@ -11,9 +11,9 @@ const userSchema = new mongoose.Schema(
         userName: {
             type: String,
             required: [true, 'Username is required.'],
-            unique:true,
-            trim:true
-        },    
+            unique: true,
+            trim: true
+        },
         email: {
             type: String,
             required: 'You need to add an email',
@@ -28,23 +28,26 @@ const userSchema = new mongoose.Schema(
         },
         age: {
             type: Number,
-            required: true,
-            default:0
-          },
+            // required: true,
+        },
         role: {
-            type:String,
-            default:'USER'
+            type: String,
+            default: 'USER'
         },
-        social : {
-            google: String
+        social: {
+            google: {
+                googleID: String,
+                access_token: String,
+                refresh_token: String,
+            }
         },
-        picture : {
+        picture: {
             type: String,
             default: '../public/images/userIcon.png'
         },
         active: {
             type: Boolean,
-            default:false
+            default: false
         },
         activationToken: {
             type: String,
@@ -53,45 +56,45 @@ const userSchema = new mongoose.Schema(
                     Math.random().toString(36).substring(2, 15) +
                     Math.random().toString(36).substring(2, 15) +
                     Math.random().toString(36).substring(2, 15) +
-                    Math.random().toString(36).substring(2, 15) 
+                    Math.random().toString(36).substring(2, 15)
                 )
             }
 
         }
     },
     {
-      timestamps: true
+        timestamps: { createdAt: "created_at", updatedAt: "updated_at" }
     },
     {
-      toJSON: {
-        virtuals: true,
-      },
+        toJSON: {
+            virtuals: true,
+        },
     }
 )
 
- userSchema.methods.checkPassword = function (passwordToCheck) {
-     return bcrypt.compare(passwordToCheck, this.password);
- };
+userSchema.methods.checkPassword = function (passwordToCheck) {
+    return bcrypt.compare(passwordToCheck, this.password);
+};
 
- userSchema.pre('save', function (next) {
-     const user = this
+userSchema.pre('save', function (next) {
+    const user = this
 
-     if (user.isModified('password')) {
-         bcrypt.hash(user.password, SALT_ROUNDS)
-             .then(hash => {
-                 this.password = hash
-                 next()
-             })
-     } else {
-         next()
-     }
- })
+    if (user.isModified('password')) {
+        bcrypt.hash(user.password, SALT_ROUNDS)
+            .then(hash => {
+                this.password = hash
+                next()
+            })
+    } else {
+        next()
+    }
+})
 
 userSchema.virtual("posts", {
     ref: "Post",
     foreignField: "user",
     localField: "_id",
-  });
+});
 
 const User = mongoose.model('User', userSchema);
 module.exports = User;

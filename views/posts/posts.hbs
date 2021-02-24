@@ -1,0 +1,18 @@
+<h2>Posts</h2>
+<section>
+	{{#each posts as |post|}}
+	<div>
+		<h3>
+			{{!-- <a href="/posts/{{post._id}}">{{post.title}}</a> --}}
+		</h3>
+		<p>{{post.description}}</p>
+		<img alt="Post image" src="{{post.image}}">
+		<div>
+			{{#each post.tags as |tag|}}
+			<p>{{tag}}</p>
+			{{/each}}
+		</div>
+	</div>
+	{{/each}}
+</section>
+<a href="/posts/create">Create</a>

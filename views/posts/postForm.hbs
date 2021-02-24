@@ -1,23 +1,36 @@
-<div class="col">
-    <div class="row">
-        <h1>Create post</h1>
+<div class="container">
+    <div class="col">
+        <div class="row">
+            {{!-- conflicto con el título --}}
+            <h1>{{#if post._id}}Edit{{else}}Create{{/if}} post</h1>
+        </div>
+        {{!-- <form action="/posts{{#if post.title}}/{{_id}}/edit{{else}}/create{{/if}}" method="POST"> --}}
+            <form action="/posts/create/" method="POST">
+                <div class="mb-3">
+                    <label for="title" class="form-label">Title</label>
+                    <input type="text" class="form-control" id="title" name="title" value="{{post.title}}">
+                    {{#if errors.title}}
+                    <div class="invalid-feedback">
+                        {{errors.title}}
+                    </div>
+                    {{/if}}
+                </div>
+                <div class="mb-3">
+                    <label for="description" class="form-label">Description</label>
+                    <textarea class="form-control" type="text" id="description"
+                        name="description">{{description}}</textarea>
+                </div>
+                <div class="mb-3">
+                    <label for="formGroupExampleInput2" class="form-label">Imagen? video? mirar</label>
+                    <input type="text" class="form-control" id="formGroupExampleInput2"
+                        placeholder="Another input placeholder">
+                </div>
+                <div class="mb-3">
+                    <label for="tags" class="form-label">Tags</label>
+                    <input type="text" class="form-control" id="tags" name="tags"
+                        placeholder="Ingrese sus tags separados por comas" value="{{tags}}">
+                </div>
+                <button type="submit" class="btn btn-primary">{{#if post.title}}Edit{{else}}Create{{/if}}</button>
+            </form>
     </div>
-    <form>
-        <div class="mb-3">
-            <label for="title" class="form-label">Title</label>
-            <input type="text" class="form-control" id="title" name="title" placeholder="Example input placeholder">
-        </div>
-        <div class="mb-3">
-            <label for="description" class="form-label">Description</label>
-            <input type="text" class="form-control" id="description" name="description" placeholder="Another input placeholder">
-        </div>
-        <div class="mb-3">
-            <label for="tags" class="form-label">Tags</label>
-            <input type="text" class="form-control" id="formGroupExampleInput" placeholder="Ingrese sus etiquetas separadas por comas">
-        </div>
-        <div class="mb-3">
-            <label for="formGroupExampleInput2" class="form-label">Imagen? video? mirar</label>
-            <input type="text" class="form-control" id="formGroupExampleInput2" placeholder="Another input placeholder">
-        </div>
-    </form>
 </div>

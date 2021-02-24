@@ -1,3 +1,35 @@
+{{!-- <div class="container">
+  <div class="row mt-5">
+    <div class="col-8">
+      <form action="/login" method="POST">
+        <div class="mb-3">
+          <label for="email" class="form-label">Email address</label>
+          <input type="email" name="email" value="{{user.email}}" class="form-control" id="email" required>
+        </div>
+        <div class="mb-3">
+          <label for="password" class="form-label">Password</label>
+          <input type="password" name="password" class="form-control" id="password" required>
+        </div>
+
+        {{#if error}}
+        <p>{{error}}</p>
+        {{/if}}
+        <div class="text-center">
+          <button type="submit" class="btn btn-secondary px-4" style="background-color: #fb369b;">Empezar</button>
+        </div>
+
+    </div>
+    <div class="col-4 mt-5">
+      <div>
+        <a class="btn btn-secondary  mx-5" style="background-color: #3c98e9;" href="/auth/google">Iniciar sesión con
+          Google</a>
+      </div>
+    </div>
+    </form>
+  </div> --}}
+
+
+
 <div class="text-center form-signin-container">
     <main class="form-signin">
         <form action="/login" method="POST">

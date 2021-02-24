@@ -1,10 +1,11 @@
 const mongoose = require('mongoose');
+const User = require('./user.model');
 
 const postSchema = new mongoose.Schema({
     user: {
-        type: mongoose.Schema.Types.ObjectId,
+        type: mongoose.SchemaTypes.ObjectId,
         ref: "User",
-        required: true
+        // required: true
     },
     title: {
         type: String,
