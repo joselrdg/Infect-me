@@ -49,7 +49,20 @@ module.exports.login = (req, res, next) => {
 }
 
 module.exports.doLogin = (req, res, next) => {
-}
+  passport.authenticate('local-Auth', (error, user, validations) => {
+    if (error) {
+      next(error);
+    } else if (!user) {
+      res.status(400).render('users/login', { user: req.body, error: validations.error });
+    } else {
+      req.login(user, loginErr => {
+        if (loginErr) next(loginErr)
+        else res.redirect('/profile')
+      })
+    }
+  })(req, res, next);
+};
+
 
 module.exports.doLoginGoogle = (req, res, next) => {
     passport.authenticate('google-auth', (error, user, validations) => {
