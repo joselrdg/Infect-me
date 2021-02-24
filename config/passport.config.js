@@ -119,38 +119,6 @@ console.log(newUserInstance)
     }
 }))
 
-// passport.use(new GoogleStrategy({
-//     clientID: config.clientID,
-//     clientSecret: config.clientSecret,
-//     callbackURL: config.callbackURL
-// },
-//     function (accessToken, refreshToken, profile, done) {
 
-//         process.nextTick(function () {
-
-//             User.findOne({ _id: profile.id }, function (err, res) {
-//                 if (err)
-//                     return done(err);
-//                 if (res) {
-//                     console.log("user exists");
-//                     return done(null, res);
-//                 } else {
-//                     console.log("insert user");
-//                     let user = new User({
-//                         _id: profile.id,
-//                         access_token: accessToken,
-//                         refresh_token: refreshToken,
-//                         name: profile.displayName
-//                     });
-//                     user.save(function (err) {
-//                         if (err)
-//                             return done(err);
-//                         return done(null, user);
-//                     });
-//                 }
-//             })
-//         });
-//     }
-// ));
 
 
