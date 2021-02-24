@@ -17,6 +17,7 @@ router.post('/login', secure.isNotAuthenticated, usersController.doLogin)
 router.get('/auth/google', passport.authenticate('google-auth', { scope: GOOGLE_SCOPES }))
 router.get('/auth/google/callback', usersController.doLoginGoogle)
 
+router.get('/activate/:activationToken',secure.isNotAuthenticated, usersController.activate)
 
 router.post('/logout', secure.isAuthenticated, usersController.logout)
 

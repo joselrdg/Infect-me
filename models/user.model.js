@@ -11,9 +11,9 @@ const userSchema = new mongoose.Schema(
         userName: {
             type: String,
             required: [true, 'Username is required.'],
-            unique:true,
-            trim:true
-        },    
+            unique: true,
+            trim: true
+        },
         email: {
             type: String,
             required: 'You need to add an email',
@@ -29,24 +29,25 @@ const userSchema = new mongoose.Schema(
         age: {
             type: Number,
             // required: true,
-          },
-        role: {
-            type:String,
-            default:'USER'
         },
-        social : {
+        role: {
+            type: String,
+            default: 'USER'
+        },
+        social: {
             google: {
                 googleID: String,
                 access_token: String,
                 refresh_token: String,
-            }        },
-        picture : {
+            }
+        },
+        picture: {
             type: String,
             default: '../public/images/userIcon.png'
         },
         active: {
             type: Boolean,
-            default:false
+            default: false
         },
         activationToken: {
             type: String,
@@ -55,7 +56,7 @@ const userSchema = new mongoose.Schema(
                     Math.random().toString(36).substring(2, 15) +
                     Math.random().toString(36).substring(2, 15) +
                     Math.random().toString(36).substring(2, 15) +
-                    Math.random().toString(36).substring(2, 15) 
+                    Math.random().toString(36).substring(2, 15)
                 )
             }
 
@@ -65,9 +66,9 @@ const userSchema = new mongoose.Schema(
         timestamps: { createdAt: "created_at", updatedAt: "updated_at" }
     },
     {
-      toJSON: {
-        virtuals: true,
-      },
+        toJSON: {
+            virtuals: true,
+        },
     }
 )
 
@@ -93,7 +94,7 @@ userSchema.virtual("posts", {
     ref: "Post",
     foreignField: "user",
     localField: "_id",
-  });
+});
 
 const User = mongoose.model('User', userSchema);
 module.exports = User;

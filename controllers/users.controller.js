@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 const passport = require('passport')
 const User = require("../models/user.model");
+const mailer= require("../config/nodemailer.config")
 
 
 module.exports.register = (req, res, next) => {
@@ -24,16 +25,14 @@ module.exports.doRegister = (req, res, next) => {
             } else {
                 User.create(req.body)
                     .then((user) => {
-
+                        mailer.sendMail(user.email,user.activationToken);
                         res.redirect('/')
                     })
                     .catch((e) => {
-                        console.log(`CATCH BUSCA USUARIO`)
                         if (e instanceof mongoose.Error.ValidationError) {
                             console.log(`ERROR MONGOOSE`)
                           renderWithErrors(e.errors);
                         } else {
-                            console.log(`OTRO ERROR`)
                           next(e);
                         }
                       });
@@ -74,4 +73,19 @@ module.exports.profile = (req, res, next) => {
 module.exports.logout = (req, res, next) => {
     req.session.destroy();
     res.redirect('/');
+}
+
+module.exports.activate = (req, res, next) => {
+    User.findOneAndUpdate(
+        {activationToken: req.params.activationToken},
+        { active: true,
+            activationToken: 'active'}
+        )
+        .then((user) => {
+            if (user) {
+                res.render('users/login',
+                            {user:req.body,
+                                message:"Congrats. You can already login session"})
+            }
+        })
 }
