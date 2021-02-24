@@ -7,9 +7,6 @@ const routes = require("./routes/index.routes");
 const passport = require ("passport");
 //Session
 const session = require("./config/session.config");
-const path = require('path');  
-
-
 
 
 // database configuration
@@ -23,16 +20,16 @@ require('./config/hbs.config');
 const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-app.use(express.static("public"));
+app.use(express.static('public'));
 
 app.use(logger("dev"));
 app.use(session);
 // initialize and user passport session
 app.use(passport.initialize());
 app.use(passport.session()); 
-app.set("views", __dirname + "/views");
+app.set("views");
 app.set("view engine", "hbs");
-app.use(favicon(path.join(__dirname, 'public', 'images', 'favicon.ico')));
+app.use(favicon('public/images/favicon.ico'));
 
 // Web Title
 app.locals.title = 'Infect-me';

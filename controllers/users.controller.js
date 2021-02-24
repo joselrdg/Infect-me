@@ -1,5 +1,7 @@
 const mongoose = require('mongoose');
+const passport = require('passport')
 const User = require("../models/user.model");
+
 
 module.exports.register = (req, res, next) => {
 
@@ -50,11 +52,26 @@ module.exports.login = (req, res, next) => {
 module.exports.doLogin = (req, res, next) => {
 }
 
+module.exports.doLoginGoogle = (req, res, next) => {
+    passport.authenticate('google-auth', (error, user, validations) => {
+      if (error) {
+        next(error);
+      } else if (!user) {
+        res.status(400).render('users/login', { user: req.body, error: validations });
+      } else {
+        req.login(user, loginErr => {
+          if (loginErr) next(loginErr)
+          else res.redirect('/profile')
+        })
+      }
+    })(req, res, next)
+  }
+
 module.exports.profile = (req, res, next) => {
     res.render('users/profile');
 }
 
 module.exports.logout = (req, res, next) => {
     req.session.destroy();
-    res.render('/');
+    res.redirect('/');
 }

@@ -28,15 +28,18 @@ const userSchema = new mongoose.Schema(
         },
         age: {
             type: Number,
-            required: true,
+            // required: true,
           },
         role: {
             type:String,
             default:'USER'
         },
         social : {
-            google: String
-        },
+            google: {
+                googleID: String,
+                access_token: String,
+                refresh_token: String,
+            }        },
         picture : {
             type: String,
             default: '../public/images/userIcon.png'
@@ -59,7 +62,7 @@ const userSchema = new mongoose.Schema(
         }
     },
     {
-      timestamps: true
+        timestamps: { createdAt: "created_at", updatedAt: "updated_at" }
     },
     {
       toJSON: {
@@ -68,23 +71,23 @@ const userSchema = new mongoose.Schema(
     }
 )
 
-// userSchema.methods.checkPassword = function (passwordToCheck) {
-//     return bcrypt.compare(passwordToCheck, this.password);
-// };
+userSchema.methods.checkPassword = function (passwordToCheck) {
+    return bcrypt.compare(passwordToCheck, this.password);
+};
 
-// userSchema.pre('save', function (next) {
-//     const user = this
+userSchema.pre('save', function (next) {
+    const user = this
 
-//     if (user.isModified('password')) {
-//         bcrypt.hash(user.password, SALT_ROUNDS)
-//             .then(hash => {
-//                 this.password = hash
-//                 next()
-//             })
-//     } else {
-//         next()
-//     }
-// })
+    if (user.isModified('password')) {
+        bcrypt.hash(user.password, SALT_ROUNDS)
+            .then(hash => {
+                this.password = hash
+                next()
+            })
+    } else {
+        next()
+    }
+})
 
 userSchema.virtual("posts", {
     ref: "Post",
