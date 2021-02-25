@@ -3,10 +3,11 @@ const passport = require('passport')
 const miscController = require("../controllers/misc.controller");
 const usersController = require('../controllers/users.controller');
 const postsController = require("../controllers/posts.controller");
+const youtubeController = require("../controllers/youtube.controller");
 const secure = require("../middlewares/secure.middleware");
 const GOOGLE_SCOPES = ['https://www.googleapis.com/auth/youtube.readonly','https://www.googleapis.com/auth/userinfo.email', 'https://www.googleapis.com/auth/userinfo.profile']
 // Misc
-router.get("/", secure.isAuthenticated, miscController.home);
+router.get("/", secure.isNotAuthenticated, miscController.home);
 // router.get("/", miscController.home);
 
 router.get('/register', secure.isNotAuthenticated, usersController.register)
@@ -19,6 +20,7 @@ router.get('/auth/youtube', passport.authenticate('youtube-auth'))
 router.get('/auth/google/callback', usersController.doLoginGoogle)
 // router.get('/auth/google/callback', usersController.youtube)
 
+router.get('/youtube/playlists', secure.isAuthenticated, youtubeController.ytbPlaylists)
 
 
 router.get('/activate/:activationToken',secure.isNotAuthenticated, usersController.activate)
