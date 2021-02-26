@@ -1,7 +1,4 @@
-const mongoose = require('mongoose');
-const passport = require('passport');
-const User = require("../models/user.model");
-const mailer = require("../config/nodemailer.config");
+// const fun = require("../public/javascripts/youtube");
 
 const { google } = require('googleapis');
 // console.log(google)
@@ -9,14 +6,16 @@ const { google } = require('googleapis');
 const config = {
     clientID: process.env.GOOGLE_CLIENT_ID,
     clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-    callbackURL: process.env.GOOGLE_REDIRECT_URI || '/auth/google/callback'
+    callbackURL: process.env.GOOGLE_REDIRECT_URI 
 };
 
 const oauth2Client = new google.auth.OAuth2(
-    config.clientID,
-    config.clientSecret,
-    config.callbackURL
+    process.env.GOOGLE_CLIENT_ID,
+    process.env.GOOGLE_CLIENT_SECRET,
+    process.env.GOOGLE_REDIRECT_URI
 );
+
+
 
 const configPlaylists = (confg) => {
     if (confg = 'list') {
@@ -29,12 +28,12 @@ const configPlaylists = (confg) => {
 }
 
 
-const dataYtb = (res, confg) => {
+const dataYtb = (req, res, confg) => {
     google.youtube({
         version: 'v3',
         auth: oauth2Client
     }).playlists.list(
-        configPlaylists('list'),
+        configPlaylists(confg),
         function (err, data, response) {
             if (err) {
                 console.error('Error: ' + err);
@@ -43,11 +42,17 @@ const dataYtb = (res, confg) => {
                 });
             }
             if (data) {
-                res.json({
-                    status: "ok",
-                    data: data
-                });
-                console.log(data.data.items)
+                // res.json({
+                //     status: "ok",
+                //     data: data
+                // });
+                let userData = {
+                    userName: req.userName,
+                    picture: req.picture,
+                    items: data.data.items
+                }
+                console.log(userData.items[0])
+                res.render('users/profile', userData);
             }
             if (response) {
                 console.log('Status code: ' + response.statusCode);
@@ -61,7 +66,7 @@ module.exports.ytbPlaylists = (req, res, next) => {
         access_token: req.user.social.google.access_token,
         refresh_token: req.user.social.google.refresh_token
     };
-   dataYtb(res, 'playlists')
+   dataYtb(req.user, res, 'list')
 }
 
 

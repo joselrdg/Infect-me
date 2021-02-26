@@ -1,5 +1,5 @@
 <div class="container text-center">
-    <h1 class="my-5">Nombre{{name}}</h1>
+    <h1 class="my-5">{{userName}}</h1>
     <h3>Algo sobre mi</h3>
     <div>
         <ul class="nav justify-content-center mt-4 ">
@@ -17,6 +17,16 @@
             </li>
         </ul>
     </div>
-
-    <a class="btn btn-lg btn-primary mx-5" style="background-color: #3c98e9;" href="/youtube/playlists">Youtube</a>
+    {{!-- <button type="button" class="btn btn-danger" id="__ytb">Danger</button>
+    <a class="btn btn-lg btn-primary mx-5" style="background-color: #3c98e9;" href="/youtube/playlists">Youtube</a> --}}
+ </div>
+ <div class="container">   
+    <div class="row">
+        <h2>Playlists</h2>
+        {{#each items}}
+        <div class="col justify-content-center py-3">
+            {{> playlistCard }}
+        </div>
+        {{/each}}
+    </div>
 </div>

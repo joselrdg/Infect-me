@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 const passport = require('passport');
 const User = require("../models/user.model");
+const Youtube = require("../controllers/youtube.controller");
 const mailer = require("../config/nodemailer.config");
 
 const { google } = require('googleapis');
@@ -18,6 +19,15 @@ const oauth2Client = new google.auth.OAuth2(
   config.callbackURL
 );
 
+let userData = {
+  userName: '',
+  picture: ''
+}
+
+const confgUserData = (name, picture) => {
+  userData.userName = name;
+  userData.picture = picture;
+}
 
 
 module.exports.register = (req, res, next) => {
@@ -72,8 +82,8 @@ module.exports.doLogin = (req, res, next) => {
       res.status(400).render('users/login', { user: req.body, error: validations.error });
     } else {
       req.login(user, loginErr => {
-        if (loginErr) next(loginErr)
-        else res.redirect('/profile')
+        if (loginErr) { next(loginErr) }
+        else { res.redirect('/profile') }
       })
     }
   })(req, res, next);
@@ -94,8 +104,8 @@ module.exports.doLoginGoogle = (req, res, next) => {
         res.status(400).render('users/login', { user: req.body, error: validations });
       } else {
         req.login(user, loginErr => {
-          if (loginErr) next(loginErr)
-          else res.redirect('/profile')
+          if (loginErr) { next(loginErr) }
+          else { res.redirect('/profile') }
         })
       }
     })(req, res, next)
@@ -104,8 +114,14 @@ module.exports.doLoginGoogle = (req, res, next) => {
 
 
 module.exports.profile = (req, res, next) => {
-  console.log('entramos en perfil');
-  res.render('users/profile');
+  const { userName, picture } = req.user;
+  confgUserData(userName, picture)
+  const token = req.user.social.google.refresh_token;
+  if (token) {
+    Youtube.ytbPlaylists(req, res, next)
+  } else {
+    res.render('users/profile', userData);
+  }
 }
 
 // const dataYtb = (res, categoria) => {
