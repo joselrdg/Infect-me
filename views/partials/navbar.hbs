@@ -12,7 +12,7 @@
         {{#if currentUser}}
         <li><a class="dropdown-item" href="/profile"><img src="{{picture}}" alt="profile picture"></a></li>
         <form action="/logout" method="POST">
-          <li><button type="button" class="btn btn-secondary">Log out</button></li>
+          <li><button type="submit" class="btn btn-secondary">Log out</button></li>
         </form>
         {{else}}
         <li class="nav-item">

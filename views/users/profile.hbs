@@ -19,14 +19,18 @@
     </div>
     {{!-- <button type="button" class="btn btn-danger" id="__ytb">Danger</button>
     <a class="btn btn-lg btn-primary mx-5" style="background-color: #3c98e9;" href="/youtube/playlists">Youtube</a> --}}
- </div>
- <div class="container">   
-    <div class="row">
+</div>
+<div class="container">
+    <div class="row" id="gPlaylist">
         <h2>Playlists</h2>
         {{#each items}}
         <div class="col justify-content-center py-3">
             {{> playlistCard }}
         </div>
         {{/each}}
+    </div>
+</div>
+<div class="container text-center">
+    <div class="videoPlayer">
     </div>
 </div>
