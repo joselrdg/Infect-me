@@ -56,3 +56,15 @@ body {
   border-bottom-right-radius: 0;
   border-bottom-left-radius: 0;
 }
+
+.card__container {
+  
+
+  max-height: 160px;
+}
+.card__description {
+  height: 50px;
+}
+.card__title {
+  height: 25px;
+}
