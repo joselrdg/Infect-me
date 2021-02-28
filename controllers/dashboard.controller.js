@@ -1,19 +1,27 @@
-const mongoose =require ("mongoose");
+const mongoose = require("mongoose");
 const User = require("../models/user.model");
 const Post = require("../models/Post.model");
 
 
-module.exports.showDashboard = ( (req, res, next) => {
-  
-  Post.find({user: req.currentUser._id})
+module.exports.showDashboard = ((req, res, next) => {
+
+  Post.find({ user: req.currentUser._id })
     .then((posts) => {
-      
-        
-       
-        res.render('users/dashboard', {posts});
+
+
+
+      for (let i = 0; i <= (posts.length - 1); i++) {
+        if (i > 2) {
+          posts[i].collapse = true;
+
+        }
+
+      }
+
+      res.render('users/dashboard', { posts });
 
     })
-    .catch((e  =>next(e)));
-    
-   
+    .catch((e => next(e)));
+
+
 })
