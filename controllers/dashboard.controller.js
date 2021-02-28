@@ -17,8 +17,8 @@ module.exports.showDashboard = ((req, res, next) => {
         }
 
       }
-
-      res.render('users/dashboard', { posts });
+      let vermas = true;
+      res.render('users/dashboard', { posts,vermas });
 
     })
     .catch((e => next(e)));
