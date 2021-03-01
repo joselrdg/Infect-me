@@ -30,7 +30,18 @@ window.addEventListener('load', () => {
             console.log('Hay respuesta',response.data)
             const outputUsers = response.data;
             outputUsers.forEach (user => {
-               // redenderizar los usuarios
+               // renden users
+               const userContainer = document.querySelector("#busca-usuario-salida");
+               userContainer.innerHTML = ""
+               let userInfo = document.createElement('div')
+               userInfo.className = 'user-info'
+               userInfo.innerHTML = `
+       <div class="name">Name: ${user.userName}</div>
+       
+       `
+       
+               userContainer.appendChild(userInfo)
+       
             })
 
 
