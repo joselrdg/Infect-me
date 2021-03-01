@@ -1,7 +1,6 @@
 const mongoose = require('mongoose');
 const passport = require('passport');
 const User = require("../models/user.model");
-const Youtube = require("../controllers/youtube.controller");
 const mailer = require("../config/nodemailer.config");
 
 const { google } = require('googleapis');
@@ -112,54 +111,20 @@ module.exports.doLoginGoogle = (req, res, next) => {
   }
 }
 
+module.exports.create = (req, res, next) => {
+  res.render('users/controlPanel');
+}
 
 module.exports.profile = (req, res, next) => {
   const { userName, picture } = req.user;
   confgUserData(userName, picture)
-  const token = req.user.social.google.refresh_token;
-  if (token) {
-    Youtube.ytbPlaylists(req, res, next)
-  } else {
-    res.render('users/profile', userData);
-  }
+  // const token = req.user.social.google.refresh_token;
+  // if (token) {
+  //   Youtube.ytbPlaylists(req, res, next, 'lists')
+  // } else {
+  res.render('users/profile', userData);
+  // }
 }
-
-// const dataYtb = (res, categoria) => {
-//   google.youtube({
-//     version: 'v3',
-//     auth: oauth2Client
-//   }).playlists.list({
-//     part: ['snippet','contentDetails'],
-//     mine: true,
-//     headers: {}
-//   }, function (err, data, response) {
-//     if (err) {
-//       console.error('Error: ' + err);
-//       res.json({
-//         status: "error"
-//       });
-//     }
-//     if (data) {
-//       console.log(data);
-//       res.json({
-//         status: "ok",
-//         data: data
-//       });
-//     }
-//     if (response) {
-//       console.log('Status code: ' + response.statusCode);
-//     }
-//   });
-// }
-
-// module.exports.youtube = (req, res, next) => {
-//   // res.render('users/profile');
-//   oauth2Client.credentials = {
-//     access_token: req.user.social.google.access_token,
-//     refresh_token: req.user.social.google.refresh_token
-//   }; 
-//   dataYtb(res,'playlists')
-// }
 
 module.exports.logout = (req, res, next) => {
   req.session.destroy();

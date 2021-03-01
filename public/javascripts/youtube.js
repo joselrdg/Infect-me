@@ -1,44 +1,64 @@
+const heightPlayer = '360';
+const widthPlayer = '640';
+
 
 window.addEventListener('load', () => {
 
- const dataPlayList =  document.querySelectorAll(".gPlaylist")
- dataPlayList.forEach(card=> {
-    //  console.log(card)
+  const dataPlayList = document.querySelectorAll(".ytbCard")
 
-   
-     card.addEventListener("click", function (event) {
-       
-        console.log(event.target.dataset.id)
-        videoPlayer(event.target.dataset.id)
+  dataPlayList.forEach(card => {
+ 
+    card.addEventListener("click", function (event) {
+      const ytbID = event.target.dataset.id;
 
+      console.log(event.target.dataset.id)
+      console.log(event.target.dataset.title)
+      console.log(event.target.dataset.image)
+      console.log(event.target.dataset.tracks)
+
+      // configVideoPlayer(id, 'playlist');
     })
- })
+  })
 })
 
-const videoPlayer = (id) => {
-    document.querySelector('.videoPlayer').innerHTML = "";
-    let div = document.createElement("div");
-    div.className = "vPlayer";
-    div.innerHTML = `
-      <iframe id="ytplayer" type="text/html" width="640" height="360" src="http://www.youtube.com/embed?listType=playlist&list=${id}"
-  frameborder="0" autoplay="1"/>`
-    document.querySelector('.videoPlayer').appendChild(div);
+
+const configVideoPlayer = (id, confg) => {
+  switch (confg) {
+    case 'video':
+      video(id)
+      break;
+    case 'playlist':
+      playList(id);
+      break;
+  };
 }
 
- 
+const videoPlayer = (confg) => {
+  document.querySelector('.videoPlayer').innerHTML = "";
+  let div = document.createElement("div");
+  div.className = "vPlayer";
+  div.innerHTML = `
+      <iframe class="embed-responsive-item" id="ytplayer" type="text/html" width="640" height="360" src=${confg}
+  frameborder="0"/>`
+  document.querySelector('.videoPlayer').appendChild(div);
+}
 
-//  function funAxios() {
-//         axios
-//             .get(apiUrl, config)
-//             .then((response) => {
-//                 const { data } = response;
-//                 console.log(data)
-//             })
-//             .catch((e) => console.error("Error getting data", e));
+const audioPlayer = (id) => {
+  const source = document.getElementById('audioSource');
+  console.log(source)
+  source.src = `http://www.youtube.com/embed?listType=playlist&list=${id}`;
+  audio.play();
 
-//         const paintData = () => {
 
-//         }
-//     }
+}
 
-// module.exports = fun
+const playList = (id) => {
+  let confg = `http://www.youtube.com/embed?listType=playlist&list=${id}&autoplay=1`
+  videoPlayer(confg);
+}
+
+
+const video = (id) => {
+}
+
+

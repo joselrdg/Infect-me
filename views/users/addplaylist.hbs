@@ -1,0 +1,14 @@
+<div class="container">
+    <h1 class="my-4">Add playlists de YouTube:</h1>
+    <div class="row">
+        <h2>Playlists</h2>
+        {{#if errors.title}}
+        <div>
+            <p class="text-danger">Error al add: {{errors.title}}</p>
+        </div>
+        {{/if}}
+        {{#each items}}
+        {{> playlistCard }}
+        {{/each}}
+    </div>
+</div>

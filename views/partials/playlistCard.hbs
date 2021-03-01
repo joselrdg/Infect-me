@@ -1,11 +1,22 @@
-<div class="card " style="width: 10rem;">
-
-  <img class="card-img-top" src="{{snippet.thumbnails.default.url}}" alt="Card image cap">
-  <div class="card-body">
-    <h5 class="card-title">{{snippet.title}}</h5>
-    <p class="card-text">{{contentDetails.itemCount}} Tracks</p>
-    <div class="text-center">
-      <button data-id="{{id}}" class="btn btn-danger gPlaylist">Play</button>
+<div class="col justify-content-center py-3 ytbCard">
+  <div class="card text-white bg-dark" style="width: 10rem;">
+    <img class="card-img-top" src="{{snippet.thumbnails.default.url}}" alt="Card image cap">
+    <div class="card-body">
+      <h5 class="card-title">{{snippet.title}}</h5>
+      <p class="card-text">{{contentDetails.itemCount}} Tracks</p>
+      <div class="text-center">
+        <form action="/addPlaylist" method="POST">
+          <input type="hidden" name="ytbID" value="{{id}}" />
+          <input type="hidden" name="image" value="{{snippet.thumbnails.default.url}}" />
+          <input type="hidden" name="title" value="{{snippet.title}}" />
+          <input type="hidden" name="tracks" value="{{contentDetails.itemCount}}" />
+          <button type="submit" class="btn btn-danger gPlaylist">Add</button>
+        </form>
+      </div>
     </div>
   </div>
 </div>
+
+{{!-- <button type="submit" data-id="{{id}}" data-image="{{snippet.thumbnails.default.url}}"
+  data-title="{{snippet.title}}" data-tracks="{{contentDetails.itemCount}}"
+  class="btn btn-danger gPlaylist">Add</button> --}}

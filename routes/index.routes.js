@@ -3,6 +3,7 @@ const passport = require('passport')
 const miscController = require("../controllers/misc.controller");
 const usersController = require('../controllers/users.controller');
 const postsController = require("../controllers/posts.controller");
+const profileController = require("../controllers/profile.controller");
 const youtubeController = require("../controllers/youtube.controller");
 const secure = require("../middlewares/secure.middleware");
 const GOOGLE_SCOPES = ['https://www.googleapis.com/auth/youtube.readonly','https://www.googleapis.com/auth/userinfo.email', 'https://www.googleapis.com/auth/userinfo.profile']
@@ -27,7 +28,13 @@ router.get('/activate/:activationToken',secure.isNotAuthenticated, usersControll
 
 router.post('/logout', secure.isAuthenticated, usersController.logout)
 
+router.get('/control', secure.isAuthenticated, usersController.create)
+router.get("/addPlaylist", secure.isAuthenticated, profileController.addPlaylist);
+router.post("/addPlaylist", secure.isAuthenticated, profileController.doAddPlaylist);
+// profile
 router.get('/profile', secure.isAuthenticated, usersController.profile)
+router.get("/profile/:id/edit", secure.isAuthenticated, profileController.edit);
+router.post("/profile/:id/edit", secure.isAuthenticated, profileController.doEdit);
 
 
 // posts
