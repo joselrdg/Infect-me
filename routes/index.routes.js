@@ -13,6 +13,7 @@ router.get("/", secure.isAuthenticated, miscController.home);
 router.get('/register', secure.isNotAuthenticated, usersController.register)
 router.post('/register', secure.isNotAuthenticated, usersController.doRegister)
 router.get('/dashboard',secure.isAuthenticated, dashboardController.showDashboard)
+router.get('/dashboard/findUser/:user',secure.isAuthenticated, dashboardController.findUser)
 
 router.get('/login', secure.isNotAuthenticated, usersController.login)
 router.post('/login', secure.isNotAuthenticated, usersController.doLogin)

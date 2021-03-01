@@ -25,3 +25,17 @@ module.exports.showDashboard = ((req, res, next) => {
 
 
 })
+
+module.exports.findUser = ((req,res,next) => {
+  console.log('Busca usuario',req.params.user)
+  User.find({userName: req.params.user})
+  .then((user) => {
+     if (user){
+       res.json(user)
+     } else {
+       console.log ('No encuentra el suario')
+     }
+  }) 
+
+ // next()
+})

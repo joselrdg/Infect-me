@@ -1,6 +1,8 @@
+//const { default: axios } = require("axios");
+
 window.addEventListener('load', () => {
     document.getElementById('mypostsButton').addEventListener('click', function (event){
-        console.log('Esto funciona', event);
+       
         axios.get('/dashboard')
         .then(response => {
           
@@ -14,17 +16,26 @@ window.addEventListener('load', () => {
                 }
             })
         })
-        .catch((e) => { console.error(`Error axios: ${e}`)})
+        .catch((e) => { console.error(`Error axios my posts: ${e}`)})
     }) ;
+
+    document.getElementById('userSearchIdButton').addEventListener('click', function (event){
+        event.preventDefault();
+        const inputName = document.querySelector('#inputUserName');
+       
+
+       
+        axios.get(`/dashboard/findUser/${inputName.value}`)
+        .then(response => {
+            console.log('Hay respuesta',response.data)
+            const outputUsers = response.data;
+            outputUsers.forEach (user => {
+               // redenderizar los usuarios
+            })
+
+
+        })
+        .catch((e) => { console.error(`Error axios user Seach: ${e}`)})        
+    console.log('despues de axios')
+    })
 });
-
-//const vermenos = (element) => {
-//    console.log('Esto funciona', element);
-//    axios.get('/dashboard')
-//    .then(response => {
-//        console.log('Esto funciona', response)
-//    })
-//    .catch((e) => { console.error(`Error axios: ${e}`)})
-//    
-//};
-
