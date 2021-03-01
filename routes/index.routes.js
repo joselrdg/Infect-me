@@ -3,6 +3,7 @@ const passport = require('passport')
 const miscController = require("../controllers/misc.controller");
 const usersController = require('../controllers/users.controller');
 const postsController = require("../controllers/posts.controller");
+const dashboardController = require("../controllers/dashboard.controller");
 const secure = require("../middlewares/secure.middleware");
 const GOOGLE_SCOPES = ['https://www.googleapis.com/auth/userinfo.email', 'https://www.googleapis.com/auth/userinfo.profile']
 // Misc
@@ -11,6 +12,7 @@ router.get("/", secure.isAuthenticated, miscController.home);
 
 router.get('/register', secure.isNotAuthenticated, usersController.register)
 router.post('/register', secure.isNotAuthenticated, usersController.doRegister)
+router.get('/dashboard',secure.isAuthenticated, dashboardController.showDashboard)
 
 router.get('/login', secure.isNotAuthenticated, usersController.login)
 router.post('/login', secure.isNotAuthenticated, usersController.doLogin)
