@@ -43,7 +43,7 @@ const userSchema = new mongoose.Schema(
         },
         picture: {
             type: String,
-            default: '../public/images/userIcon.png'
+            default: './images/userIcon.png'
         },
         active: {
             type: Boolean,
@@ -92,6 +92,18 @@ userSchema.pre('save', function (next) {
 
 userSchema.virtual("posts", {
     ref: "Post",
+    foreignField: "user",
+    localField: "_id",
+});
+
+userSchema.virtual("profile", {
+    ref: "Profile",
+    foreignField: "user",
+    localField: "_id",
+});
+
+userSchema.virtual("playlist", {
+    ref: "Playlist",
     foreignField: "user",
     localField: "_id",
 });
