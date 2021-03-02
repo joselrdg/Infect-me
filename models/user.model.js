@@ -1,12 +1,13 @@
 // User model here
 const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
 const Post = require('./Post.model');
 const bcrypt = require('bcrypt');
 const EMAIL_PATTERN = /^(([^<>()[\]\\.,;:\s@']+(\.[^<>()[\]\\.,;:\s@']+)*)|('.+'))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 const PASSWORD_PATTERN = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{8,}$/;
 const SALT_ROUNDS = 10;
 
-const userSchema = new mongoose.Schema(
+const userSchema = new Schema(
     {
         userName: {
             type: String,
@@ -60,16 +61,19 @@ const userSchema = new mongoose.Schema(
                 )
             }
 
-        }
+        },
+        // playlist: [{type: Schema.Types.ObjectId, ref: 'Playlist'}]
     },
     {
         timestamps: { createdAt: "created_at", updatedAt: "updated_at" }
+    }, {
+    toObject: {
+        virtuals: true
     },
-    {
-        toJSON: {
-            virtuals: true,
-        },
+    toJSON: {
+        virtuals: true
     }
+}
 )
 
 userSchema.methods.checkPassword = function (passwordToCheck) {
@@ -90,11 +94,11 @@ userSchema.pre('save', function (next) {
     }
 })
 
-userSchema.virtual("posts", {
-    ref: "Post",
-    foreignField: "user",
-    localField: "_id",
-});
+// userSchema.virtual("posts", {
+//     ref: "Post",
+//     foreignField: "user",
+//     localField: "_id",
+// });
 
 userSchema.virtual("profile", {
     ref: "Profile",

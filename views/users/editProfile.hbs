@@ -1,0 +1,102 @@
+<div class="container">
+    <h1>Edita tu página</h1>
+    <div class="row">
+        <h2 class="my-3 text-center">Cabezera:</h2>
+        <form action="/profile/edit/head" method="POST">
+            <div class="form-group">
+                <label for="backgroundImg">Imagen de fondo</label>
+                <input type="text" name="backgroundImg" value="{{profile.head.backgroundImg}}" class="form-control"
+                    placeholder="Pon una imagen de fondo">
+                <small class="form-text text-muted">
+                    Introduce una url.</small>
+            </div>
+            <div class="form-group">
+                <label for="backgroundColor">o... un color de fondo:</label>
+                <input name="backgroundColor" value="{{profile.head.backgroundColor}}" type="color" class="form-control">
+            </div>
+            <div class="form-group">
+                <label for="backgroundColor">Indica el color del texto</label>
+                <input name="textColor" value="{{profile.head.textColor}}" type="color" class="form-control">
+            </div>
+            <div class="form-group">
+                <label for="image">Imagen</label>
+                <input type="text" name="image" value="{{profile.head.image}}" class="form-control"
+                    placeholder="name@example.com">
+            </div>
+            <div class="form-group">
+                <label for="video">Video</label>
+                <input type="text" name="video" value="{{profile.head.video}}" class="form-control"
+                    placeholder="name@example.com">
+            </div>
+            <div class="form-group">
+                <label for="title">Título</label>
+                <input type="text" name="title" value="{{profile.head.title}}" class="form-control"
+                    placeholder="name@example.com">
+            </div>
+            <div class="form-group">
+                <label for="description">Descripción</label>
+                <input type="text" name="description" value="{{profile.head.description}}" class="form-control"
+                    placeholder="name@example.com">
+            </div>
+            <div class="form-group">
+                <label for="exampleFormControlSelect1">Elige layout:</label>
+                <select class="form-control">
+                    <option>1</option>
+                    <option>2</option>
+                    <option>3</option>
+                    <option>4</option>
+                    <option>5</option>
+                </select>
+            </div>
+            <div class="text-center">
+                <button type="submit" class="btn btn-primary my-1">Guardar</button>
+            </div>
+        </form>
+    </div>
+    <div class="row mt-4">
+        <h2 class="my-3 text-center">Contenedores:</h2>
+        <form action="/profile" method="POST">
+            <div class="form-group">
+                <label for="backgroundImg">Imagen de fondo</label>
+                <input type="text" name="backgroundImg" class="form-control" placeholder="Pon una imagen de fondo">
+                <small class="form-text text-muted">
+                    Introduce una url.</small>
+            </div>
+            <div class="form-group">
+                <label for="backgroundColor">Color de fondo</label>
+                <input type="text" name="backgroundColor" class="form-control" placeholder="o... un color fondo">
+                <small class="form-text text-muted">
+                    Introduce una url.</small>
+            </div>
+            <div class="form-group">
+                <label for="image">Imagen</label>
+                <input type="text" name="image" class="form-control" placeholder="name@example.com">
+            </div>
+            <div class="form-group">
+                <label for="video">Video</label>
+                <input type="text" name="video" class="form-control" placeholder="name@example.com">
+            </div>
+            <div class="form-group">
+                <label for="title">Título</label>
+                <input type="text" name="title" class="form-control" placeholder="name@example.com">
+            </div>
+            <div class="form-group">
+                <label for="description">Descripción</label>
+                <input type="text" name="description" class="form-control" placeholder="name@example.com">
+            </div>
+            <div class="form-group">
+                <label for="exampleFormControlSelect1">Elige layout:</label>
+                <select class="form-control">
+                    <option>1</option>
+                    <option>2</option>
+                    <option>3</option>
+                    <option>4</option>
+                    <option>5</option>
+                </select>
+            </div>
+            <div class="text-center">
+                <button type="submit" class="btn btn-primary my-1">Guardar</button>
+            </div>
+        </form>
+    </div>
+</div>

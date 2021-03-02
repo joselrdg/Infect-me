@@ -9,14 +9,10 @@ window.addEventListener('load', () => {
   dataPlayList.forEach(card => {
  
     card.addEventListener("click", function (event) {
+      if(event.target.dataset.play){
       const ytbID = event.target.dataset.id;
-
-      console.log(event.target.dataset.id)
-      console.log(event.target.dataset.title)
-      console.log(event.target.dataset.image)
-      console.log(event.target.dataset.tracks)
-
-      // configVideoPlayer(id, 'playlist');
+      configVideoPlayer(ytbID, 'playlist');
+    } else {return}
     })
   })
 })
@@ -45,7 +41,6 @@ const videoPlayer = (confg) => {
 
 const audioPlayer = (id) => {
   const source = document.getElementById('audioSource');
-  console.log(source)
   source.src = `http://www.youtube.com/embed?listType=playlist&list=${id}`;
   audio.play();
 

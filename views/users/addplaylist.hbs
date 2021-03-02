@@ -1,5 +1,6 @@
+{{> profile}}
 <div class="container">
-    <h1 class="my-4">Add playlists de YouTube:</h1>
+    <h1 class="my-4">{{#if delete}}Elimina playlists:{{else}}Add playlists desde youtube:{{/if}}</h1>
     <div class="row">
         <h2>Playlists</h2>
         {{#if errors.title}}
@@ -8,7 +9,31 @@
         </div>
         {{/if}}
         {{#each items}}
-        {{> playlistCard }}
+        <div class="col justify-content-center py-3 ytbCard">
+            <div class="card text-white bg-dark" style="width: 10rem;">
+                <img class="card-img-top" src=" {{#if ytbID}}{{image}}{{else}}{{snippet.thumbnails.default.url}}{{/if}}"
+                    alt="Card image cap">
+                <div class="card-body">
+                    <h5 class="card-title">{{#if ytbID}} {{title}} {{else}}{{snippet.title}}{{/if}}</h5>
+                    <p class="card-text">{{#if ytbID}} {{tracks}} {{else}}{{contentDetails.itemCount}}{{/if}} Tracks</p>
+                    <div class="text-center">
+                        {{#if delete}}
+                        <form action="/playlist/{{id}}/delete" method="POST">
+                            <button type="submit" class="btn btn-danger">Borrar</button>
+                        </form>
+                        {{else}}
+                        <form action="/playlist/add" method="POST">
+                            <input type="hidden" name="ytbID" value="{{id}}" />
+                            <input type="hidden" name="image" value="{{snippet.thumbnails.default.url}}" />
+                            <input type="hidden" name="title" value="{{snippet.title}}" />
+                            <input type="hidden" name="tracks" value="{{contentDetails.itemCount}}" />
+                            <button type="submit" class="btn btn-danger">Add</button>
+                        </form>
+                        {{/if}}
+                    </div>
+                </div>
+            </div>
+        </div>
         {{/each}}
     </div>
 </div>

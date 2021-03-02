@@ -31,12 +31,15 @@ router.get('/activate/:activationToken',secure.isNotAuthenticated, usersControll
 router.post('/logout', secure.isAuthenticated, usersController.logout)
 
 router.get('/control', secure.isAuthenticated, usersController.create)
-router.get("/addPlaylist", secure.isAuthenticated, profileController.addPlaylist);
-router.post("/addPlaylist", secure.isAuthenticated, profileController.doAddPlaylist);
+router.get("/playlist/add", secure.isAuthenticated, profileController.addPlaylist);
+router.post("/playlist/add", secure.isAuthenticated, profileController.doAddPlaylist);
+router.get("/playlist/delete", secure.isAuthenticated, profileController.deletePlaylist);
+router.post("/playlist/:id/delete", secure.isAuthenticated, profileController.doDeletePlaylist);
 // profile
-router.get('/profile', secure.isAuthenticated, usersController.profile)
-router.get("/profile/:id/edit", secure.isAuthenticated, profileController.edit);
-router.post("/profile/:id/edit", secure.isAuthenticated, profileController.doEdit);
+router.get('/profile', secure.isAuthenticated, profileController.profile)
+router.get('/profile/library', secure.isAuthenticated, profileController.library)
+router.get("/profile/edit", secure.isAuthenticated, profileController.edit);
+router.post("/profile/edit/head", secure.isAuthenticated, profileController.doEdit);
 
 
 // posts

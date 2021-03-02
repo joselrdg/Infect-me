@@ -4,6 +4,7 @@ const User = require("../models/user.model");
 const mailer = require("../config/nodemailer.config");
 
 const { google } = require('googleapis');
+const Playlist = require('../models/Playlist.model');
 // console.log(google)
 // const OAuth2 = google.auth.AuthPlus.OAuth2;
 const config = {
@@ -18,19 +19,8 @@ const oauth2Client = new google.auth.OAuth2(
   config.callbackURL
 );
 
-let userData = {
-  userName: '',
-  picture: ''
-}
-
-const confgUserData = (name, picture) => {
-  userData.userName = name;
-  userData.picture = picture;
-}
-
 
 module.exports.register = (req, res, next) => {
-
   res.render('users/register');
 }
 
@@ -61,9 +51,7 @@ module.exports.doRegister = (req, res, next) => {
               next(e);
             }
           });
-
       }
-
     })
     .catch((e) => next(e));
 };
@@ -91,9 +79,7 @@ module.exports.doLogin = (req, res, next) => {
 
 module.exports.doLoginGoogle = (req, res, next) => {
   if (req.user) {
-    console.log('estamos en login google con usuario')
     passport.authenticate('youtube', (error, user, validations) => {
-      console.log(user)
     })
   } else {
     passport.authenticate('google-auth', (error, user, validations) => {
@@ -112,19 +98,13 @@ module.exports.doLoginGoogle = (req, res, next) => {
 }
 
 module.exports.create = (req, res, next) => {
-  res.render('users/controlPanel');
+  let userData = {
+    userName: req.user.userName,
+    picture: req.user.picture
+  }
+  res.render('users/controlPanel', userData);
 }
 
-module.exports.profile = (req, res, next) => {
-  const { userName, picture } = req.user;
-  confgUserData(userName, picture)
-  // const token = req.user.social.google.refresh_token;
-  // if (token) {
-  //   Youtube.ytbPlaylists(req, res, next, 'lists')
-  // } else {
-  res.render('users/profile', userData);
-  // }
-}
 
 module.exports.logout = (req, res, next) => {
   req.session.destroy();

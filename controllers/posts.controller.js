@@ -42,7 +42,6 @@ module.exports.doCreate = (req, res, next) => {
     post.tags = post.tags.split(",");
   }
   post.user = req.currentUser._id;
-  console.log(post)
  
   Post.create(post)
     .then((p) => {
