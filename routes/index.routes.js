@@ -39,7 +39,8 @@ router.post("/playlist/:id/delete", secure.isAuthenticated, profileController.do
 router.get('/profile', secure.isAuthenticated, profileController.profile)
 router.get('/profile/library', secure.isAuthenticated, profileController.library)
 router.get("/profile/edit", secure.isAuthenticated, profileController.edit);
-router.post("/profile/edit/head", secure.isAuthenticated, profileController.doEdit);
+router.post("/profile/edit/head", secure.isAuthenticated, profileController.doEditHead);
+router.post("/profile/edit/body", secure.isAuthenticated, profileController.doEditBody);
 
 
 // posts

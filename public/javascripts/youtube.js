@@ -7,14 +7,31 @@ window.addEventListener('load', () => {
   const dataPlayList = document.querySelectorAll(".ytbCard")
 
   dataPlayList.forEach(card => {
- 
+
     card.addEventListener("click", function (event) {
-      if(event.target.dataset.play){
-      const ytbID = event.target.dataset.id;
-      configVideoPlayer(ytbID, 'playlist');
-    } else {return}
+      if (event.target.dataset.play) {
+        const ytbID = event.target.dataset.id;
+        configVideoPlayer(ytbID, 'playlist');
+      } else { return }
     })
   })
+
+  document.getElementById('editHeadBtn').addEventListener('click', function (event) {
+    let head = document.getElementById('editHead');
+    if (head.style.display === "none") {
+      head.style.display = "block";
+    } else {
+      head.style.display = "none";
+    }
+  });
+  document.getElementById('editBodyBtn').addEventListener('click', function (event) {
+    let body = document.getElementById('editBody');
+    if (body.style.display === "none") {
+      body.style.display = "block";
+    } else {
+      body.style.display = "none";
+    }
+  });
 })
 
 

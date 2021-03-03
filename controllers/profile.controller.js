@@ -3,31 +3,31 @@ const User = require("../models/user.model");
 const Youtube = require("../controllers/youtube.controller");
 const Playlist = require("../models/Playlist.model");
 const Profile = require("../models/Profile.model");
-
+const ProfileBody = require("../models/Body.model");
+let userData = {};
 
 module.exports.profile = (req, res, next) => {
-  
+
   User.findOne({ _id: req.user._id })
     .populate('playlist')
     .populate('profile')
-    .then((p) => {      
-      let userData = {
+    .then((p) => {
+      userData = {
         userName: req.user.userName,
         picture: req.user.picture,
         profile: p.profile[0]
       }
       // userData.playlist = p.playlist;
-      console.log(userData)
       res.render('users/profile', userData);
     })
     .catch((e) => next(e));
 }
 
-module.exports.edit = (req, res, next) => {  
+module.exports.edit = (req, res, next) => {
   Profile.findOne({ user: req.user._id })
     .then((profile) => {
       if (profile) {
-        let userData = {
+        userData = {
           userName: req.user.userName,
           picture: req.user.picture,
           profile: profile
@@ -37,29 +37,47 @@ module.exports.edit = (req, res, next) => {
       } else {
         Profile.create({ user: req.user._id })
           .then((user) => {
-            console.log('Perfil creado ----------------------')
-            res.render('users/editProfile');
+            ProfileBody.create({ profile: user._id })
+              .then((p) => {
+                console.log(p)
+                console.log('Perfil y modulos creados ----------------------')
+                res.render('users/editProfile');
+              })
           })
           .catch((e) => {
             console.log(e)
-              next(e);
+            next(e);
           });
       }
     })
     .catch((e) => next(e));
 }
 
-module.exports.doEdit = (req, res, next) => {
-const body = {head : req.body}
-const query = {user: req.user._id};
-Profile.findOneAndUpdate( query, body, { new: true })
-    .then((p) => {console.log('actualizado ---------------');
-    res.redirect('/profile')})
+module.exports.doEditHead = (req, res, next) => {
+  const body = { head: req.body }
+  const query = { user: req.user._id };
+  Profile.findOneAndUpdate(query, body, { new: true })
+    .then((p) => {
+      console.log('actualizado ---------------');
+      res.redirect('/profile')
+    })
     .catch((e) => next(e));
 }
 
+module.exports.doEditBody = (req, res, next) => {
+  console.log(userData.profile._id)
+  const body = { body: req.body }
+  const query = { profile: userData.profile._id };
+  ProfileBody.findOneAndUpdate(query, body, { new: true })
+  .then((p) => {
+    console.log('actualizado ---------------');
+    res.redirect('/profile')
+  })
+  .catch((e) => next(e));
+}
+
 module.exports.library = (req, res, next) => {
-  let userData = {
+  userData = {
     userName: req.user.userName,
     picture: req.user.picture
   }
@@ -110,12 +128,12 @@ module.exports.doAddPlaylist = (req, res, next) => {
 }
 
 module.exports.deletePlaylist = (req, res, next) => {
-  let userData = {
+  userData = {
     userName: req.userName,
     picture: req.picture
   }
   Playlist.find({ user: req.user._id })
-    .then((p) => { console.log(p); userData.items = p; userData.delete = true; res.render('users/deletePlaylist', userData) })
+    .then((p) => { userData.items = p; userData.delete = true; res.render('users/deletePlaylist', userData) })
     .catch((e) => next(e));
 
 }

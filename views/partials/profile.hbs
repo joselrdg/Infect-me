@@ -1,17 +1,39 @@
-<div class="container-fluid text-center"
-    style="background-color: {{profile.head.backgroundColor}}; 
-    background-image: url('{{profile.head.backgroundImg}}');
+<div class="container{{#if profile.head.fluid}}-fluid{{/if}} text-center" style="background-color: {{profile.head.backgroundColor}}; 
+    {{#if profile.head.bkgImgON}}background-image: url('{{profile.head.backgroundImg}}');{{/if}}
+    {{#if profile.head.bkgImgCover}}background-repeat: no-repeat; background-size: cover;{{/if}}
+    background-attachment: fixed;
     color: {{profile.head.textColor}}">
-    <h1 class="pt-5">{{profile.head.title}}</h1>
-    <img class="my-5" src="{{profile.head.image}}" alt="header image">
-    <h3 class="pb-5">{{profile.head.description}}</h3>
-    
-    {{!-- <button type="button" class="btn btn-danger" id="__ytb">Danger</button>
-    <a class="btn btn-lg btn-primary mx-5" style="background-color: #3c98e9;" href="/youtube/playlists">Youtube</a> --}}
+    <div class="row">
+        <div class="col">
+            <h1 class="pt-5 mb-3">{{profile.head.title}}</h1>
+
+            {{#if profile.head.imgON}}<img class="my-3" src="{{profile.head.image}}" alt="header image" 
+            width="{{profile.head.imgWidth}}" height="{{profile.head.imgHeight}}">{{/if}}
+
+            <h3 class="pt-3 mb-5">{{profile.head.description}}</h3>
+
+            {{#if profile.head.layout}}
+        </div>
+        <div class="col">
+            {{/if}}
+
+            {{#if profile.head.videoON}}
+            <div class="m-5">
+                <div class="videoPlayer embed-responsive embed-responsive-21by9">
+                    <iframe class="embed-responsive-item" width="640" height="360" src="{{profile.head.video}}?autoplay=0&mute=0&loop=1"
+                        frameborder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowfullscreen></iframe>
+                </div>
+            </div>
+            {{/if}}
+        </div>
+    </div>
 </div>
-<div>
+
+<div class="my-4">
     <div>
-        <ul class="nav justify-content-center mt-4 ">
+        <ul class="nav justify-content-center">
             <li class="nav-item">
                 <a class="nav-link active text-dark" aria-current="page" href="/profile">Perfil</a>
             </li>

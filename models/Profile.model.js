@@ -9,30 +9,23 @@ const profileSchema = new mongoose.Schema(
             required: true
         },
         head: {
-            backgroundImg: {
-                type: String
-            },
-            backgroundColor: {
-                type: String
-            },
-            textColor: {
-                type: String
-            },
-            image: {
-                type: String
-            },
-            video: {
-                type: String
-            },
-            title: {
-                type: String
-            },
-            description: {
-                type: String
-            },
-            layout: {
-                type: String
-            }
+            bkgBODY: String,
+            txtColorBODY: String,
+            backgroundImg: String,
+            bkgImgON: String,
+            bkgImgCover: String,
+            backgroundColor: String,
+            textColor: String,
+            imgON: String,
+            image: String,
+            imgWidth: String,
+            imgHeight: String,
+            video: String,
+            videoON: String,
+            title: String,
+            description: String,
+            layout: String,
+            fluid: String
         }
     },
     {
@@ -45,42 +38,13 @@ const profileSchema = new mongoose.Schema(
     }
 );
 
-const profileBodySchema = new mongoose.Schema({
-    profile: {
-        type: mongoose.SchemaTypes.ObjectId,
-        ref: "Profile",
-        required: true
-    },
-    body: [{
-        division: [{
-            background: {
-                type: String
-            },
-            image: {
-                type: String
-            },
-            video: {
-                url: String
-            },
-            title: {
-                type: String
-            },
-            description: {
-                type: String
-            },
-            layout: [String]
-        }]
-    }]
-})
-
 profileSchema.virtual("body", {
     ref: "ProfileBody",
     foreignField: "profile",
     localField: "_id",
 });
 
-const ProfileBody = mongoose.model('ProfileBody', profileBodySchema);
+
 const Profile = mongoose.model('Profile', profileSchema);
 
-module.exports = ProfileBody;
 module.exports = Profile;
