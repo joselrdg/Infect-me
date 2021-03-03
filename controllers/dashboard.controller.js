@@ -27,15 +27,24 @@ module.exports.showDashboard = ((req, res, next) => {
 })
 
 module.exports.findUser = ((req,res,next) => {
-  console.log('Busca usuario',req.params.user)
+ 
   User.find({userName: req.params.user})
   .then((user) => {
      if (user){
        res.json(user)
      } else {
-       console.log ('No encuentra el suario')
+       console.log ('No encuentra el usuario')
      }
   }) 
 
  // next()
+})
+
+module.exports.friendEmail = ((req,res,next) => {
+
+  console.log(`ENVIO DE EMAIL DE AMISTAD ${req.body.frienduserid} ${req.body.friendemail}`)
+  
+  // crear relacion de amistad
+  // enviar email de amistad
+  next();
 })
