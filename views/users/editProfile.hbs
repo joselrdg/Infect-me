@@ -2,14 +2,14 @@
     <h1>Edita tu página:</h1>
     <div class="text-center my-4" id="editProfile">
         <div class="btn-group text-center" role="group" aria-label="Basic example">
-            <button type="button" id="editHeadBtn" class="btn btn-secondary">Mostrar/ocultar cabecera</button>
+            <button type="button" id="editHeadBtn" class="btn btn-secondary">Mostrar/ocultar {{#if editBody}}edita contenedor{{else}}cabecera{{/if}}</button>
             <button type="button" id="editBodyBtn" class="btn btn-secondary">Mostrar/ocultar contenedores</button>
         </div>
     </div>
 </div>
 <div class="container" id="editHead" style="display: block;">
-    <h2 class="mt-5 mb-3 text-center">Cabezera:</h2>
-    <form action="/profile/edit/head" method="POST">
+    <h2 class="mt-5 mb-3 text-center">Edita{{#if editBody}} el contenedor:{{else}} la cabezera:{{/if}}</h2>
+    <form action="{{#if editBody}}/profile/edit/body/{{id}}{{else}}/profile/edit/head{{/if}}" method="POST">
 
         <div class="form-group my-1">
         </div>
@@ -123,17 +123,26 @@
 </div>
 
 <div class="container" id="editBody" style="display: block;">
-    <h2 class="mt-5 mb-3 text-center">Contenedores:</h2>
+    {{#if editBody}}
+    {{else}}<h2 class="mt-5 mb-3 text-center">Contenedores:</h2>
+    <h3>Selecciona un contenedor para editarlo:</h3>{{/if}}
     {{#each body as |container| }}
     {{!-- <div class="container px-0" style="background-color: {{bkgBODY}}; color: {{txtColorBODY}}"> --}}
-        <button type="button" class="btn btn-dark">{{#if title}}{{title}}{{else}}Div{{/if}}</button>
-        <div style="width: 30px; height: 50px; background-color: {{#if backgroundColor}}{{backgroundColor}}{{else}}blueviolet{{/if}};">
-        {{title}}
-        {{id}}
-
+        <div>
+            {{!-- <button type="button" class="btn btn-dark">{{#if title}}{{title}}{{else}}Div{{/if}}</button> --}}
+            <div
+                style="width: 30px; height: 50px; background-color: {{#if backgroundColor}}{{backgroundColor}}{{else}}blueviolet{{/if}};">
+                <a href="/profile/edit/body/{{id}}" class="btn btn-danger cardContainer">{{#if title}}{{title}}{{else}}Container{{/if}}</a>
+                {{!-- <a  data-idbody="{{id}}" class="btn btn-danger cardContainer">{{#if title}}{{title}}{{else}}Div{{/if}}</a> --}}
+                {{title}}
+                {{id}}
+            </div>
         </div>
-        {{!-- </div> --}}
+        {{!--
+    </div> --}}
     {{/each}}
+
+    <h2 class="mt-5 mb-3 text-center">Crea un contenedor:</h2>
     <form action="/profile/create/body" method="POST">
 
         <div class="form-group my-1">
@@ -141,15 +150,15 @@
 
         <div class="form-group my-5">
             <label for="backgroundImg">Muestra una imagen de fondo...</label>
-            <input type="text" name="backgroundImg" value="{{body.backgroundImg}}" class="form-control my-3"
+            <input type="text" id="backgroundImg" name="backgroundImg" value="{{body.backgroundImg}}" class="form-control my-3"
                 placeholder="Pon una imagen de fondo">
             <div class="custom-control custom-checkbox">
-                <input type="checkbox" name="bkgImgCover" class="custom-control-input" {{#if
+                <input type="checkbox" id="bkgImgCover" name="bkgImgCover" class="custom-control-input" {{#if
                     head.bkgImgCover}}checked{{/if}}>
                 <label class="custom-control-label mx-2" for="bkgImgCover">Selecciona para expandir la
                     imagen.</label>
                 <span class="mx-3">
-                    <input type="checkbox" name="bkgImgON" class="custom-control-input" {{#if
+                    <input type="checkbox" id="bkgImgON" name="bkgImgON" class="custom-control-input" {{#if
                         head.bkgImgON}}checked{{/if}}>
                     <label class="custom-control-label mx-2" for="bkgImgON">Selecciona para que se muestre en tu
                         perfil.</label>
@@ -161,12 +170,12 @@
             <div class="row">
                 <div class="col">
                     <label for="backgroundColor">o... un color de fondo:</label>
-                    <input name="backgroundColor" value="{{profile.head.backgroundColor}}" type="color"
+                    <input id="bkgImgON" id="backgroundColor" name="backgroundColor" value="{{profile.head.backgroundColor}}" type="color"
                         class="form-control my-3">
                 </div>
                 <div class="col">
                     <label for="backgroundColor">Indica el color del texto</label>
-                    <input name="textColor" value="{{profile.head.textColor}}" type="color" class="form-control my-3">
+                    <input id="backgroundColor" name="textColor" value="{{profile.head.textColor}}" type="color" class="form-control my-3">
                 </div>
             </div>
 

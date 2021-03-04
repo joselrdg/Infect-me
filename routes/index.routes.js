@@ -41,6 +41,8 @@ router.get('/profile/library', secure.isAuthenticated, profileController.library
 router.get("/profile/edit", secure.isAuthenticated, profileController.edit);
 router.post("/profile/edit/head", secure.isAuthenticated, profileController.doEditHead);
 router.post("/profile/create/body", secure.isAuthenticated, profileController.doCreateBody);
+router.get("/profile/edit/body/:id", secure.isAuthenticated, profileController.findPBody);
+router.post("/profile/edit/body/:id", secure.isAuthenticated, profileController.doEditPBody);
 
 
 // posts

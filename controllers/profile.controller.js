@@ -7,12 +7,10 @@ const ProfileBody = require("../models/Body.model");
 let userData = {};
 
 module.exports.profile = (req, res, next) => {
-
   Profile.findOne({ user: req.user._id })
     // .populate('playlist')
     .populate('body')
     .then((p) => {
-      console.log(p)
       userData = p;
       // userData.playlist = p.playlist;
       res.render('users/profile', p);
@@ -57,7 +55,7 @@ module.exports.doCreateBody = (req, res, next) => {
   Profile.findOne({ user: req.user._id })
     .then((profile) => {
       console.log(profile.id)
-      const body =  req.body;
+      const body = req.body;
       body.profile = profile.id;
       ProfileBody.create(body)
         .then((p) => {
@@ -79,14 +77,34 @@ module.exports.doCreateBody = (req, res, next) => {
   //   .catch((e) => next(e));
 }
 
+module.exports.findPBody = ((req, res, next) => {
+  console.log('estamos en find body -------------------')
+  console.log(req.params)
+  ProfileBody.findById(req.params.id)
+    .then((profile) => {
+      if (profile) {
+        let userData = profile
+        userData.editBody = true;
+        console.log('Existe----------------------')
+        res.render('users/editProfile', userData);
+      } else {
+        console.log('No encuentra el usuario')
+      }
+    })
+    .catch((e) => next(e));
+})
+
+
 // terminar
-module.exports.doEditBody = (req, res, next) => {
-  console.log(userData.profile._id)
-  const body = { body: req.body }
-  const query = { profile: userData.profile._id };
-  ProfileBody.findOneAndUpdate(query, body, { new: true })
+module.exports.doEditPBody = (req, res, next) => {
+  console.log('estamos en edddddddddditt p bodyyyyyyyyyyyyyyyyy')
+  const body = req.body
+  console.log(body)
+  const query = req.params.id;
+  ProfileBody.findByIdAndUpdate(query, body, { new: true })
     .then((p) => {
       console.log('actualizado ---------------');
+      console.log(p);
       res.redirect('/profile')
     })
     .catch((e) => next(e));
