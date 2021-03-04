@@ -30,7 +30,7 @@ router.get('/activate/:activationToken',secure.isNotAuthenticated, usersControll
 
 router.post('/logout', secure.isAuthenticated, usersController.logout)
 
-router.get('/control', secure.isAuthenticated, usersController.create)
+router.get('/control', secure.isAuthenticated, profileController.create)
 router.get("/playlist/add", secure.isAuthenticated, profileController.addPlaylist);
 router.post("/playlist/add", secure.isAuthenticated, profileController.doAddPlaylist);
 router.get("/playlist/delete", secure.isAuthenticated, profileController.deletePlaylist);
@@ -38,11 +38,13 @@ router.post("/playlist/:id/delete", secure.isAuthenticated, profileController.do
 // profile
 router.get('/profile', secure.isAuthenticated, profileController.profile)
 router.get('/profile/library', secure.isAuthenticated, profileController.library)
-router.get("/profile/edit", secure.isAuthenticated, profileController.edit);
+router.get("/profile/edit/head", secure.isAuthenticated, profileController.editHead);
 router.post("/profile/edit/head", secure.isAuthenticated, profileController.doEditHead);
+router.get("/profile/create/body", secure.isAuthenticated, profileController.createBody);
 router.post("/profile/create/body", secure.isAuthenticated, profileController.doCreateBody);
-router.get("/profile/edit/body/:id", secure.isAuthenticated, profileController.findPBody);
-router.post("/profile/edit/body/:id", secure.isAuthenticated, profileController.doEditPBody);
+router.get("/profile/edit/body", secure.isAuthenticated, profileController.findBody);
+router.get("/profile/edit/body/:id", secure.isAuthenticated, profileController.editBody);
+router.post("/profile/edit/body/:id", secure.isAuthenticated, profileController.doEditBody);
 
 
 // posts

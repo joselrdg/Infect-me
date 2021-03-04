@@ -12,20 +12,20 @@ const profileSchema = new mongoose.Schema(
             bkgBODY: String,
             txtColorBODY: String,
             backgroundImg: String,
-            bkgImgON: String,
-            bkgImgCover: String,
+            bkgImgON: Boolean,
+            bkgImgCover: Boolean,
             backgroundColor: String,
             textColor: String,
-            imgON: String,
+            imgON: Boolean,
             image: String,
             imgWidth: String,
             imgHeight: String,
             video: String,
-            videoON: String,
-            title: String,
+            videoON: Boolean,
+            titleH: String,
             description: String,
-            layout: String,
-            fluid: String
+            col2: Boolean,
+            fluid: Boolean
     },
     {
         toObject: {

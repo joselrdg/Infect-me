@@ -97,14 +97,6 @@ module.exports.doLoginGoogle = (req, res, next) => {
   }
 }
 
-module.exports.create = (req, res, next) => {
-  let userData = {
-    userName: req.user.userName,
-    picture: req.user.picture
-  }
-  res.render('users/controlPanel', userData);
-}
-
 
 module.exports.logout = (req, res, next) => {
   req.session.destroy();

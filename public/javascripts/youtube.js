@@ -14,36 +14,36 @@ window.addEventListener('load', () => {
   //       configVideoPlayer(ytbID, 'playlist');
   //     } else { return }
   //   })
-})
+// })
 
-document.getElementById('editHeadBtn').addEventListener('click', function (event) {
-  let head = document.getElementById('editHead');
-  if (head.style.display === "none") {
-    head.style.display = "block";
-  } else {
-    head.style.display = "none";
-  }
-});
-document.getElementById('editBodyBtn').addEventListener('click', function (event) {
-  let body = document.getElementById('editBody');
+// document.getElementById('editHeadBtn').addEventListener('click', function (event) {
+//   let head = document.getElementById('editHead');
+//   if (head.style.display === "none") {
+//     head.style.display = "block";
+//   } else {
+//     head.style.display = "none";
+//   }
+// });
+// document.getElementById('editBodyBtn').addEventListener('click', function (event) {
+//   let body = document.getElementById('editBody');
 
-  if (body.style.display === "none") {
-    body.style.display = "block";
-  } else {
-    body.style.display = "none";
-  }
-});
+//   if (body.style.display === "none") {
+//     body.style.display = "block";
+//   } else {
+//     body.style.display = "none";
+//   }
+// });
 
 
-const idBody = document.querySelectorAll(".cardContainer")
-idBody.forEach(card => {
-  card.addEventListener("click", function (event) {
-    if (event.target.dataset.idbody) {
-      const ID = event.target.dataset.idbody;
-      funAxios(ID)
-    }
-  })
-})
+// const idBody = document.querySelectorAll(".cardContainer")
+// idBody.forEach(card => {
+//   card.addEventListener("click", function (event) {
+//     if (event.target.dataset.idbody) {
+//       const ID = event.target.dataset.idbody;
+//       funAxios(ID)
+//     }
+//   })
+// })
 
 
 // document.getElementById('cardContainer').addEventListener('click', function (event) {
@@ -51,30 +51,18 @@ idBody.forEach(card => {
 // });
 
 
-function funAxios(id) {
-  axios
-    .get(`/profile/edit/body/${id}`)
-    .then((response) => {
-      console.log('estamos en axios --------------------------------')
-      const { data } = response;
-      console.log(data)
-  // const xAxis = Object.keys(data['bpi'])
-  // console.log(xAxis)
-  // const yAxis = Object.values(data['bpi'])
-  //     .map((dayData) => dayData)
-  // console.log(yAxis)
-  // min = (Math.min.apply(null, yAxis).toFixed(2));
-  // max = (Math.max.apply(null, yAxis).toFixed(2));
-  // console.log('min ' + min + ' max ' + max)
-  // minHtml.innerHTML =`Min: ${min} ${currency}`
-  // maxHtml.innerHTML =`Max: ${max} ${currency}`
-
-  // paintData(xAxis, yAxis);
-  })
-  .catch((e) => console.error("Error getting data", e));
+// function funAxios(id) {
+//   axios
+//     .get(`/profile/edit/body/${id}`)
+//     .then((response) => {
+//       console.log('estamos en axios --------------------------------')
+//       const { data } = response;
+//       console.log(data)
+//  })
+//   .catch((e) => console.error("Error getting data", e));
 
 
-}
+})
 
 
 
