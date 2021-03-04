@@ -40,7 +40,7 @@ router.get('/profile', secure.isAuthenticated, profileController.profile)
 router.get('/profile/library', secure.isAuthenticated, profileController.library)
 router.get("/profile/edit", secure.isAuthenticated, profileController.edit);
 router.post("/profile/edit/head", secure.isAuthenticated, profileController.doEditHead);
-router.post("/profile/edit/body", secure.isAuthenticated, profileController.doEditBody);
+router.post("/profile/create/body", secure.isAuthenticated, profileController.doCreateBody);
 
 
 // posts

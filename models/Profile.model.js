@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const User = require('./user.model');
+const ProfileBody = require('./Body.model');
 
 const profileSchema = new mongoose.Schema(
     {
@@ -8,7 +9,6 @@ const profileSchema = new mongoose.Schema(
             ref: "User",
             required: true
         },
-        head: {
             bkgBODY: String,
             txtColorBODY: String,
             backgroundImg: String,
@@ -26,7 +26,6 @@ const profileSchema = new mongoose.Schema(
             description: String,
             layout: String,
             fluid: String
-        }
     },
     {
         toObject: {

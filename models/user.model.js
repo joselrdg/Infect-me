@@ -1,6 +1,7 @@
 // User model here
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
+const Profile = require("../models/Profile.model");
 const Post = require('./Post.model');
 const bcrypt = require('bcrypt');
 const EMAIL_PATTERN = /^(([^<>()[\]\\.,;:\s@']+(\.[^<>()[\]\\.,;:\s@']+)*)|('.+'))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;

@@ -1,26 +1,26 @@
-<div class="container{{#if profile.head.fluid}}-fluid{{/if}} text-center" style="background-color: {{profile.head.backgroundColor}}; 
-    {{#if profile.head.bkgImgON}}background-image: url('{{profile.head.backgroundImg}}');{{/if}}
-    {{#if profile.head.bkgImgCover}}background-repeat: no-repeat; background-size: cover;{{/if}}
+<div class="container{{#if fluid}}-fluid{{/if}} text-center" style="background-color: {{backgroundColor}}; 
+    {{#if bkgImgON}}background-image: url('{{backgroundImg}}');{{/if}}
+    {{#if bkgImgCover}}background-repeat: no-repeat; background-size: cover;{{/if}}
     background-attachment: fixed;
-    color: {{profile.head.textColor}}">
+    color: {{textColor}}">
     <div class="row">
         <div class="col">
-            <h1 class="pt-5 mb-3">{{profile.head.title}}</h1>
+            <h1 class="pt-5 mb-3">{{title}}</h1>
 
-            {{#if profile.head.imgON}}<img class="my-3" src="{{profile.head.image}}" alt="header image" 
-            width="{{profile.head.imgWidth}}" height="{{profile.head.imgHeight}}">{{/if}}
+            {{#if imgON}}<img class="my-3" src="{{image}}" alt="header image" 
+            width="{{imgWidth}}" height="{{imgHeight}}">{{/if}}
 
-            <h3 class="pt-3 mb-5">{{profile.head.description}}</h3>
+            <h3 class="pt-3 mb-5">{{description}}</h3>
 
-            {{#if profile.head.layout}}
+            {{#if layout}}
         </div>
         <div class="col">
             {{/if}}
 
-            {{#if profile.head.videoON}}
+            {{#if videoON}}
             <div class="m-5">
                 <div class="videoPlayer embed-responsive embed-responsive-21by9">
-                    <iframe class="embed-responsive-item" width="640" height="360" src="{{profile.head.video}}?autoplay=0&mute=0&loop=1"
+                    <iframe class="embed-responsive-item" width="640" height="360" src="{{video}}?autoplay=0&mute=0&loop=1"
                         frameborder="0"
                         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                         allowfullscreen></iframe>
@@ -31,24 +31,3 @@
     </div>
 </div>
 
-<div class="my-4">
-    <div>
-        <ul class="nav justify-content-center">
-            <li class="nav-item">
-                <a class="nav-link active text-dark" aria-current="page" href="/profile">Perfil</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link text-dark" href="/profile/library">Biblioteca</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link text-dark" href="#">Páginas</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link text-dark" href="/posts/create">Posts</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link text-dark" href="/control">Panel</a>
-            </li>
-        </ul>
-    </div>
-</div>

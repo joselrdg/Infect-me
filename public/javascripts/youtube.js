@@ -26,6 +26,7 @@ window.addEventListener('load', () => {
   });
   document.getElementById('editBodyBtn').addEventListener('click', function (event) {
     let body = document.getElementById('editBody');
+    funAxios()
     if (body.style.display === "none") {
       body.style.display = "block";
     } else {
@@ -33,6 +34,32 @@ window.addEventListener('load', () => {
     }
   });
 })
+
+
+function funAxios() {
+  axios
+    .get('http://localhost:3000/profile/edit')
+    .then((response) => {
+      const { data } = response;
+      console.log(data)
+      // const xAxis = Object.keys(data['bpi'])
+      // console.log(xAxis)
+      // const yAxis = Object.values(data['bpi'])
+      //     .map((dayData) => dayData)
+      // console.log(yAxis)
+      // min = (Math.min.apply(null, yAxis).toFixed(2));
+      // max = (Math.max.apply(null, yAxis).toFixed(2));
+      // console.log('min ' + min + ' max ' + max)
+      // minHtml.innerHTML =`Min: ${min} ${currency}`
+      // maxHtml.innerHTML =`Max: ${max} ${currency}`
+
+      // paintData(xAxis, yAxis);
+    })
+    .catch((e) => console.error("Error getting data", e));
+
+
+}
+
 
 
 const configVideoPlayer = (id, confg) => {

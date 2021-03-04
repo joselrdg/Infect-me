@@ -8,44 +8,33 @@ let userData = {};
 
 module.exports.profile = (req, res, next) => {
 
-  User.findOne({ _id: req.user._id })
-    .populate('playlist')
-    .populate('profile')
+  Profile.findOne({ user: req.user._id })
+    // .populate('playlist')
+    .populate('body')
     .then((p) => {
-      userData = {
-        userName: req.user.userName,
-        picture: req.user.picture,
-        profile: p.profile[0]
-      }
+      console.log(p)
+      userData = p;
       // userData.playlist = p.playlist;
-      res.render('users/profile', userData);
+      res.render('users/profile', p);
     })
     .catch((e) => next(e));
 }
 
 module.exports.edit = (req, res, next) => {
   Profile.findOne({ user: req.user._id })
+    .populate('body')
     .then((profile) => {
       if (profile) {
-        userData = {
-          userName: req.user.userName,
-          picture: req.user.picture,
-          profile: profile
-        }
+        userData = profile
         console.log('Existe----------------------')
         res.render('users/editProfile', userData);
       } else {
         Profile.create({ user: req.user._id })
-          .then((user) => {
-            ProfileBody.create({ profile: user._id })
-              .then((p) => {
-                console.log(p)
-                console.log('Perfil y modulos creados ----------------------')
-                res.render('users/editProfile');
-              })
+          .then((profile) => {
+            console.log('Perfil creado ----------------------')
+            res.render('users/editProfile');
           })
           .catch((e) => {
-            console.log(e)
             next(e);
           });
       }
@@ -54,7 +43,7 @@ module.exports.edit = (req, res, next) => {
 }
 
 module.exports.doEditHead = (req, res, next) => {
-  const body = { head: req.body }
+  const body = req.body;
   const query = { user: req.user._id };
   Profile.findOneAndUpdate(query, body, { new: true })
     .then((p) => {
@@ -64,16 +53,43 @@ module.exports.doEditHead = (req, res, next) => {
     .catch((e) => next(e));
 }
 
+module.exports.doCreateBody = (req, res, next) => {
+  Profile.findOne({ user: req.user._id })
+    .then((profile) => {
+      console.log(profile.id)
+      const body =  req.body;
+      body.profile = profile.id;
+      ProfileBody.create(body)
+        .then((p) => {
+          console.log('Body creado ---------------');
+          console.log(p)
+          res.redirect('/profile')
+        })
+    })
+    .catch((e) => {
+      next(e);
+    });
+  // const body = { profile: req.body._id, body: req.body }
+  // ProfileBody.create(body)
+  //   .then((p) => {
+  //     console.log('Body creado ---------------');
+  //     console.log(p)
+  //     res.redirect('/profile')
+  //   })
+  //   .catch((e) => next(e));
+}
+
+// terminar
 module.exports.doEditBody = (req, res, next) => {
   console.log(userData.profile._id)
   const body = { body: req.body }
   const query = { profile: userData.profile._id };
   ProfileBody.findOneAndUpdate(query, body, { new: true })
-  .then((p) => {
-    console.log('actualizado ---------------');
-    res.redirect('/profile')
-  })
-  .catch((e) => next(e));
+    .then((p) => {
+      console.log('actualizado ---------------');
+      res.redirect('/profile')
+    })
+    .catch((e) => next(e));
 }
 
 module.exports.library = (req, res, next) => {

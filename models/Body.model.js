@@ -7,27 +7,23 @@ const profileBodySchema = new mongoose.Schema({
         ref: "Profile",
         required: true
     },
-    body: [{
-        division: [{
-            bkgBODY: String,
-            txtColorBODY: String,
-            backgroundImg: String,
-            bkgImgON: String,
-            bkgImgCover: String,
-            backgroundColor: String,
-            textColor: String,
-            imgON: String,
-            image: String,
-            imgWidth: String,
-            imgHeight: String,
-            video: String,
-            videoON: String,
-            title: String,
-            description: String,
-            layout: String,
-            fluid: String
-        }]
-    }]
+    bkgBODY: String,
+    txtColorBODY: String,
+    backgroundImg: String,
+    bkgImgON: String,
+    bkgImgCover: String,
+    backgroundColor: String,
+    textColor: String,
+    imgON: String,
+    image: String,
+    imgWidth: String,
+    imgHeight: String,
+    video: String,
+    videoON: String,
+    title: String,
+    description: String,
+    layout: String,
+    fluid: String
 })
 
 const ProfileBody = mongoose.model('ProfileBody', profileBodySchema);
