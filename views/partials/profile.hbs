@@ -3,31 +3,38 @@
     {{#if bkgImgCover}}background-repeat: no-repeat; background-size: cover;{{/if}}
     background-attachment: fixed;
     color: {{textColor}}">
-    <div class="row">
+    <div class="row d-flex align-items-center">
         <div class="col">
-            <h1 class="pt-5 mb-3">{{titleH}}</h1>
+            <h1 class="pt-5 mb-3">{{titleOne}}</h1>
 
-            {{#if imgON}}<img class="my-3" src="{{image}}" alt="header image" 
-            width="{{imgWidth}}" height="{{imgHeight}}">{{/if}}
+            {{#if imgOneON}}<img class="my-3" src="{{imgOneON}}" alt="header image" width="{{imgWidthOne}}"
+                height="{{imgHeightOne}}">{{/if}}
 
-            <h3 class="pt-3 mb-5">{{description}}</h3>
+            <h3 class="pt-3 my-3">{{subTitleOne}}</h3>
+            <p class="pt-3 mb-5">{{textOne}}</p>
 
             {{#if col2}}
         </div>
         <div class="col">
             {{/if}}
+            
+            <h1 class="pt-5 mb-3">{{titleTwo}}</h1>
+
+            {{#if imgTwoON}}<img class="my-3" src="{{imageTwo}}" alt="header image" width="{{imgWidthTwo}}"
+                height="{{imgHeightTwo}}">{{/if}}
 
             {{#if videoON}}
             <div class="m-5">
                 <div class="videoPlayer embed-responsive embed-responsive-21by9">
-                    <iframe class="embed-responsive-item" width="640" height="360" src="{{video}}?autoplay=0&mute=0&loop=1"
-                        frameborder="0"
+                    <iframe class="embed-responsive-item" width="640" height="360"
+                        src="{{video}}?autoplay=0&mute=0&loop=1" frameborder="0"
                         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                         allowfullscreen></iframe>
                 </div>
             </div>
             {{/if}}
+            <h3 class="pt-3 my-3">{{subTitleTwo}}</h3>
+            <p class="pt-3 mb-5">{{textTwo}}</p>
         </div>
     </div>
 </div>
-

@@ -1,29 +1,29 @@
-<div class="container-fluid px-0 pb-5" style="background-color: {{bkgBODY}}; color: {{txtColorBODY}}">
+<div class="container-fluid px-0 pb-5" style=" background-image: url('{{bkgImgBODY}}'); background-color: {{bkgBODY}}; color: {{txtColorBODY}}">
     {{> profile}}
-    <div class="my-4">
+    <div class=" container my-4">
         <div>
             <ul class="nav justify-content-center">
-                <li class="nav-item">
-                    <a class="nav-link active text-dark" aria-current="page" href="/profile">Perfil</a>
+                <li class="nav-item  ">
+                    <a class="btn active text-dark bg-light" aria-current="page" href="/profile">Perfil</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-dark" href="/profile/library">Biblioteca</a>
+                    <a class="btn text-dark bg-light" href="/profile/library">Biblioteca</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-dark" href="#">Páginas</a>
+                    <a class="btn text-dark bg-light" href="#">Páginas</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-dark" href="/posts/create">Posts</a>
+                    <a class="btn text-dark bg-light" href="/posts/create">Posts</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-dark" href="/control">Panel</a>
+                    <a class="btn text-dark bg-light" href="/control">Panel</a>
                 </li>
             </ul>
         </div>
     </div>
 
     {{#each body as |container| }}
-    <div class="px-0" style="background-color: {{bkgBODY}}; color: {{txtColorBODY}}">
+    <div class="px-0" style="margin-bottom: {{margin}}px; background-color: {{bkgBODY}}; color: {{txtColorBODY}}">
         {{> profile}}
     </div>
     {{/each}}

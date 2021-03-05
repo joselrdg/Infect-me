@@ -4,6 +4,7 @@ const miscController = require("../controllers/misc.controller");
 const usersController = require('../controllers/users.controller');
 const postsController = require("../controllers/posts.controller");
 const profileController = require("../controllers/profile.controller");
+const pageController = require("../controllers/page.controller");
 const youtubeController = require("../controllers/youtube.controller");
 const dashboardController = require("../controllers/dashboard.controller");
 const secure = require("../middlewares/secure.middleware");
@@ -45,6 +46,19 @@ router.post("/profile/create/body", secure.isAuthenticated, profileController.do
 router.get("/profile/edit/body", secure.isAuthenticated, profileController.findBody);
 router.get("/profile/edit/body/:id", secure.isAuthenticated, profileController.editBody);
 router.post("/profile/edit/body/:id", secure.isAuthenticated, profileController.doEditBody);
+router.get("/profile/delete/body/:id", secure.isAuthenticated, profileController.deleteBody);
+
+// //pages
+router.get("/page/create", secure.isAuthenticated, pageController.create);
+router.post("/page/create", secure.isAuthenticated, pageController.doCreate);
+router.get('/page/edit', secure.isAuthenticated, pageController.findPages)
+router.get("/page/edit/head/:id", secure.isAuthenticated, pageController.editHead);
+router.post("/page/edit/head/:id", secure.isAuthenticated, pageController.doEditHead);
+router.get("/page/create/body/:id", secure.isAuthenticated, pageController.createBody);
+router.post("/page/create/body/:id", secure.isAuthenticated, pageController.doCreateBody);
+router.get("/page/edit/body/:id", secure.isAuthenticated, pageController.findBody);
+router.get("/page/delete/:id", secure.isAuthenticated, pageController.delete);
+router.get("/page/:id", secure.isAuthenticated, pageController.page);
 
 
 // posts

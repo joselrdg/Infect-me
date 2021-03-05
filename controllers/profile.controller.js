@@ -4,14 +4,19 @@ const Youtube = require("../controllers/youtube.controller");
 const Playlist = require("../models/Playlist.model");
 const Profile = require("../models/Profile.model");
 const ProfileBody = require("../models/Body.model");
-// let userData = {};
+let userData = { userN: "", picture: "" };
 
 module.exports.profile = (req, res, next) => {
-  Profile.findOne({ user: req.user._id })
+  const id = { user: req.user._id }
+  userData.userN = req.currentUser.userName;
+  userData.picture = req.currentUser.picture;
+  Profile.findOne(id)
     // .populate('playlist')
     .populate('body')
     .then((p) => {
-      //  let userData = p;
+      p.userN = userData.userN;
+      p.picture = userData.picture;
+      console.log(p)
       // userData.playlist = p.playlist;
       // console.log(userData)
       res.render('users/profile', p);
@@ -21,22 +26,31 @@ module.exports.profile = (req, res, next) => {
 
 
 module.exports.create = (req, res, next) => {
-  res.render('users/controlPanel');
+  const p = {
+    userN: req.currentUser.userName,
+    picture: req.currentUser.picture
+  }
+  res.render('users/controlPanel', p);
 }
 
 module.exports.editHead = (req, res, next) => {
   Profile.findOne({ user: req.user._id })
     .then((p) => {
       if (p) {
-        let profile = p
-        profile.editHead = true,
-          console.log('Existe----------------------')
-        res.render('users/editProfile', profile);
+        p.userN = userData.userN;
+        p.picture = userData.picture;
+        p.editHead = true;
+        console.log('Existe----------------------')
+        res.render('users/editProfile', p);
       } else {
-        Profile.create({ user: req.user._id })
-          .then((profile) => {
+        const id = { user: req.user._id }
+        Profile.create(id)
+          .then((p) => {
+            p.userN = userData.userN;
+            p.picture = userData.picture;
+            p.editHead = true;
             console.log('Perfil creado ----------------------')
-            res.render('users/editProfile', { editHead: true });
+            res.render('users/editProfile', p);
           })
           .catch((e) => {
             next(e);
@@ -50,7 +64,6 @@ module.exports.editHead = (req, res, next) => {
 module.exports.doEditHead = (req, res, next) => {
   let body = req.body;
   body = checkBox(body);
-  console.log(body)
   const query = { user: req.user._id };
   Profile.findOneAndUpdate(query, body, { new: true })
     .then((p) => {
@@ -61,7 +74,10 @@ module.exports.doEditHead = (req, res, next) => {
 }
 
 module.exports.createBody = ((req, res, next) => {
-  res.render('users/editProfile', { createBody: true });
+  let p = { createBody: true }
+  p.userN = userData.userN;
+  p.picture = userData.picture;
+  res.render('users/editProfile', p);
 })
 
 module.exports.doCreateBody = (req, res, next) => {
@@ -73,7 +89,6 @@ module.exports.doCreateBody = (req, res, next) => {
       ProfileBody.create(body)
         .then((p) => {
           console.log('Body creado ---------------');
-          console.log(p)
           res.redirect('/profile')
         })
     })
@@ -83,13 +98,19 @@ module.exports.doCreateBody = (req, res, next) => {
 }
 
 module.exports.findBody = (req, res, next) => {
-  Profile.findOne({ user: req.user._id })
+  const id = { user: req.user._id };
+  Profile.findOne(id)
     .then((profile) => {
       console.log(profile)
-      ProfileBody.find({ profile: profile.id })
+      const id = { profile: profile.id }
+      ProfileBody.find(id)
         .then((containers) => {
           console.log('Body encontrado ---------------');
-          res.render('users/editProfile', { containers, selectBody: true });
+          let p = { containers }
+          p.userN = userData.userN;
+          p.picture = userData.picture;
+          p.selectBody = true;
+          res.render('users/editProfile', p);
         })
     })
     .catch((e) => {
@@ -101,11 +122,12 @@ module.exports.editBody = (req, res, next) => {
   const query = req.params.id;
   console.log(query)
   ProfileBody.findById(query)
-    .then((container) => {
-      let body = container;
-      body.editBody = true;
+    .then((p) => {
+      p.userN = userData.userN;
+      p.picture = userData.picture;
+      p.editBody = true;
       console.log('Body encontrado ---------------');
-      res.render('users/editProfile', body);
+      res.render('users/editProfile', p);
     })
     .catch((e) => {
       next(e);
@@ -120,21 +142,31 @@ module.exports.doEditBody = (req, res, next) => {
   const query = req.params.id;
   ProfileBody.findByIdAndUpdate(query, body, { new: true })
     .then((p) => {
-      res.redirect('/profile')
+      res.redirect('/control')
+    })
+    .catch((e) => next(e));
+}
+
+module.exports.deleteBody = (req, res, next) => {
+  const id = req.params.id;
+  ProfileBody.findByIdAndRemove(id)
+    .then((p) => {
+      console.log('Container eliminado')
+      res.redirect('/control')
     })
     .catch((e) => next(e));
 }
 
 module.exports.library = (req, res, next) => {
-  userData = {
+  let userDat = {
     userName: req.user.userName,
     picture: req.user.picture
   }
   User.findById(req.user._id)
     .populate('playlist')
     .then((p) => {
-      userData.playlist = p.playlist
-      res.render('users/library', userData);
+      userDat.playlist = p.playlist
+      res.render('users/library', userDat);
     })
     .catch((e) => next(e));
 }
@@ -177,12 +209,12 @@ module.exports.doAddPlaylist = (req, res, next) => {
 }
 
 module.exports.deletePlaylist = (req, res, next) => {
-  userData = {
+  let userDat = {
     userName: req.userName,
     picture: req.picture
   }
-  Playlist.find({ user: req.user._id })
-    .then((p) => { userData.items = p; userData.delete = true; res.render('users/deletePlaylist', userData) })
+  Playlist.findOne({ user: req.user._id })
+    .then((p) => { userDat.items = p; userDat.delete = true; res.render('users/deletePlaylist', userDat) })
     .catch((e) => next(e));
 
 }
@@ -205,10 +237,15 @@ const checkBox = (body) => {
   } else {
     body.bkgImgCover = false;
   }
-  if (body.imgON === 'on') {
-    body.imgON = true;
+  if (body.imgOneON === 'on') {
+    body.imgOneON = true;
   } else {
-    body.imgON = false;
+    body.imgOneON = false;
+  }
+  if (body.imgTwoON === 'on') {
+    body.imgTwoON = true;
+  } else {
+    body.imgTwoON = false;
   }
   if (body.videoON === 'on') {
     body.videoON = true;

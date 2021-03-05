@@ -9,23 +9,33 @@ const profileSchema = new mongoose.Schema(
             ref: "User",
             required: true
         },
-            bkgBODY: String,
-            txtColorBODY: String,
-            backgroundImg: String,
-            bkgImgON: Boolean,
-            bkgImgCover: Boolean,
-            backgroundColor: String,
-            textColor: String,
-            imgON: Boolean,
-            image: String,
-            imgWidth: String,
-            imgHeight: String,
-            video: String,
-            videoON: Boolean,
-            titleH: String,
-            description: String,
-            col2: Boolean,
-            fluid: Boolean
+        bkgImgBODY: String,
+        bkgBODY: String,
+        txtColorBODY: String,
+        backgroundImg: String,
+        bkgImgON: Boolean,
+        bkgImgCover: Boolean,
+        backgroundColor: String,
+        textColor: String,
+        imgOneON: Boolean,
+        imageOne: String,
+        imgWidthOne: String,
+        imgHeightOne: String,
+        imgTwoON: Boolean,
+        imageTwo: String,
+        imgWidthTwo: String,
+        imgHeightTwo: String,
+        video: String,
+        videoON: Boolean,
+        titleOne: String,
+        subTitleOne: String,
+        textOne: String,
+        titleTwo: String,
+        subTitleTwo: String,
+        textTwo: String,
+        margin: String,
+        col2: Boolean,
+        fluid: Boolean
     },
     {
         toObject: {
@@ -42,6 +52,7 @@ profileSchema.virtual("body", {
     foreignField: "profile",
     localField: "_id",
 });
+
 
 
 const Profile = mongoose.model('Profile', profileSchema);
