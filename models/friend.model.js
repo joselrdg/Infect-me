@@ -17,11 +17,24 @@ const friendSchema = new mongoose.Schema ({
             type: String,
             required: true,
             enum: ['Active' , 'Inactive', 'pending'],
-            default:'Pending'
+            default:'pending'
+        },
+        activationToken: {
+            type: String,
+            default: () => {
+                return (
+                    Math.random().toString(36).substring(2, 15) +
+                    Math.random().toString(36).substring(2, 15) +
+                    Math.random().toString(36).substring(2, 15) +
+                    Math.random().toString(36).substring(2, 15)
+                )
+            }
+
         }
+
    
     
 })
-const Friend = mongoose.model('Friend', friendsSchema);
+const Friend = mongoose.model('Friend', friendSchema);
 
 module.exports = Friend;

@@ -1,6 +1,8 @@
 const mongoose = require("mongoose");
 const User = require("../models/user.model");
 const Post = require("../models/Post.model");
+const Friend = require("../models/friend.model");
+const mailer= require("../config/nodemailer.config");
 
 
 module.exports.showDashboard = ((req, res, next) => {
@@ -43,8 +45,33 @@ module.exports.findUser = ((req,res,next) => {
 module.exports.friendEmail = ((req,res,next) => {
 
   console.log(`ENVIO DE EMAIL DE AMISTAD ${req.body.frienduserid} ${req.body.friendemail}`)
+  // validar si ya son amigos
+  Promise.all([
+    Friend.find({user: req.currentUser._id,friend : req.body.frienduserid}),
+    Friend.find({user: req.body.frienduserid,friend : req.currentUser._id})
+
+  ])
+  .then ((friends) =>{
+   if (friends[0].length === 0 && friends[1].length === 0) {
+    console.log('Friends: ',friends,friends[0].length)
+    const friendship ={user: req.currentUser._id,friend : req.body.frienduserid}
+ // crear relacion de amistad
+    Friend.create(friendship)
+    .then((friendship) =>{
+      // enviar email de amistad
+      console.log('FRIENDSHIP : ', friendship)
+       mailer.sendMailFriend(req.currentUser._id,req.body.friendemail,friendship.activationToken);
+       res.redirect('/dashboard');
+
+       })
+       
+   }
+  // res.redirect('/dashboard');
+   
+  })
+ 
+  .catch((e) => next(e))
+
   
-  // crear relacion de amistad
-  // enviar email de amistad
-  next();
+  next()
 })

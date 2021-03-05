@@ -41,7 +41,7 @@ window.addEventListener('load', () => {
                         userInfo.innerHTML = `
        <div class="dash__usersearch_response"><img scr="${user.picture}" alt="...">  <a class="dash_usersearch_profile" href="/profile/${user._id}">Name: ${user.userName}</a></div>
        <div class="dash__usersearch__links">
-       <form action="/friends/create" method="POST">
+       <form action="/dashboard/createfriend" method="POST">
        <input type="hidden" name="frienduserid" id="frienduserid" value="${user._id}">
        <input type="hidden" name="friendemail" id="friendemail" value="${user.email}">
        <button class="btn btn-primary" type="submit">Solicitud de Amistad</button>           
