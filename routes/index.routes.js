@@ -57,7 +57,7 @@ router.post("/page/edit/head/:id", secure.isAuthenticated, pageController.doEdit
 router.get("/page/create/body/:id", secure.isAuthenticated, pageController.createBody);
 router.post("/page/create/body/:id", secure.isAuthenticated, pageController.doCreateBody);
 router.get("/page/edit/body/:id", secure.isAuthenticated, pageController.findBody);
-router.get("/page/delete/:id", secure.isAuthenticated, pageController.delete);
+router.get("/page/delete/:id", secure.isAuthenticated, pageController.deletePage);
 router.get("/page/:id", secure.isAuthenticated, pageController.page);
 
 

@@ -11,14 +11,11 @@ let userData = { userN: "", picture: "" };
 module.exports.page = (req, res, next) => {
     const id = req.params.id
     Profile.findById(id)
-        // .populate('playlist')
         .populate('body')
         .then((p) => {
             p.userN = req.currentUser.userName;
             p.picture = req.currentUser.picture
             console.log(p)
-            // userData.playlist = p.playlist;
-            // console.log(userData)
             res.render('users/profile', p);
         })
         .catch((e) => next(e));
@@ -151,6 +148,25 @@ module.exports.findBody = (req, res, next) => {
             next(e);
         });
 }
+
+module.exports.deletePage = (req, res, next) => {
+    let query = {profile: req.params.id}
+    ProfileBody.deleteMany(query)
+      .then((p) => {
+        console.log('Container eliminado')
+        Pages.deleteOne(query)
+        .then((p) => {
+            console.log('Página eliminada')
+            query.user = req.currentUser._id
+            Profile.findOneAndDelete(query)
+            .then((p) => {
+                console.log('Perfil eliminado')
+                res.redirect('/control')
+            })
+        })
+      })
+      .catch((e) => next(e));
+  }
 
 
 const checkBox = (body) => {

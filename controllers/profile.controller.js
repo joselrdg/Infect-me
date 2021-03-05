@@ -8,18 +8,31 @@ let userData = { userN: "", picture: "" };
 
 module.exports.profile = (req, res, next) => {
   const id = { user: req.user._id }
+  console.log(req.currentUser)
   userData.userN = req.currentUser.userName;
   userData.picture = req.currentUser.picture;
   Profile.findOne(id)
     // .populate('playlist')
     .populate('body')
     .then((p) => {
-      p.userN = userData.userN;
-      p.picture = userData.picture;
-      console.log(p)
-      // userData.playlist = p.playlist;
-      // console.log(userData)
-      res.render('users/profile', p);
+      if(p){
+        p.userN = userData.userN;
+        p.picture = userData.picture;
+        console.log(p)
+        // userData.playlist = p.playlist;
+        // console.log(userData)
+        res.render('users/profile', p);
+      } else {
+        const id = { user: req.user._id }
+        Profile.create(id)
+          .then((p) => {
+            p.userN = userData.userN;
+            p.picture = userData.picture;
+            p.editHead = true;
+            console.log('Perfil creado ----------------------')
+            res.render('users/editProfile', p);
+          })
+      }
     })
     .catch((e) => next(e));
 }
