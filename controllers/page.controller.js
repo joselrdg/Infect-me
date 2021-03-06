@@ -41,7 +41,7 @@ module.exports.create = (req, res, next) => {
 module.exports.doCreate = (req, res, next) => {
     const idU = { 
         user: req.user.id,
-        profileUser: 'false'
+        profileUser: false
     }
     const userN = req.currentUser.userName;
     const picture = req.currentUser.picture;

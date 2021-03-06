@@ -26,7 +26,7 @@ module.exports.profile = (req, res, next) => {
         console.log('y ahora que')
         const idP = {
           user: req.currentUser._id,
-          profileUser: 'true'
+          profileUser: true
         }
         Profile.create(idP)
           .then((p) => {

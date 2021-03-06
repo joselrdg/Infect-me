@@ -10,7 +10,7 @@ const profileSchema = new mongoose.Schema(
             required: true
         },
         profileUser: { 
-            type: String, 
+            type: Boolean, 
             required: true 
         },
         bkgImgBODY: String,
