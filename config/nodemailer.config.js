@@ -35,8 +35,9 @@ module.exports.sendMailFriend = (userName,email,token) => {
         html:`
         <h1> Confirmacion de solicitud de amistad</h1>
         <b>Has recibido una solicitud de amistad de ${userName} </b>
-        <a href="${process.env.HOST || `http://localhost:${process.env.PORT || 3000}`}/activate/${token}">Click Here </a>
+        <a href="${process.env.HOST || `http://localhost:${process.env.PORT || 3000}`}/dashboard/activate/${token}">Click Here </a>
         `
+        
         
     })
     .then(info => console.log(info))

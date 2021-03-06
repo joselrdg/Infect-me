@@ -16,8 +16,8 @@ const friendSchema = new mongoose.Schema ({
         status: {
             type: String,
             required: true,
-            enum: ['Active' , 'Inactive', 'pending'],
-            default:'pending'
+            enum: ['Active' , 'Inactive', 'Pending'],
+            default:'Pending'
         },
         activationToken: {
             type: String,
