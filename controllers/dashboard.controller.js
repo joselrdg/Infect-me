@@ -3,6 +3,7 @@ const User = require("../models/user.model");
 const Post = require("../models/Post.model");
 const Friend = require("../models/friend.model");
 const mailer = require("../config/nodemailer.config");
+const flash = require("connect-flash")
 
 
 module.exports.showDashboard = ((req, res, next) => {
@@ -52,6 +53,7 @@ module.exports.friendEmail = ((req, res, next) => {
     .then((friends) => {
       let friendship;
       if (friends[0].length > 0) {
+
         friendship = friends[0][0]
 
       } else if (friends[1].length > 0) {
@@ -59,7 +61,13 @@ module.exports.friendEmail = ((req, res, next) => {
       }
       if (friendship){
       if (friendship.status === 'Active' || friendship.status === 'Pending') {
-  
+          if (friendship.status === 'Active'){
+            req.flash('flashMessage','Ya sois amigos')
+          }
+          if (friendship.status === 'Pending'){
+            req.flash('flashMessage','Hay una solicidud de amistad pendiente')
+          }
+       
         res.redirect('/dashboard');
       }
       } else {
@@ -69,6 +77,8 @@ module.exports.friendEmail = ((req, res, next) => {
           .then((friendshipData) => {
             // enviar email de amistad
             mailer.sendMailFriend(req.currentUser.userName, req.body.friendemail, friendshipData.activationToken);
+            req.flash('flashMessage','Solicitud de amistad enviada')
+
             res.redirect('/dashboard');
 
           })

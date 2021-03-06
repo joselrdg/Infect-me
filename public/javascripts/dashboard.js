@@ -49,32 +49,33 @@ window.addEventListener('load', () => {
      
        <div>
        `
-       
-
                         userContainer.appendChild(userInfo)
 
                     })
                 } else {
+             //       let messageContainer = document.createElement('div')
                   
-                    let message = document.createElement('p');
-                    //      let messageHeader =document.createElement('div');
-                    //    let messageBody   =document.createElement('div');
+                    let message = document.createElement('div');
+                    message.className = 'invalid-feedback';
+                    message.style.display ='block'
                     message.innerHTML = `No existe el usuario ${inputName.value} `
                     userContainer.appendChild(message)
-
-                    //       
-                    //       message.className = 'toast';
-                    //       message.role = 'alert';
-                    //       message.arialive = "assertive"
-                    //       message.ariaatomic = "true";
-                    //       
-
-
                 }
 
 
             })
             .catch((e) => { console.error(`Error axios user Seach: ${e}`) })
-        console.log('despues de axios')
+     
     })
+
+
 });
+
+setTimeout(() => {
+  const toasts = document.querySelectorAll('.toast')
+    toasts.forEach (toast => {
+        const toastEl = new bootstrap.Toast(toast);
+        toastEl.hide()
+    })
+    
+},4000)
