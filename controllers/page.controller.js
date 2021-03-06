@@ -7,6 +7,17 @@ const ProfileBody = require("../models/Body.model");
 const Pages = require("../models/Pages.model");
 let userData = { userN: "", picture: "" };
 
+module.exports.pages = (req, res, next) => {
+    const id = { user: req.user._id }
+    Profile.find(id)
+        .then((p) => {
+            let pages = {pages: p}
+            pages.userN = req.currentUser.userName;
+            pages.picture = req.currentUser.picture;
+            res.render('users/pages', pages);
+        })
+        .catch((e) => next(e));
+}
 
 module.exports.page = (req, res, next) => {
     const id = req.params.id
@@ -15,7 +26,6 @@ module.exports.page = (req, res, next) => {
         .then((p) => {
             p.userN = req.currentUser.userName;
             p.picture = req.currentUser.picture
-            console.log(p)
             res.render('users/profile', p);
         })
         .catch((e) => next(e));
@@ -29,17 +39,18 @@ module.exports.create = (req, res, next) => {
 }
 
 module.exports.doCreate = (req, res, next) => {
-    const id = { user: req.currentUser.id }
+    const idU = { 
+        user: req.user.id,
+        profileUser: 'false'
+    }
     const userN = req.currentUser.userName;
     const picture = req.currentUser.picture;
-    console.log(req.body)
-    Profile.create(id)
+    Profile.create(idU)
         .then((p) => {
             console.log('perfil creado')
             let data = req.body;
-            data.user = id.user;
+            data.user = idU.user;
             data.profile = p._id;
-            console.log(data)
             Pages.create(data)
                 .then((p) => {
                     console.log('pagina creada')
@@ -52,8 +63,16 @@ module.exports.doCreate = (req, res, next) => {
 module.exports.findPages = (req, res, next) => {
     const id = { user: req.user._id }
     Pages.find(id)
+    .populate('profile')
         .then((containers) => {
             if (containers[0]) {
+                containers.forEach(element => {
+                    element.backgroundImg = element.profile.backgroundImg;
+                    element.backgroundColor = element.profile.backgroundColor;
+                    element.backgroundColor = element.profile.backgroundColor;
+                    element.textColor = element.profile.textColor;
+                    element.idProfile = element.profile._id;
+                });
                 console.log('El usuario tiene paginas')
                 let p = { containers }
                 p.userN = req.currentUser.userName;
@@ -74,14 +93,12 @@ module.exports.editHead = (req, res, next) => {
         _id: req.params.id,
         user: req.currentUser.id
     }
-    console.log(query)
     Profile.findOne(query)
         .then((p) => {
             p.userN = req.currentUser.userName;
             p.picture = req.currentUser.picture;
             p.editPageHead = true;
             console.log('Existe----------------------')
-            console.log(p)
             res.render('users/editProfile', p);
         })
         .catch((e) => next(e));
@@ -95,7 +112,6 @@ module.exports.doEditHead = (req, res, next) => {
     Profile.findOneAndUpdate(query, body, { new: true })
         .then((p) => {
             console.log('actualizado ---------------');
-            console.log(p)
             res.redirect(`/page/${req.params.id}`)
         })
         .catch((e) => { console.error(e); next(e) });
@@ -106,13 +122,12 @@ module.exports.createBody = ((req, res, next) => {
     p.userN = req.currentUser.userName;
     p.picture = req.currentUser.picture;
     p.profileId = req.params.id;
-    console.log(p)
     res.render('users/editProfile', p);
 })
 
 module.exports.doCreateBody = (req, res, next) => {
-    const query = {_id: req.params.id, user: req.currentUser._id }
-    Profile.findOne({_id: req.params.id, user: req.currentUser._id })
+    const query = { _id: req.params.id, user: req.currentUser._id }
+    Profile.findOne({ _id: req.params.id, user: req.currentUser._id })
         .then((profile) => {
             let body = req.body;
             body = checkBox(body);
@@ -129,19 +144,22 @@ module.exports.doCreateBody = (req, res, next) => {
 }
 
 module.exports.findBody = (req, res, next) => {
-    const query = {_id: req.params.id, user: req.currentUser._id }
+    const query = { _id: req.params.id, user: req.currentUser._id }
     Profile.findOne(query)
         .then((profile) => {
-            console.log(profile)
             const id = { profile: profile.id }
             ProfileBody.find(id)
                 .then((containers) => {
+                    if(containers[0]){
                     console.log('Body encontrado ---------------');
                     let p = { containers }
                     p.userN = req.currentUser.userName;
                     p.picture = req.currentUser.picture;
                     p.selectBody = true;
                     res.render('users/editProfile', p);
+                }else {
+                    res.redirect('/control')  
+                }
                 })
         })
         .catch((e) => {
@@ -150,23 +168,23 @@ module.exports.findBody = (req, res, next) => {
 }
 
 module.exports.deletePage = (req, res, next) => {
-    let query = {profile: req.params.id}
+    let query = { profile: req.params.id }
     ProfileBody.deleteMany(query)
-      .then((p) => {
-        console.log('Container eliminado')
-        Pages.deleteOne(query)
         .then((p) => {
-            console.log('Página eliminada')
-            query.user = req.currentUser._id
-            Profile.findOneAndDelete(query)
-            .then((p) => {
-                console.log('Perfil eliminado')
-                res.redirect('/control')
-            })
+            console.log('Container eliminado')
+            Pages.deleteOne(query)
+                .then((p) => {
+                    console.log('Página eliminada')
+                    query.user = req.currentUser._id
+                    Profile.findOneAndDelete(query)
+                        .then((p) => {
+                            console.log('Perfil eliminado')
+                            res.redirect('/control')
+                        })
+                })
         })
-      })
-      .catch((e) => next(e));
-  }
+        .catch((e) => next(e));
+}
 
 
 const checkBox = (body) => {

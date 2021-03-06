@@ -10,36 +10,57 @@
     <div>
         <a href="/control" class="btn btn-success my-4 px-5">Panel de control</a>
     </div>
-    <div class="d-inline-flex">
-        {{#each containers as |container| }}
-        <div class="m-4">
-            <div class="card text-center" style="width: 18rem; color:{{textColor}} ; background-color: {{#if backgroundColor
-        }}{{backgroundColor}}{{else}}{{bkgColor}}{{/if}}; {{#if backgroundImg}}background-image: {{backgroundImg}};{{/if}}
-        ">
-                {{#if imageOne}}<img class="card-img-top" src="{{imageOne}}" alt="Imagen container">{{/if}}
-                <div class="card-body">
+    <div class="d-flex">
+        {{!-- <div class="row"> --}}
+            {{#each containers as |container| }}
+            <div class="m-4">
+                <div class="" style="width: 300px; background-color: {{backgroundColor}}; color: {{textColor}};">
+                    {{> pages}}
                     {{#if category}}
-                    <a href="/page/{{profile}}" class="btn btn-dark"><h5 class="card-title">{{#if titleOne}}{{titleOne}}{{else}} Página{{/if}}</h5></a>
-                    {{else}}
-                    <h5 class="card-title">{{#if titleOne}}{{titleOne}}{{else}} Contenedor{{/if}}</h5>
-                    {{/if}}
-                    <p class="card-text mt-2">{{#if subTitleOne}}{{subTitleOne}}{{else}} ________{{/if}}</p>
-                    <p class="card-text mb-3">{{category}}</p>
-                    {{#if category}}
-                    <a href="/page/edit/head/{{profile}}" class="btn btn-success my-2 mx-2 px-4">Cabezera</a>
-                    <a href="/page/create/body/{{profile}}" class="btn btn-success my-2 mx-2 px-4">Cuerpo</a>
-                    <a href="/page/edit/body/{{profile}}" class="btn btn-success my-2 mx-2 px-4">Editar cuerpo</a>
-                    <a href="/page/delete/{{profile}}" class="btn btn-danger my-2 mx-2 px-4">Eliminar</a>
+                    <a href="/page/edit/head/{{idProfile}}" class="btn btn-success my-2 mx-2 px-4">Cabezera</a>
+                    <a href="/page/create/body/{{idProfile}}" class="btn btn-success my-2 mx-2 px-4">Cuerpo</a>
+                    <a href="/page/edit/body/{{idProfile}}" class="btn btn-success my-2 mx-2 px-4">Editar cuerpo</a>
+                    <a href="/page/delete/{{idProfile}}" class="btn btn-danger my-2 mx-2 px-4">Eliminar</a>
                     {{else}}
                     <a href="/profile/edit/body/{{id}}" class="btn btn-success mx-2 px-4">Editar</a>
                     <a href="/profile/delete/body/{{id}}" class="btn btn-danger">Eliminar</a>
                     {{/if}}
-
                 </div>
             </div>
-        </div>
-        {{/each}}
-    </div>
+            {{/each}}
+            {{!--
+        </div> --}}
+        {{!-- </div> --}}
+    {{!-- <div class="m-4">
+        <div class="card text-center" style="width: 18rem; color:{{textColor}} ; background-color: {{#if backgroundColor
+        }}{{backgroundColor}}{{else}}{{bkgColor}}{{/if}}; {{#if backgroundImg}}background-image: {{backgroundImg}};{{/if}}
+        ">
+            {{#if imageOne}}<img class="card-img-top" src="{{imageOne}}" alt="Imagen container">{{/if}}
+            <div class="card-body">
+                {{#if category}}
+                <a href="/page/{{profile}}" class="btn btn-dark">
+                    <h5 class="card-title">{{#if titleOne}}{{titleOne}}{{else}} Página{{/if}}</h5>
+                </a>
+                {{else}}
+                <h5 class="card-title">{{#if titleOne}}{{titleOne}}{{else}} Contenedor{{/if}}</h5>
+                {{/if}}
+                <p class="card-text mt-2">{{#if subTitleOne}}{{subTitleOne}}{{else}} ________{{/if}}</p>
+                <p class="card-text mb-3">{{category}}</p>
+                {{#if category}}
+                <a href="/page/edit/head/{{profile}}" class="btn btn-success my-2 mx-2 px-4">Cabezera</a>
+                <a href="/page/create/body/{{profile}}" class="btn btn-success my-2 mx-2 px-4">Cuerpo</a>
+                <a href="/page/edit/body/{{profile}}" class="btn btn-success my-2 mx-2 px-4">Editar cuerpo</a>
+                <a href="/page/delete/{{profile}}" class="btn btn-danger my-2 mx-2 px-4">Eliminar</a>
+                {{else}}
+                <a href="/profile/edit/body/{{id}}" class="btn btn-success mx-2 px-4">Editar</a>
+                <a href="/profile/delete/body/{{id}}" class="btn btn-danger">Eliminar</a>
+                {{/if}}
+
+            </div>
+        </div>--}}
+
+        {{!--
+    </div> --}}
     {{!-- <div class="d-flex justify-content-end">
         <a href="/profile/create/body" class="btn btn-success my-4 px-5">Crear</a>
     </div> --}}

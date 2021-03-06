@@ -109,7 +109,6 @@ passport.use('google-auth', new GoogleStrategy(
                             picture: profile._json.picture,
                             active: true
                         })
-                        console.log(newUserInstance)
                         return newUserInstance.save()
                             .then(newUser => next(null, newUser))
                     } else {

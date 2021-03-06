@@ -7,31 +7,34 @@ const ProfileBody = require("../models/Body.model");
 let userData = { userN: "", picture: "" };
 
 module.exports.profile = (req, res, next) => {
-  const id = { user: req.user._id }
-  console.log(req.currentUser)
+  const idU = {
+    user: req.currentUser._id,
+    profileUser: 'true'
+  }
   userData.userN = req.currentUser.userName;
   userData.picture = req.currentUser.picture;
-  Profile.findOne(id)
+  Profile.findOne(idU)
     // .populate('playlist')
     .populate('body')
     .then((p) => {
-      if(p){
+      if (p) {
         p.userN = userData.userN;
         p.picture = userData.picture;
-        console.log(p)
         // userData.playlist = p.playlist;
-        // console.log(userData)
         res.render('users/profile', p);
-      } else {
-        const id = { user: req.user._id }
-        Profile.create(id)
+      } else {        
+        console.log('y ahora que')
+        const idP = {
+          user: req.currentUser._id,
+          profileUser: 'true'
+        }
+        Profile.create(idP)
           .then((p) => {
             p.userN = userData.userN;
             p.picture = userData.picture;
-            p.editHead = true;
             console.log('Perfil creado ----------------------')
-            res.render('users/editProfile', p);
-          })
+            res.render('users/profile', p);
+      })
       }
     })
     .catch((e) => next(e));
@@ -55,20 +58,21 @@ module.exports.editHead = (req, res, next) => {
         p.editHead = true;
         console.log('Existe----------------------')
         res.render('users/editProfile', p);
-      } else {
-        const id = { user: req.user._id }
-        Profile.create(id)
-          .then((p) => {
-            p.userN = userData.userN;
-            p.picture = userData.picture;
-            p.editHead = true;
-            console.log('Perfil creado ----------------------')
-            res.render('users/editProfile', p);
-          })
-          .catch((e) => {
-            next(e);
-          });
       }
+      //  else {
+      //   const id = { user: req.user._id }
+      //   Profile.create(id)
+      //     .then((p) => {
+      //       p.userN = userData.userN;
+      //       p.picture = userData.picture;
+      //       p.editHead = true;
+      //       console.log('Perfil creado ----------------------')
+      //       res.render('users/editProfile', p);
+      //     })
+      //     .catch((e) => {
+      //       next(e);
+      //     });
+      // }
     })
     .catch((e) => next(e));
 }
@@ -114,7 +118,6 @@ module.exports.findBody = (req, res, next) => {
   const id = { user: req.user._id };
   Profile.findOne(id)
     .then((profile) => {
-      console.log(profile)
       const id = { profile: profile.id }
       ProfileBody.find(id)
         .then((containers) => {
@@ -133,7 +136,6 @@ module.exports.findBody = (req, res, next) => {
 
 module.exports.editBody = (req, res, next) => {
   const query = req.params.id;
-  console.log(query)
   ProfileBody.findById(query)
     .then((p) => {
       p.userN = userData.userN;

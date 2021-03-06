@@ -49,6 +49,7 @@ router.post("/profile/edit/body/:id", secure.isAuthenticated, profileController.
 router.get("/profile/delete/body/:id", secure.isAuthenticated, profileController.deleteBody);
 
 // //pages
+router.get("/pages", secure.isAuthenticated, pageController.pages);
 router.get("/page/create", secure.isAuthenticated, pageController.create);
 router.post("/page/create", secure.isAuthenticated, pageController.doCreate);
 router.get('/page/edit', secure.isAuthenticated, pageController.findPages)

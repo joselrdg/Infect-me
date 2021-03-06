@@ -9,6 +9,10 @@ const profileSchema = new mongoose.Schema(
             ref: "User",
             required: true
         },
+        profileUser: { 
+            type: String, 
+            required: true 
+        },
         bkgImgBODY: String,
         bkgBODY: String,
         txtColorBODY: String,
