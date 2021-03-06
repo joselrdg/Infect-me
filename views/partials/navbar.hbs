@@ -8,11 +8,11 @@
     </button>
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav mr-auto mt-2">
+      <ul class="navbar-nav mr-auto mt-2 d-flex flex-column text-center">
         {{#if currentUser}}
-        <li><a class="dropdown-item" href="/profile">View profile</a></li>
+        <li><a class="dropdown-item" href="/profile"><img src="{{picture}}" alt="profile picture" style="height: 80px;"></a></li>
         <form action="/logout" method="POST">
-          <li><button class="dropdown-item">Log out</button></li>
+          <li><button type="submit" class="btn btn-secondary">Log out</button></li>
         </form>
         <li><a class="dropdown-item" href="/dashboard">Mi tablero</a></li>
         {{else}}
