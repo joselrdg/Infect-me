@@ -7,25 +7,57 @@ const flash = require("connect-flash")
 
 
 module.exports.showDashboard = ((req, res, next) => {
+  Promise.all(
+    [
+      Post.find({ user: req.currentUser._id }),
+      Friend.find({ user: req.currentUser._id })
+    ]
+  )
+    .then((containerDashboard) => {
+      if (containerDashboard[0]) {
+        let posts = containerDashboard[0]
+        let friends = containerDashboard[1]
+        console.log("POSTS :", posts)
+        console.log("FRIENDS: ", friends)
+        let i=0;
+        posts.forEach(post => {
+          if (i > 2) {
+            post.collapse = true;
 
-  Post.find({ user: req.currentUser._id })
-    .then((posts) => {
+          }
+          i++
+        });
+        let vermas = true;
 
+        res.render('users/dashboard', { posts, vermas, friends });
 
-
-      for (let i = 0; i <= (posts.length - 1); i++) {
-        if (i > 2) {
-          posts[i].collapse = true;
-
-        }
-
+      } else {
+        res.render('users/dashboard');
       }
-      let vermas = true;
-      res.render('users/dashboard', { posts, vermas });
-
     })
-    .catch((e => next(e)));
 
+
+
+
+  //
+  //  Post.find({ user: req.currentUser._id })
+  //    .then((posts) => {
+  //
+  //
+  //
+  //      for (let i = 0; i <= (posts.length - 1); i++) {
+  //        if (i > 2) {
+  //          posts[i].collapse = true;
+  //
+  //        }
+  //
+  //      }
+  //      let vermas = true;
+  //      res.render('users/dashboard', { posts, vermas });
+  //
+  //    })
+  //    .catch((e => next(e)));
+  //
 
 })
 
@@ -59,17 +91,17 @@ module.exports.friendEmail = ((req, res, next) => {
       } else if (friends[1].length > 0) {
         friendship = friends[1][0]
       }
-      if (friendship){
-      if (friendship.status === 'Active' || friendship.status === 'Pending') {
-          if (friendship.status === 'Active'){
-            req.flash('flashMessage','Ya sois amigos')
+      if (friendship) {
+        if (friendship.status === 'Active' || friendship.status === 'Pending') {
+          if (friendship.status === 'Active') {
+            req.flash('flashMessage', 'Ya sois amigos')
           }
-          if (friendship.status === 'Pending'){
-            req.flash('flashMessage','Hay una solicidud de amistad pendiente')
+          if (friendship.status === 'Pending') {
+            req.flash('flashMessage', 'Hay una solicidud de amistad pendiente')
           }
-       
-        res.redirect('/dashboard');
-      }
+
+          res.redirect('/dashboard');
+        }
       } else {
         const friendshipData = { user: req.currentUser._id, friend: req.body.frienduserid }
         // crear relacion de amistad
@@ -77,7 +109,7 @@ module.exports.friendEmail = ((req, res, next) => {
           .then((friendshipData) => {
             // enviar email de amistad
             mailer.sendMailFriend(req.currentUser.userName, req.body.friendemail, friendshipData.activationToken);
-            req.flash('flashMessage','Solicitud de amistad enviada')
+            req.flash('flashMessage', 'Solicitud de amistad enviada')
 
             res.redirect('/dashboard');
 
@@ -87,7 +119,7 @@ module.exports.friendEmail = ((req, res, next) => {
     .catch((e) => next(e))
 })
 
-module.exports.activateFriend = ((req,res,next) => {
+module.exports.activateFriend = ((req, res, next) => {
   Friend.findOneAndUpdate(
     {
       activationToken: req.params.activationToken
@@ -97,10 +129,10 @@ module.exports.activateFriend = ((req,res,next) => {
       activationToken: 'Active'
     }
   ).populate('user')
-  .then((friend) => {
-    console.log("Amigo ",friend.user)
-  res.render('friendship',{friend : friend})
-  })
-  .catch((e) => next(e))
+    .then((friend) => {
+      console.log("Amigo ", friend.user)
+      res.render('friendship', { friend: friend })
+    })
+    .catch((e) => next(e))
 
 });

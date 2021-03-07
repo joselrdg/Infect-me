@@ -72,16 +72,14 @@
         <section class="friends__header">
             <h2> Amigos</h2>
         </section>
-        <section class="friends__list__container">
+        <section class="friends__list__container"> {{!-- List friends block--}}
             <ul class=" list-group friends_list">
-                <li class="list-group-item  friend__info">
-                    <div class="input-group">
-                        <input type="text" class="form-control" placeholder="Recipient's username"
-                            aria-label="Recipient's username with two button addons" disabled readonly>
-                        <button class="btn btn-outline-secondary" type="button">Button</button>
-                        <button class="btn btn-outline-secondary" type="button">Button</button>
-                    </div>
-                </li>
+              {{#each friends as |friendData| }} {{!-- Item list--}}
+
+
+                {{>friend friendData}}
+
+                {{/each}}
             </ul>
         </section>
         <div>
