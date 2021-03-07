@@ -37,7 +37,7 @@ window.addEventListener('load', () => {
                         // renden users
                         
                         let userInfo = document.createElement('div')
-                        userInfo.className = 'user-info'
+                        userInfo.className = 'user-info d-flex flex-row'
                         userInfo.innerHTML = `
        <div class="dash__usersearch_response"><img scr="${user.picture}" alt="...">  <a class="dash_usersearch_profile" href="/profile/${user._id}">Name: ${user.userName}</a></div>
        <div class="dash__usersearch__links">
