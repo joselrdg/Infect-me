@@ -1,15 +1,19 @@
-<div class="container">
-    <h1>Páginas</h1>
+<div class="container"></h1>
     <h2 class="m-5">Tus páginas:</h2>
-    <div class="container">
-        <div class="row">
-    {{#each pages as |page|}}
-    <div class="col-4 my-2">
-    <div class="" style="width: 300px; background-color: {{backgroundColor}}; color: {{textColor}};">
-    {{> pages}}
+    <div class="col-6 d-flex">
+        {{#each pages as |page|}}
+        <div class="m-4" style=" background-color: {{backgroundColor}}; color: {{textColor}};">
+            {{> pages}}
+        </div>
+        {{/each}}
     </div>
+    <h2 class="m-5">Páginas que sigues:</h2>
+    <div class="col-6 d-flex">
+        {{#each pagesFollow as |follow|}}        
+        <div class="m-4" style="width: 300px; background-color: {{backgroundColor}}; color: {{textColor}};">
+            {{> pages}}
+        </div>
+        {{/each}}
     </div>
-    {{/each}}
-    </div>
-    </div>
+</div>
 </div>

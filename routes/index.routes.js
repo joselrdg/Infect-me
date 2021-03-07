@@ -8,14 +8,14 @@ const pageController = require("../controllers/page.controller");
 const youtubeController = require("../controllers/youtube.controller");
 const dashboardController = require("../controllers/dashboard.controller");
 const secure = require("../middlewares/secure.middleware");
-const GOOGLE_SCOPES = ['https://www.googleapis.com/auth/youtube.readonly','https://www.googleapis.com/auth/userinfo.email', 'https://www.googleapis.com/auth/userinfo.profile']
+const GOOGLE_SCOPES = ['https://www.googleapis.com/auth/youtube.readonly', 'https://www.googleapis.com/auth/userinfo.email', 'https://www.googleapis.com/auth/userinfo.profile']
 // Misc
 router.get("/", secure.isNotAuthenticated, miscController.home);
 // router.get("/", miscController.home);
 
 router.get('/register', secure.isNotAuthenticated, usersController.register)
 router.post('/register', secure.isNotAuthenticated, usersController.doRegister)
-router.get('/dashboard',secure.isAuthenticated, dashboardController.showDashboard)
+router.get('/dashboard', secure.isAuthenticated, dashboardController.showDashboard)
 
 router.get('/login', secure.isNotAuthenticated, usersController.login)
 router.post('/login', secure.isNotAuthenticated, usersController.doLogin)
@@ -27,7 +27,7 @@ router.get('/auth/google/callback', usersController.doLoginGoogle)
 router.get('/youtube/playlists', secure.isAuthenticated, youtubeController.ytbPlaylists)
 
 
-router.get('/activate/:activationToken',secure.isNotAuthenticated, usersController.activate)
+router.get('/activate/:activationToken', secure.isNotAuthenticated, usersController.activate)
 
 router.post('/logout', secure.isAuthenticated, usersController.logout)
 
@@ -36,6 +36,7 @@ router.get("/playlist/add", secure.isAuthenticated, profileController.addPlaylis
 router.post("/playlist/add", secure.isAuthenticated, profileController.doAddPlaylist);
 router.get("/playlist/delete", secure.isAuthenticated, profileController.deletePlaylist);
 router.post("/playlist/:id/delete", secure.isAuthenticated, profileController.doDeletePlaylist);
+
 // profile
 router.get('/profile', secure.isAuthenticated, profileController.profile)
 router.get('/profile/library', secure.isAuthenticated, profileController.library)
@@ -60,7 +61,7 @@ router.post("/page/create/body/:id", secure.isAuthenticated, pageController.doCr
 router.get("/page/edit/body/:id", secure.isAuthenticated, pageController.findBody);
 router.get("/page/delete/:id", secure.isAuthenticated, pageController.deletePage);
 router.get("/page/:id", secure.isAuthenticated, pageController.page);
-
+router.get("/follow/:id", secure.isAuthenticated, pageController.follow);
 
 // posts
 router.get("/posts/list", secure.isAuthenticated, postsController.list);

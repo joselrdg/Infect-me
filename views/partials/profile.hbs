@@ -3,6 +3,7 @@
     {{#if bkgImgCover}}background-repeat: no-repeat; background-size: cover;{{/if}}
     background-attachment: fixed;
     color: {{textColor}}">
+    <a href="/follow/{{id}}">Seguir</a>
     <div class="row d-flex align-items-center">
         <div class="col">
             <h1 class="pt-5 mb-3">{{titleOne}}</h1>
@@ -17,7 +18,7 @@
         </div>
         <div class="col">
             {{/if}}
-            
+
             <h1 class="pt-5 mb-3">{{titleTwo}}</h1>
 
             {{#if imgTwoON}}<img class="my-3" src="{{imageTwo}}" alt="header image" width="{{imgWidthTwo}}"
@@ -35,6 +36,22 @@
             {{/if}}
             <h3 class="pt-3 my-3">{{subTitleTwo}}</h3>
             <p class="pt-3 mb-5">{{textTwo}}</p>
+        </div>
+    </div>
+    <div>
+        <a href="">Comentarios</a>
+        <div>
+            <form>
+                <div class="form-group">
+                    <label for="exampleInputEmail1"></label>
+                    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+                        placeholder="Escribe un comentario:">
+                    <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone
+                        else.</small>
+                </div>
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+
         </div>
     </div>
 </div>

@@ -114,6 +114,12 @@ userSchema.virtual("pages", {
     localField: "_id",
 });
 
+userSchema.virtual("follow", {
+    ref: "Profile",
+    foreignField: "followers",
+    localField: "_id",
+});
+
 userSchema.virtual("playlist", {
     ref: "Playlist",
     foreignField: "user",

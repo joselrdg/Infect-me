@@ -9,10 +9,14 @@ const profileSchema = new mongoose.Schema(
             ref: "User",
             required: true
         },
-        profileUser: { 
-            type: Boolean, 
-            required: true 
+        profileUser: {
+            type: Boolean,
+            required: true
         },
+        followers: [{
+            type: mongoose.SchemaTypes.ObjectId,
+            ref: "User"
+        }],
         bkgImgBODY: String,
         bkgBODY: String,
         txtColorBODY: String,

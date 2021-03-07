@@ -7,14 +7,41 @@ const ProfileBody = require("../models/Body.model");
 const Pages = require("../models/Pages.model");
 let userData = { userN: "", picture: "" };
 
+
+module.exports.follow = (req, res, next) => {
+    const id = req.params.id;
+    const idU = req.user._id;
+    Profile.findByIdAndUpdate(id, { followers: idU })
+        .then((p) => {
+            console.log('seguidor añadido')
+            res.redirect(`/page/${id}`);
+        })
+        .catch((e) => next(e));
+}
+
+
 module.exports.pages = (req, res, next) => {
     const id = { user: req.user._id }
     Profile.find(id)
         .then((p) => {
-            let pages = {pages: p}
-            pages.userN = req.currentUser.userName;
-            pages.picture = req.currentUser.picture;
-            res.render('users/pages', pages);
+            let pagesUser = {
+                userN: req.currentUser.userName,
+                picture: req.currentUser.picture,
+                pages: p
+            }
+            const idU = { followers: id.user }
+            Profile.find(idU)
+                .then((f) => {
+                    console.log('paginas seguidas')
+                    if (f[0]) {
+                        console.log('hay paginaaaas')
+                        pagesUser.pagesFollow = f
+                        res.render('users/pages', pagesUser);
+                    } else {
+                        console.log('no hay paginas')
+                        res.render('users/pages', pagesUser)
+                    }
+                })
         })
         .catch((e) => next(e));
 }
@@ -39,7 +66,7 @@ module.exports.create = (req, res, next) => {
 }
 
 module.exports.doCreate = (req, res, next) => {
-    const idU = { 
+    const idU = {
         user: req.user.id,
         profileUser: false
     }
@@ -61,9 +88,9 @@ module.exports.doCreate = (req, res, next) => {
 }
 
 module.exports.findPages = (req, res, next) => {
-    const id = { user: req.user._id }
+    let id = { user: req.user._id }
     Pages.find(id)
-    .populate('profile')
+        .populate('profile')
         .then((containers) => {
             if (containers[0]) {
                 containers.forEach(element => {
@@ -150,16 +177,16 @@ module.exports.findBody = (req, res, next) => {
             const id = { profile: profile.id }
             ProfileBody.find(id)
                 .then((containers) => {
-                    if(containers[0]){
-                    console.log('Body encontrado ---------------');
-                    let p = { containers }
-                    p.userN = req.currentUser.userName;
-                    p.picture = req.currentUser.picture;
-                    p.selectBody = true;
-                    res.render('users/editProfile', p);
-                }else {
-                    res.redirect('/control')  
-                }
+                    if (containers[0]) {
+                        console.log('Body encontrado ---------------');
+                        let p = { containers }
+                        p.userN = req.currentUser.userName;
+                        p.picture = req.currentUser.picture;
+                        p.selectBody = true;
+                        res.render('users/editProfile', p);
+                    } else {
+                        res.redirect('/control')
+                    }
                 })
         })
         .catch((e) => {
