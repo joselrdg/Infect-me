@@ -1,0 +1,57 @@
+{{#if profileUser}} <h3 class="m-2">Tu perfil{{/if}}</h3>
+<div class="" style="width: 300px; background-color: {{backgroundColor}}; color: {{textColor}};">
+    {{#if backgroundImg}}
+    <img style="width: 300px;" class="card-img position-absolute" src="{{backgroundImg}}" alt="Card image">
+    {{/if}}
+    <div class="position-relative">
+        <div class="d-flex flex-column text-center">
+            {{#if titleOne}}
+            <h3 class="card-title">{{titleOne}}</h3>
+            {{else}}
+            {{#if titleTwo}}
+            <h3 class="card-title">{{titleTwo}}</h3>
+            {{else}}
+            <h3 class="card-title">Sin título</h3>
+            {{/if}}
+            {{/if}}
+            {{#if imageOne}}
+            <img class="mx-auto" style="width: 200px;" src="{{imageOne}}" alt="Card image">
+            {{else}}
+            {{#if imageTwo}}
+            <img class="mx-auto" style="width: 200px;" src="{{imageTwo}}" alt="Card image">
+            {{else}}
+            <img class="mx-auto" style="width: 200px;"
+                src="data:image/jpeg;base64,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"
+                alt="Card image">
+            {{/if}}
+            {{/if}}
+            {{#if subTitleOne}}
+            <h4 class="">{{subTitleOne}}</h4>
+            {{else}}
+            {{#if subTitleTwo}}
+            <h4 class="">{{subTitleTwo}}</h4>
+            {{else}}
+            <h4 class="">Una página divertida</h4>
+            {{/if}}
+            {{/if}}
+        </div>
+    </div>
+    <div class="text-center my-3"
+        style="background-color: {{#if backgroundColor}}{{backgroundColor}}{{else}}violet{{/if}};">
+        <a class="btn btn-warning px-5" href="/page/{{#if idProfile}}{{idProfile}}{{else}}{{id}}{{/if}}" role="button">Visitar</a>
+    </div>
+</div>
+
+{{!-- <div class="card" style="width: 18rem;">
+    {{!-- <img class="card-img-top" src=".../100px180/" alt="Card image cap">
+    <div class="card-body">
+        <h3 class="card-title">{{titleOne}}</h3>
+        <img class="" src="{{imageOne}}" alt="Card image">
+        <h4 class="">{{subTitleOne}}</h4>
+        <p class="card-text">{{textOne}}</p>
+        <h3 class="card-title">{{titleTwo}}</h3>
+        <img class="" src="{{imageTwo}}" alt="Card image">
+        <h4 class="">{{subTitleTwo}}</h4>
+        <p class="card-text">{{textTwo}}</p>
+    </div>
+</div> --}}

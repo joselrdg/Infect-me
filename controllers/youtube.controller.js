@@ -1,4 +1,4 @@
-// const fun = require("../public/javascripts/youtube");
+const Playlist = require("../models/Playlist.model");
 
 const { google } = require('googleapis');
 // console.log(google)
@@ -54,16 +54,11 @@ const dataYtb = (req, res, confg) => {
                 });
             }
             if (data) {
-                // res.json({
-                //     status: "ok",
-                //     data: data
-                // });
                 let userData = {
                     userName: req.userName,
                     picture: req.picture,
                     items: data.data.items
                 }
-                console.log(userData.items[0])
                 res.render('users/addplaylist', userData);
             }
             if (response) {
@@ -77,7 +72,7 @@ module.exports.ytbPlaylists = (req, res, next, carcase) => {
         access_token: req.user.social.google.access_token,
         refresh_token: req.user.social.google.refresh_token
     };
-    dataYtb(req.user, res, carcase)
+    dataYtb(req.user, res, 'lists')
 }
 
 

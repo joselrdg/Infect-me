@@ -1,0 +1,275 @@
+<div class="container">
+    <h1>Edita tus páginas:</h1>
+</div>
+
+{{#if selectBody}}
+<div class="container">
+    {{!-- <div>
+        <a href="/profile/create/body" class="btn btn-success my-4 px-5">Crear</a>
+    </div> --}}
+    <div>
+        <a href="/control" class="btn btn-success my-4 px-5">Panel de control</a>
+    </div>
+    <div class="d-flex">
+        {{!-- <div class="row"> --}}
+            {{#each containers as |container| }}
+            <div class="m-4">
+                <div class="" style="width: 300px; background-color: {{backgroundColor}}; color: {{textColor}};">
+                    {{> pages}}
+                    {{#if category}}
+                    <a href="/page/edit/head/{{idProfile}}" class="btn btn-success my-2 mx-2 px-4">Cabezera</a>
+                    <a href="/page/create/body/{{idProfile}}" class="btn btn-success my-2 mx-2 px-4">Cuerpo</a>
+                    <a href="/page/edit/body/{{idProfile}}" class="btn btn-success my-2 mx-2 px-4">Editar cuerpo</a>
+                    <a href="/page/delete/{{idProfile}}" class="btn btn-danger my-2 mx-2 px-4">Eliminar</a>
+                    {{else}}
+                    <a href="/profile/edit/body/{{id}}" class="btn btn-success mx-2 px-4">Editar</a>
+                    <a href="/profile/delete/body/{{id}}" class="btn btn-danger">Eliminar</a>
+                    {{/if}}
+                </div>
+            </div>
+            {{/each}}
+        </div>
+        {{else}}
+
+        <div class="container" id="editHead" style="display: block;">
+            <h2 class="mt-5 mb-3 text-center">Edita{{#if editBody}} el contenedor:{{else}} la cabezera:{{/if}}</h2>
+
+            {{#if editHead}}
+            <h1>Si editHead</h1>
+            <form action="/profile/edit/head" method="POST">
+                {{/if}}
+                {{#if editBody}}
+                <h1>Si editBody</h1>
+                <form action="/profile/edit/body/{{id}}" method="POST">
+                    {{/if}}
+                    {{#if createBody}}
+                    <h1>Si createBody</h1>
+                    <form action="/profile/create/body" method="POST">
+                        {{/if}}
+                        {{#if editPageHead}}
+                        <h1>Si editPageHead</h1>
+                        <form action="/page/edit/head/{{id}}" method="POST">
+                            {{/if}}
+                            {{#if createPageBody}}
+                            <h1>Si createPageBody</h1>
+                            <form action="/page/create/body/{{profileId}}" method="POST">
+                                {{/if}}
+
+                                <div class="form-group my-5">
+                                    <label for="backgroundImg">Muestra una imagen de fondo...</label>
+                                    <input type="text" name="backgroundImg" value="{{backgroundImg}}"
+                                        class="form-control my-3" placeholder="Pon una imagen de fondo">
+                                    <div class="custom-control custom-checkbox">
+                                        <input type="checkbox" name="bkgImgCover" class="custom-control-input" {{#if
+                                            bkgImgCover}}checked{{/if}}>
+                                        <label class="custom-control-label mx-2" for="bkgImgCover">Selecciona para
+                                            expandir la
+                                            imagen.</label>
+                                        <span class="mx-3">
+                                            <input type="checkbox" name="bkgImgON" class="custom-control-input" {{#if
+                                                bkgImgON}}checked{{/if}}>
+                                            <label class="custom-control-label mx-2" for="bkgImgON">Selecciona para que
+                                                se
+                                                muestre
+                                                en tu
+                                                perfil.</label>
+                                        </span>
+                                    </div>
+
+
+                                </div>
+
+                                <div class="form-group my-5">
+                                    <div class="row">
+                                        <div class="col">
+                                            <label for="backgroundColor">o... un color de fondo:</label>
+                                            <input name="backgroundColor" value="{{backgroundColor}}" type="color"
+                                                class="form-control my-3">
+                                        </div>
+                                        <div class="col">
+                                            <label for="backgroundColor">Indica el color del texto</label>
+                                            <input name="textColor" value="{{textColor}}" type="color"
+                                                class="form-control my-3">
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group my-5">
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <label for="imageOne">Pon una imagen o tu logo!</label>
+                                                <input type="text" name="imageOne" value="{{imageOne}}"
+                                                    class="form-control my-3" placeholder="name@example.com">
+                                                <div>
+                                                    <label for="imgHeightOne">Alto de la imagen:</label>
+                                                    <input type="range" name="imgHeightOne" value="{{imgHeightOne}}"
+                                                        class="custom-range mx-4" min="0" max="900" step="0.5"
+                                                        id="customRange3">
+                                                </div>
+                                                <div>
+                                                    <label for="imgWidthOne">Ancho de la imagen:</label>
+                                                    <input type="range" name="imgWidthOne" value="{{imgWidthOne}}"
+                                                        class="custom-range mx-4" min="0" max="900" step="0.5"
+                                                        id="customRange3">
+                                                </div>
+                                                <div class="custom-control custom-checkbox">
+                                                    <input type="checkbox" name="imgOneON"
+                                                        class="custom-control-input my-3" {{#if
+                                                        imgOneON}}checked{{/if}}>
+                                                    <label class="custom-control-label mx-2" for="imgOneON">Selecciona
+                                                        para que
+                                                        se
+                                                        muestre
+                                                        en
+                                                        tu
+                                                        perfil.</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <label for="imageTwo">Pon otra imagen o tu logo!</label>
+                                                <input type="text" name="imageTwo" value="{{imageTwo}}"
+                                                    class="form-control my-3" placeholder="name@example.com">
+                                                <div>
+                                                    <label for="imgHeightTwo">Alto de la imagen:</label>
+                                                    <input type="range" name="imgHeightTwo" value="{{imgHeightTwo}}"
+                                                        class="custom-range mx-4" min="0" max="900" step="1"
+                                                        id="customRange3">
+                                                </div>
+                                                <div>
+                                                    <label for="imgWidthTwo">Ancho de la imagen:</label>
+                                                    <input type="range" name="imgWidthTwo" value="{{imgWidthTwo}}"
+                                                        class="custom-range mx-4" min="0" max="900" step="1"
+                                                        id="customRange3">
+                                                </div>
+                                                <div class="custom-control custom-checkbox">
+                                                    <input type="checkbox" name="imgTwoON"
+                                                        class="custom-control-input my-3" {{#if
+                                                        imgTwoON}}checked{{/if}}>
+                                                    <label class="custom-control-label mx-2" for="imgTwoON">Selecciona
+                                                        para que
+                                                        se
+                                                        muestre en tu perfil.
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group my-5">
+                                        <label for="video">o incrusta un video</label>
+                                        <input type="text" name="video" value="{{video}}" class="form-control my-3"
+                                            placeholder="name@example.com">
+                                        <small id="emailHelp" class="form-text text-muted">Ejemplo:
+                                            https://www.youtube.com/embed/0zrqJo9kZ_Y</small><br>
+                                        <small id="emailHelp" class="form-text text-muted">Ejemplo:
+                                            https://www.youtube.com/embed/X3-Bw31fI2s</small>
+                                        <div class="custom-control custom-checkbox">
+                                            <input type="checkbox" name="videoON" class="custom-control-input my-3"
+                                                {{#if videoON}}checked{{/if}}>
+                                            <label class="custom-control-label mx-2" for="bkgImgON">Selecciona para que
+                                                se
+                                                muestre
+                                                en tu
+                                                perfil.</label>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="titleOne">Pon título</label>
+                                                <input type="text" name="titleOne" value="{{titleOne}}"
+                                                    class="form-control my-3" placeholder="name@example.com">
+                                            </div>
+                                            <div class="form-group  my-2">
+                                                <label for="titleTwo">Un segundo título</label>
+                                                <input type="text" name="titleTwo" value="{{titleTwo}}"
+                                                    class="form-control my-3" placeholder="name@example.com">
+                                            </div>
+
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="subTitleOne">Un subtítulo</label>
+                                                <input type="text" name="subTitleOne" value="{{subTitleOne}}"
+                                                    class="form-control my-3" placeholder="name@example.com">
+                                            </div>
+
+                                            <div class="form-group my-2">
+                                                <label for="subTitleTwo">Y subtítulo</label>
+                                                <input type="text" name="subTitleTwo" value="{{subTitleTwo}}"
+                                                    class="form-control my-3" placeholder="name@example.com">
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="textOne">Un texto...</label>
+                                        <input type="text" name="textOne" value="{{textOne}}" class="form-control my-3"
+                                            placeholder="name@example.com">
+                                    </div>
+                                    <div class="form-group my-2">
+                                        <label for="textTwo">Un segundo texto...</label>
+                                        <input type="text" name="textTwo" value="{{textTwo}}" class="form-control my-3"
+                                            placeholder="name@example.com">
+                                    </div>
+
+                                    <div class="form-group mt-5 ">
+                                        <label for="image">Textura para el fondo del body!</label>
+                                        <input type="text" name="bkgImgBODY" value="{{bkgImgBODY}}"
+                                            class="form-control my-3" placeholder="name@example.com">
+                                        <div class="row">
+                                            {{#if editBody}}
+                                            <div class="col mt-4">
+                                                <div>
+                                                    <label for="margin">Margen entre contenedores:</label>
+                                                    <input type="range" name="margin" value="{{margin}}"
+                                                        class="custom-range mx-4" min="0" max="180" step="1"
+                                                        id="customRange3">
+                                                </div>
+                                            </div>
+                                            {{/if}}
+                                            {{#if createBody}}
+                                            <div class="col mt-4">
+                                                <div>
+                                                    <label for="margin">Margen entre contenedores:</label>
+                                                    <input type="range" name="margin" value="{{margin}}"
+                                                        class="custom-range mx-4" min="0" max="180" step="1"
+                                                        id="customRange3">
+                                                </div>
+                                            </div>
+                                            {{/if}}
+
+                                            <div class="col">
+                                                <label class="mx-2" for="bkgBODY">Selecciona un color para el
+                                                    cuerpo:</label>
+                                                <input name="bkgBODY" value="{{bkgBODY}}" type="color"
+                                                    class="form-control my-3">
+                                            </div>
+
+                                            <div class="col">
+                                                <label for="txtColorBODY">Y un color para el texto del cuerpo:</label>
+                                                <input name="txtColorBODY" value="{{txtColorBODY}}" type="color"
+                                                    class="form-control my-3">
+                                            </div>
+
+                                        </div>
+                                    </div>
+
+                                    <div class="custom-control custom-checkbox text-center">
+                                        <input type="checkbox" name="col2" class="custom-control-input" {{#if
+                                            col2}}checked{{/if}}>
+                                        <label class="custom-control-label mx-2" for="col2">Selecciona para tener dos
+                                            columnas.</label>
+                                        <span class="mx-3">
+                                            <input type="checkbox" name="fluid" class="custom-control-input" {{#if
+                                                fluid}}checked{{/if}}>
+                                            <label class="custom-control-label mx-2" for="fluid">Selecciona para
+                                                expandir la
+                                                cabecera.</label>
+                                        </span>
+                                    </div>
+                                    <div class="text-center my-5">
+                                        <button type="submit" class="btn btn-primary my-1">Guardar</button>
+                                    </div>
+                            </form>
+        </div>
+        {{/if}}

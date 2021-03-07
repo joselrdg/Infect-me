@@ -7,6 +7,9 @@ amarillo: #fdcf1b
 */
 
 body {
+  margin-bottom: 100px;
+  background-image: url("../images/fondodos.png");
+  background-repeat: repeat-y;
 }
 
 #whatIsIt {

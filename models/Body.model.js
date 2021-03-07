@@ -1,22 +1,13 @@
 const mongoose = require('mongoose');
-const User = require('./user.model');
-const ProfileBody = require('./Body.model');
+const Profile = require("../models/Profile.model");
 
-const profileSchema = new mongoose.Schema(
+const profileBodySchema = new mongoose.Schema(
     {
-        user: {
+        profile: {
             type: mongoose.SchemaTypes.ObjectId,
-            ref: "User",
+            ref: "Profile",
             required: true
         },
-        profileUser: {
-            type: Boolean,
-            required: true
-        },
-        followers: [{
-            type: mongoose.SchemaTypes.ObjectId,
-            ref: "User"
-        }],
         bkgImgBODY: String,
         bkgBODY: String,
         txtColorBODY: String,
@@ -53,16 +44,14 @@ const profileSchema = new mongoose.Schema(
             virtuals: true
         }
     }
-);
+)
 
-profileSchema.virtual("body", {
-    ref: "ProfileBody",
-    foreignField: "profile",
+profileBodySchema.virtual("comments", {
+    ref: "Comments",
+    foreignField: "body",
     localField: "_id",
 });
 
+const ProfileBody = mongoose.model('ProfileBody', profileBodySchema);
 
-
-const Profile = mongoose.model('Profile', profileSchema);
-
-module.exports = Profile;
+module.exports = ProfileBody;

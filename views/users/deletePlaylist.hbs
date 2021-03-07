@@ -1,0 +1,29 @@
+{{> profile}}
+<div class="container">
+    <h1 class="my-4">Elimina playlists:</h1>
+    <div class="row">
+        <h2>Playlists</h2>
+        {{#if errors.title}}
+        <div>
+            <p class="text-danger">Error al add: {{errors.title}}</p>
+        </div>
+        {{/if}}
+        {{#each items}}
+        <div class="col justify-content-center py-3 ytbCard">
+            <div class="card text-white bg-dark" style="width: 10rem;">
+                <img class="card-img-top" src="{{image}}"
+                    alt="Card image cap">
+                <div class="card-body">
+                    <h5 class="card-title">{{title}}</h5>
+                    <p class="card-text">{{tracks}} Tracks</p>
+                    <div class="text-center">
+                        <form action="/playlist/{{id}}/delete" method="POST">
+                            <button type="submit" class="btn btn-danger">Borrar</button>
+                        </form>                        
+                    </div>
+                </div>
+            </div>
+        </div>
+        {{/each}}
+    </div>
+</div>

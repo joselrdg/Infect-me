@@ -1,45 +1,30 @@
-<div class="container text-center">
-    <h1 class="my-5">{{userName}}</h1>
-    <h3>Algo sobre mi</h3>
-    <div>
-        <ul class="nav justify-content-center mt-4 ">
-            <li class="nav-item">
-                <a class="nav-link active text-dark" aria-current="page" href="#">Librería</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link text-dark" href="#">Páginas</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link text-dark" href="/posts/create">Posts</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link text-dark" href="/control">Crear</a>
-            </li>
-        </ul>
+<div class="container-fluid px-0 pb-5" style=" background-image: url('{{bkgImgBODY}}'); background-color: {{bkgBODY}}; color: {{txtColorBODY}}">
+    {{> profile}}
+    <div class=" container my-4">
+        <div>
+            <ul class="nav justify-content-center">
+                <li class="nav-item  ">
+                    <a class="btn active text-dark bg-light" aria-current="page" href="/profile">Perfil</a>
+                </li>
+                <li class="nav-item">
+                    <a class="btn text-dark bg-light" href="/profile/library">Biblioteca</a>
+                </li>
+                <li class="nav-item">
+                    <a class="btn text-dark bg-light" href="/pages">Páginas</a>
+                </li>
+                <li class="nav-item">
+                    <a class="btn text-dark bg-light" href="/posts/create">Posts</a>
+                </li>
+                <li class="nav-item">
+                    <a class="btn text-dark bg-light" href="/control">Panel</a>
+                </li>
+            </ul>
+        </div>
     </div>
-    {{!-- <button type="button" class="btn btn-danger" id="__ytb">Danger</button>
-    <a class="btn btn-lg btn-primary mx-5" style="background-color: #3c98e9;" href="/youtube/playlists">Youtube</a> --}}
-</div>
 
-<div class="container text-center">
-    <div class="videoPlayer embed-responsive embed-responsive-21by9">
+    {{#each body as |container| }}
+    <div class="px-0" style="margin-bottom: {{margin}}px; background-color: {{bkgBODY}}; color: {{txtColorBODY}}">
+        {{> profile}}
     </div>
-</div>
-
-
-
-{{!-- <div class="container">
-    <div class="row">
-        <h2>Playlists</h2>
-        {{#each items}}
-        {{> playlistCard }}
-        {{/each}}
-    </div>
-</div> --}}
-<div class="container-fluid text-center fixed-bottom">
-    <audio id="audio" controls="controls" type="audio/mpeg" preload="preload">
-        <source id="audioSource" src="">
-        </source>
-        Your browser does not support the audio format.
-    </audio>
+    {{/each}}
 </div>

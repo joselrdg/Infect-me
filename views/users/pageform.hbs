@@ -1,0 +1,62 @@
+<div class="container ">
+    <form action="/page/create" method="POST">
+        <div class="form-group">
+            <label for="titleOne">Nombre</label>
+            <input type="text" name="titleOne" class="form-control my-3" placeholder="Nombre">
+        </div>
+
+        <div class="form-group my-2">
+            <label for="subTitleOne">Descripción</label>
+            <input type="text" name="subTitleOne" class="form-control my-3" placeholder="Descripción">
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div>
+                    <label for="category">Categoría</label>
+                    <select multiple class="form-control my-2" name="category">
+                        <option value="naturaleza">Naturaleza y aventura</option>
+                        <option value="tecnologia">Tecnología</option>
+                        <option value="salud">Salud y bienestar</option>
+                        <option value="deportes">Deportes y condición física</option>
+                        <option value="fotografia">Fotografiá</option>
+                        <option value="cocina">Cocina y bebida</option>
+                        <option value="escritura">Escritura</option>
+                        <option value="idiomas">Idiomas</option>
+                        <option value="cultura">Cultura</option>
+                        <option value="musica">Música</option>
+                        <option value="cine">Cine</option>
+                        <option value="videojuegos">Videojuegos</option>
+                        <option value="creencias">Creencias</option>
+                        <option value="arte">Arte</option>
+                        <option value="lectura">Club de lectura</option>
+                        <option value="mascotas">Mascotas</option>
+                        <option value="aficiones">Aficiones y manualidades</option>
+                        <option value="belleza">Moda y belleza</option>
+                        <option value="social">Vida social</option>
+                        <option value="negocios">Carrera y negocios</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-md-6">
+
+                <div class="m-4 ">
+                    <label for="backgroundColor">Color del fondo:</label>
+                    <input name="bkgColor" value="{{bkgColor}}" type="color" class="form-control my-2 px-5">
+                </div>
+                <div class="m-4">
+                    <label for="backgroundColor">Color del texto:</label>
+                    <input name="textColor" value="#e6dba3" type="color" class="form-control  px-5">
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group my-3">
+            <label for="textTwo">Etiquetas:</label>
+            <input type="text" name="tags" class="form-control my-3" placeholder="Palabras clave">
+        </div>
+
+        <div class="text-center my-5">
+            <button type="submit" class="btn btn-primary my-1">Guardar</button>
+        </div>
+    </form>
+</div>

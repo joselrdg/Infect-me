@@ -4,22 +4,66 @@ const widthPlayer = '640';
 
 window.addEventListener('load', () => {
 
-  const dataPlayList = document.querySelectorAll(".ytbCard")
+  // const dataPlayList = document.querySelectorAll(".ytbCard")
 
-  dataPlayList.forEach(card => {
- 
-    card.addEventListener("click", function (event) {
-      const ytbID = event.target.dataset.id;
+  // dataPlayList.forEach(card => {
 
-      console.log(event.target.dataset.id)
-      console.log(event.target.dataset.title)
-      console.log(event.target.dataset.image)
-      console.log(event.target.dataset.tracks)
+  //   card.addEventListener("click", function (event) {
+  //     if (event.target.dataset.play) {
+  //       const ytbID = event.target.dataset.id;
+  //       configVideoPlayer(ytbID, 'playlist');
+  //     } else { return }
+  //   })
+// })
 
-      // configVideoPlayer(id, 'playlist');
-    })
-  })
+// document.getElementById('editHeadBtn').addEventListener('click', function (event) {
+//   let head = document.getElementById('editHead');
+//   if (head.style.display === "none") {
+//     head.style.display = "block";
+//   } else {
+//     head.style.display = "none";
+//   }
+// });
+// document.getElementById('editBodyBtn').addEventListener('click', function (event) {
+//   let body = document.getElementById('editBody');
+
+//   if (body.style.display === "none") {
+//     body.style.display = "block";
+//   } else {
+//     body.style.display = "none";
+//   }
+// });
+
+
+// const idBody = document.querySelectorAll(".cardContainer")
+// idBody.forEach(card => {
+//   card.addEventListener("click", function (event) {
+//     if (event.target.dataset.idbody) {
+//       const ID = event.target.dataset.idbody;
+//       funAxios(ID)
+//     }
+//   })
+// })
+
+
+// document.getElementById('cardContainer').addEventListener('click', function (event) {
+//   funAxios()
+// });
+
+
+// function funAxios(id) {
+//   axios
+//     .get(`/profile/edit/body/${id}`)
+//     .then((response) => {
+//       console.log('estamos en axios --------------------------------')
+//       const { data } = response;
+//       console.log(data)
+//  })
+//   .catch((e) => console.error("Error getting data", e));
+
+
 })
+
 
 
 const configVideoPlayer = (id, confg) => {
@@ -45,7 +89,6 @@ const videoPlayer = (confg) => {
 
 const audioPlayer = (id) => {
   const source = document.getElementById('audioSource');
-  console.log(source)
   source.src = `http://www.youtube.com/embed?listType=playlist&list=${id}`;
   audio.play();
 

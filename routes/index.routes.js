@@ -4,10 +4,11 @@ const miscController = require("../controllers/misc.controller");
 const usersController = require('../controllers/users.controller');
 const postsController = require("../controllers/posts.controller");
 const profileController = require("../controllers/profile.controller");
+const pageController = require("../controllers/page.controller");
 const youtubeController = require("../controllers/youtube.controller");
 const dashboardController = require("../controllers/dashboard.controller");
 const secure = require("../middlewares/secure.middleware");
-const GOOGLE_SCOPES = ['https://www.googleapis.com/auth/youtube.readonly','https://www.googleapis.com/auth/userinfo.email', 'https://www.googleapis.com/auth/userinfo.profile']
+const GOOGLE_SCOPES = ['https://www.googleapis.com/auth/youtube.readonly', 'https://www.googleapis.com/auth/userinfo.email', 'https://www.googleapis.com/auth/userinfo.profile']
 // Misc
 router.get("/", secure.isNotAuthenticated, miscController.home);
 // router.get("/", miscController.home);
@@ -29,18 +30,41 @@ router.get('/auth/google/callback', usersController.doLoginGoogle)
 router.get('/youtube/playlists', secure.isAuthenticated, youtubeController.ytbPlaylists)
 
 
-router.get('/activate/:activationToken',secure.isNotAuthenticated, usersController.activate)
+router.get('/activate/:activationToken', secure.isNotAuthenticated, usersController.activate)
 
 router.post('/logout', secure.isAuthenticated, usersController.logout)
 
-router.get('/control', secure.isAuthenticated, usersController.create)
-router.get("/addPlaylist", secure.isAuthenticated, profileController.addPlaylist);
-router.post("/addPlaylist", secure.isAuthenticated, profileController.doAddPlaylist);
-// profile
-router.get('/profile', secure.isAuthenticated, usersController.profile)
-router.get("/profile/:id/edit", secure.isAuthenticated, profileController.edit);
-router.post("/profile/:id/edit", secure.isAuthenticated, profileController.doEdit);
+router.get('/control', secure.isAuthenticated, profileController.create)
+router.get("/playlist/add", secure.isAuthenticated, profileController.addPlaylist);
+router.post("/playlist/add", secure.isAuthenticated, profileController.doAddPlaylist);
+router.get("/playlist/delete", secure.isAuthenticated, profileController.deletePlaylist);
+router.post("/playlist/:id/delete", secure.isAuthenticated, profileController.doDeletePlaylist);
 
+// profile
+router.get('/profile', secure.isAuthenticated, profileController.profile)
+router.get('/profile/library', secure.isAuthenticated, profileController.library)
+router.get("/profile/edit/head", secure.isAuthenticated, profileController.editHead);
+router.post("/profile/edit/head", secure.isAuthenticated, profileController.doEditHead);
+router.get("/profile/create/body", secure.isAuthenticated, profileController.createBody);
+router.post("/profile/create/body", secure.isAuthenticated, profileController.doCreateBody);
+router.get("/profile/edit/body", secure.isAuthenticated, profileController.findBody);
+router.get("/profile/edit/body/:id", secure.isAuthenticated, profileController.editBody);
+router.post("/profile/edit/body/:id", secure.isAuthenticated, profileController.doEditBody);
+router.get("/profile/delete/body/:id", secure.isAuthenticated, profileController.deleteBody);
+
+// //pages
+router.get("/pages", secure.isAuthenticated, pageController.pages);
+router.get("/page/create", secure.isAuthenticated, pageController.create);
+router.post("/page/create", secure.isAuthenticated, pageController.doCreate);
+router.get('/page/edit', secure.isAuthenticated, pageController.findPages)
+router.get("/page/edit/head/:id", secure.isAuthenticated, pageController.editHead);
+router.post("/page/edit/head/:id", secure.isAuthenticated, pageController.doEditHead);
+router.get("/page/create/body/:id", secure.isAuthenticated, pageController.createBody);
+router.post("/page/create/body/:id", secure.isAuthenticated, pageController.doCreateBody);
+router.get("/page/edit/body/:id", secure.isAuthenticated, pageController.findBody);
+router.get("/page/delete/:id", secure.isAuthenticated, pageController.deletePage);
+router.get("/page/:id", secure.isAuthenticated, pageController.page);
+router.get("/follow/:id", secure.isAuthenticated, pageController.follow);
 
 // posts
 router.get("/posts/list", secure.isAuthenticated, postsController.list);
