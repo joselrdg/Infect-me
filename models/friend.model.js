@@ -35,6 +35,14 @@ const friendSchema = new mongoose.Schema ({
    
     
 })
+
+
+friendSchema.virtual("profile", {
+    ref: "Profile",
+    foreignField: "user",
+    localField: "friend",
+});
+
 const Friend = mongoose.model('Friend', friendSchema);
 
 module.exports = Friend;

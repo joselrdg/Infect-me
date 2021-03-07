@@ -18,6 +18,7 @@ router.post('/register', secure.isNotAuthenticated, usersController.doRegister)
 router.get('/dashboard',secure.isAuthenticated, dashboardController.showDashboard)
 router.get('/dashboard/findUser/:user',secure.isAuthenticated, dashboardController.findUser)
 router.post('/dashboard/createfriend',secure.isAuthenticated, dashboardController.friendEmail)
+router.get('/dashboard/deletefriend/:id',secure.isAuthenticated,dashboardController.deleteFriend)
 router.get('/dashboard/activate/:activationToken',secure.isNotAuthenticated, dashboardController.activateFriend)
 
 router.get('/login', secure.isNotAuthenticated, usersController.login)

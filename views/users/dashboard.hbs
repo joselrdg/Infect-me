@@ -74,10 +74,19 @@
         </section>
         <section class="friends__list__container"> {{!-- List friends block--}}
             <ul class=" list-group friends_list">
-              {{#each friends as |friendData| }} {{!-- Item list--}}
+              {{#each friendsSelected as |friendData| }} {{!-- Item list--}}
 
+                
+  <li class="list-group-item  friend__info"> {{!-- Friend Item list--}}
+    <div class="input-group">
+       <input type="text" class="form-control" placeholder="{{friend.userName}}"
+            aria-label="{{friendData.friend.userName}}" disabled readonly>
+        <a class="btn btn-primary" style="background-color: #3c98e9;" href="/profile/{{friendData.profile.[0]._id}}">Perfil</a>
+        <a class="btn btn-primary" style="background-color: #3c98e9;" href="/dashboard/deletefriend/{{friendData._id}}">Eliminar</a>
 
-                {{>friend friendData}}
+ 
+    </div>
+</li>
 
                 {{/each}}
             </ul>
