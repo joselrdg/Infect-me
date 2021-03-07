@@ -13,7 +13,7 @@ module.exports.showDashboard = ((req, res, next) => {
       Friend.find({ user: req.currentUser._id })
       .populate('profile')
       .populate('friend'),
-   
+      Profile.find({ followers: req.currentUser._id })
     ]
   )
     .then((containerDashboard) => {
@@ -37,7 +37,8 @@ module.exports.showDashboard = ((req, res, next) => {
   
           return ((friend.status === 'Active' ) && (friend.profile[0].profileUser)) 
         })
-        //PAGES
+        //PAGES   
+        console.log("paginas: ", pages[0])
 
    
      //   if (pages[0]) {
@@ -49,7 +50,7 @@ module.exports.showDashboard = ((req, res, next) => {
    //
      //   }
 
-        res.render('users/dashboard', { posts, vermas, friendsSelected });
+        res.render('users/dashboard', { posts, vermas, friendsSelected,pages });
 
       } else {
         res.render('users/dashboard');
