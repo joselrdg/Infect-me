@@ -64,7 +64,11 @@ router.post("/page/create/body/:id", secure.isAuthenticated, pageController.doCr
 router.get("/page/edit/body/:id", secure.isAuthenticated, pageController.findBody);
 router.get("/page/delete/:id", secure.isAuthenticated, pageController.deletePage);
 router.get("/page/:id", secure.isAuthenticated, pageController.page);
+
 router.get("/follow/:id", secure.isAuthenticated, pageController.follow);
+router.get("/stopfollow/:id", secure.isAuthenticated, pageController.unfollow);
+router.post("/comment", secure.isAuthenticated, pageController.doComment)
+router.get("/comments/:id", secure.isAuthenticated, pageController.comments)
 
 // posts
 router.get("/posts/list", secure.isAuthenticated, postsController.list);

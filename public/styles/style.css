@@ -4,6 +4,7 @@ azul/morado oscuro: #1c2550
 azul claro: #3c98e9
 azul casi negro: #001a33
 amarillo: #fdcf1b
+naranja:#ffad19
 */
 
 body {
@@ -12,9 +13,76 @@ body {
   background-repeat: repeat-y;
 }
 
+#__editForm {
+  background-color: #fdd01bc0;
+padding: 10px 100px;
+}
+
+#__buttonEditForm {
+  background-color: #ffad19;
+  border-color: rgb(255, 144, 0);
+  box-shadow: 0 1px 1px rgba(229, 103, 23, 0.075) inset,
+    0 0 8px rgba(255, 144, 0, 0.6);
+    padding: 5px 50px  5px 50px;
+}
+
+.__imputColorI {
+  background: #fdcf1b;
+  border: 0;
+}
+
+.__imputColorD {
+  background: #fdcf1b;
+  border: 0;
+}
+
+.__commentForm {
+  background: #fdd01b00;
+  width: 100;
+}
+
+.__commets {
+  margin: 1rem 10rem;
+}
+
+.__commentDiv {
+  border-bottom: 1px solid #fb369b;
+
+}
+
+.__editForm {
+  background: #fdcf1b;
+  border: 0;
+  border-bottom: 1px solid #fb369b;
+  outline: none;
+  border-radius: 0px;
+}
+
+input[type=range]{
+  background-color: #fb369b;
+  -webkit-appearance: left; 
+  background-color:linear-gradient(to right, #02C38A  calc(var(--value)*1%), black 0);
+}
+
+input[type='range']:focus {
+  outline: none;
+  background-color: #fb369b;
+}
+
+
+textarea:focus,
+input:focus,
+input[type]:focus {
+  border-color: rgb(255, 144, 0);
+  box-shadow: 0 1px 1px rgba(229, 103, 23, 0.075) inset,
+    0 0 8px rgba(255, 144, 0, 0.6);
+  outline: 0 none;
+  background-color: #ffad19;
+}
+
 #whatIsIt {
-  background-color:#fdcf1b;
-  height:80vw;
+  background-color: #fdcf1b;
+  height: 80vw;
 }
 
 .form-signin-container {
@@ -22,7 +90,6 @@ body {
   align-items: center;
   padding-top: 40px;
   padding-bottom: 40px;
-      
 }
 .form-signin {
   width: 100%;
@@ -46,7 +113,6 @@ body {
 .form-signin input[type="email"] {
   margin-bottom: -1px;
   border-radius: 0;
- 
 }
 .form-signin input[type="password"] {
   margin-bottom: 10px;
@@ -61,8 +127,6 @@ body {
 }
 
 .card__container {
-  
-
   max-height: 160px;
 }
 .card__description {

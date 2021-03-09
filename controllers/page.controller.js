@@ -3,10 +3,43 @@ const User = require("../models/user.model");
 const Youtube = require("../controllers/youtube.controller");
 const Playlist = require("../models/Playlist.model");
 const Profile = require("../models/Profile.model");
+const Comment = require("../models/Comments.model");
 const ProfileBody = require("../models/Body.model");
 const Pages = require("../models/Pages.model");
 let userData = { userN: "", picture: "" };
 
+module.exports.doComment = (req, res, next) => {
+    const query = {
+        body: req.body.body,
+        user: req.user._id,
+        name: req.user.userName,
+        comment: req.body.comment
+    }
+    if (req.body.comment) {
+        Comment.create(query)
+            .then(p => {
+                console.log('comentario creado')
+                return;
+            })
+            .catch((e) => next(e));
+    } else {
+        console.log('NO ESTA')
+        return;
+    }
+}
+
+module.exports.comments = (req, res, next) => {
+    const query = {
+        body: req.params.id
+    }
+    console.log('estamos en comments')
+    Comment.find(query)
+        .then(comments => {
+            console.log(comments)
+            res.json(comments)
+        })
+        .catch((e) => next(e));
+}
 
 module.exports.follow = (req, res, next) => {
     const id = req.params.id;
@@ -19,9 +52,26 @@ module.exports.follow = (req, res, next) => {
         .catch((e) => next(e));
 }
 
+module.exports.unfollow = (req, res, next) => {
+    const id = req.params.id;
+    const idU = req.user._id;
+    Profile.findByIdAndUpdate(id, { $pull: { followers: idU } })
+        .then((p) => {
+            console.log('seguidor eliminado')
+            res.redirect(`/page/${id}`);
+        })
+        .catch((e) => next(e));
+}
+
 
 module.exports.pages = (req, res, next) => {
+    const idU = req.user._id
     const id = { user: req.user._id }
+    if (idU === id.user){
+        console.log('estamos en pages y es la pagina del usuario')
+        res.redirect('/profile')
+    }
+    i
     Profile.find(id)
         .then((p) => {
             let pagesUser = {
@@ -35,7 +85,7 @@ module.exports.pages = (req, res, next) => {
                     console.log('paginas seguidas')
                     if (f[0]) {
                         console.log('hay paginaaaas')
-                        pagesUser.pagesFollow = f
+                        pagesUser.pagesFollow = f;
                         res.render('users/pages', pagesUser);
                     } else {
                         console.log('no hay paginas')
@@ -51,6 +101,17 @@ module.exports.page = (req, res, next) => {
     Profile.findById(id)
         .populate('body')
         .then((p) => {
+            const idU = req.user._id
+            const esta = p.followers.indexOf(idU)
+            console.log(esta)
+            if (esta) {
+                p.follow = true;
+            } else {
+                console.log('no esta')
+                p.follow = false;
+            }
+            console.log(p)
+            console.log('-------------------------------estamos en page')
             p.userN = req.currentUser.userName;
             p.picture = req.currentUser.picture
             res.render('users/profile', p);

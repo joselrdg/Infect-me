@@ -21,6 +21,11 @@ module.exports.profile = (req, res, next) => {
         p.userN = userData.userN;
         p.picture = userData.picture;
         // userData.playlist = p.playlist;
+        console.log('si ppppppp ')
+        console.log(p)
+
+        console.log('si ppppppp ')
+
         res.render('users/profile', p);
       } else {        
         console.log('y ahora que')
@@ -242,40 +247,45 @@ module.exports.doDeletePlaylist = (req, res, next) => {
 
 
 const checkBox = (body) => {
+  if (body.comment === 'on') {
+    body.comment = true;
+  } else {
+    body.comment = false;
+  };
   if (body.bkgImgON === 'on') {
     body.bkgImgON = true;
   } else {
     body.bkgImgON = false;
-  }
+  };
   if (body.bkgImgCover === 'on') {
     body.bkgImgCover = true;
   } else {
     body.bkgImgCover = false;
-  }
+  };
   if (body.imgOneON === 'on') {
     body.imgOneON = true;
   } else {
     body.imgOneON = false;
-  }
+  };
   if (body.imgTwoON === 'on') {
     body.imgTwoON = true;
   } else {
     body.imgTwoON = false;
-  }
+  };
   if (body.videoON === 'on') {
     body.videoON = true;
   } else {
     body.videoON = false;
-  }
+  };
   if (body.col2 === 'on') {
     body.col2 = true;
   } else {
     body.col2 = false;
-  }
+  };
   if (body.fluid === 'on') {
     body.fluid = true;
   } else {
     body.fluid = false;
-  }
+  };
   return body;
-}
+};

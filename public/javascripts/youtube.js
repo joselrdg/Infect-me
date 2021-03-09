@@ -4,65 +4,115 @@ const widthPlayer = '640';
 
 window.addEventListener('load', () => {
 
-  // const dataPlayList = document.querySelectorAll(".ytbCard")
+  const dataPlayList = document.querySelectorAll(".ytbCard")
 
-  // dataPlayList.forEach(card => {
+  dataPlayList.forEach(card => {
 
+    card.addEventListener("click", function (event) {
+      if (event.target.dataset.play) {
+        const ytbID = event.target.dataset.id;
+        configVideoPlayer(ytbID, 'playlist');
+      } else { return }
+    })
+  })
+
+  const commentForm = document.querySelectorAll(".__seeComments")
+
+  commentForm.forEach(commentF => {
+    commentF.addEventListener("click", function (event) {
+      const id = event.target.dataset.id;
+      axiosCommnet(id)
+    })
+  })
+
+  const like = document.querySelectorAll(".__like")
+
+  like.forEach(e => {
+    e.addEventListener("click", function (event) {
+
+      console.log('warADasdljkaSJFHLKañhsflñika')
+    })
+  })
+
+  const comntFHide = document.querySelectorAll(".__hideComments")
+  comntFHide.forEach(commentF => {
+    commentF.addEventListener("click", function (event) {
+      const id = event.target.dataset.id;
+      document.getElementById(`${id}`).innerHTML = "";
+    })
+  })
+
+  function axiosCommnet(id) {
+    axios
+      .get(`/comments/${id}`)
+      .then((response) => {
+        console.log('estamos en axios --------------------------------')
+        const { data } = response;
+        card(data)
+      })
+      .catch((e) => console.error("Error getting data", e));
+  }
+  const card = (data) => {
+    let commentDiv = document.getElementById(`${data[0].body}`)
+    commentDiv.innerHTML = "";
+    data.forEach(c => {
+      let { name, comment, body, _id} = c;
+      let div = document.createElement("div");
+      div.className = "__commentD row";
+      div.innerHTML = `<div>
+      <a class="btn-outline" href="/page/${_id}" ><h5 class="__commentNDiv mt-2">${name}<span> dijo:</span></h5></a>
+      <p class="__commentDiv">${comment}</p>
+      </div>`
+      commentDiv.appendChild(div);
+    });
+  }
+
+  // document.getElementById('editHeadBtn').addEventListener('click', function (event) {
+  //   let head = document.getElementById('editHead');
+  //   if (head.style.display === "none") {
+  //     head.style.display = "block";
+  //   } else {
+  //     head.style.display = "none";
+  //   }
+  // });
+  // document.getElementById('editBodyBtn').addEventListener('click', function (event) {
+  //   let body = document.getElementById('editBody');
+
+  //   if (body.style.display === "none") {
+  //     body.style.display = "block";
+  //   } else {
+  //     body.style.display = "none";
+  //   }
+  // });
+
+
+  // const idBody = document.querySelectorAll(".cardContainer")
+  // idBody.forEach(card => {
   //   card.addEventListener("click", function (event) {
-  //     if (event.target.dataset.play) {
-  //       const ytbID = event.target.dataset.id;
-  //       configVideoPlayer(ytbID, 'playlist');
-  //     } else { return }
+  //     if (event.target.dataset.idbody) {
+  //       const ID = event.target.dataset.idbody;
+  //       funAxios(ID)
+  //     }
   //   })
-// })
-
-// document.getElementById('editHeadBtn').addEventListener('click', function (event) {
-//   let head = document.getElementById('editHead');
-//   if (head.style.display === "none") {
-//     head.style.display = "block";
-//   } else {
-//     head.style.display = "none";
-//   }
-// });
-// document.getElementById('editBodyBtn').addEventListener('click', function (event) {
-//   let body = document.getElementById('editBody');
-
-//   if (body.style.display === "none") {
-//     body.style.display = "block";
-//   } else {
-//     body.style.display = "none";
-//   }
-// });
+  // 
 
 
-// const idBody = document.querySelectorAll(".cardContainer")
-// idBody.forEach(card => {
-//   card.addEventListener("click", function (event) {
-//     if (event.target.dataset.idbody) {
-//       const ID = event.target.dataset.idbody;
-//       funAxios(ID)
-//     }
-//   })
-// })
+  // document.getElementById('cardContainer').addEventListener('click', function (event) {
+  //   funAxios()
+  // });
 
 
-// document.getElementById('cardContainer').addEventListener('click', function (event) {
-//   funAxios()
-// });
-
-
-// function funAxios(id) {
-//   axios
-//     .get(`/profile/edit/body/${id}`)
-//     .then((response) => {
-//       console.log('estamos en axios --------------------------------')
-//       const { data } = response;
-//       console.log(data)
-//  })
-//   .catch((e) => console.error("Error getting data", e));
-
-
+  // function funAxios(id) {
+  //   axios
+  //     .get(`/profile/edit/body/${id}`)
+  //     .then((response) => {
+  //       console.log('estamos en axios --------------------------------')
+  //       const { data } = response;
+  //       console.log(data)
+  //  })
+  //   .catch((e) => console.error("Error getting data", e));
 })
+
 
 
 
