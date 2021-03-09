@@ -5,10 +5,13 @@
     color: {{textColor}}">
     {{#if followBody}}
     {{else}}
+    {{#if profileUser}}
+    {{else}}    
     {{#if follow}}
     <a href="/follow/{{id}}"><img src="../images/follow.png" alt=""></a>
     {{else}}
     <a href="/stopfollow/{{id}}"><img src="../images/unfollow.png" alt=""></a>
+    {{/if}}
     {{/if}}
     {{/if}}
     <div class="row d-flex align-items-center">
@@ -64,7 +67,7 @@
                         with other people.</small> --}}
                 </div>
             </form>
-            <a data-id="{{id}}" class="btn btn-outline mx-2 __seeComments" style="color: {{textColor}};">Ver
+            <a data-id="{{id}}" data-textcolor="{{txtColorBODY}}" class="btn btn-outline mx-2 __seeComments" style="color: {{textColor}};">Ver
                 comentarios</a>
                 <a data-id="{{id}}" class="btn btn-outline mx-2 __hideComments" style="color: {{textColor}};">Ocultar
                 comentarios</a>               

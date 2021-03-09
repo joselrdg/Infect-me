@@ -65,13 +65,7 @@ module.exports.unfollow = (req, res, next) => {
 
 
 module.exports.pages = (req, res, next) => {
-    const idU = req.user._id
     const id = { user: req.user._id }
-    if (idU === id.user){
-        console.log('estamos en pages y es la pagina del usuario')
-        res.redirect('/profile')
-    }
-    i
     Profile.find(id)
         .then((p) => {
             let pagesUser = {
@@ -97,26 +91,27 @@ module.exports.pages = (req, res, next) => {
 }
 
 module.exports.page = (req, res, next) => {
+    const idU = req.user._id
     const id = req.params.id
-    Profile.findById(id)
+    if (idU == id) {
+        res.redirect('/profile')
+    } else {
+        Profile.findById(id)
         .populate('body')
         .then((p) => {
             const idU = req.user._id
             const esta = p.followers.indexOf(idU)
-            console.log(esta)
             if (esta) {
                 p.follow = true;
             } else {
-                console.log('no esta')
                 p.follow = false;
             }
-            console.log(p)
-            console.log('-------------------------------estamos en page')
             p.userN = req.currentUser.userName;
             p.picture = req.currentUser.picture
             res.render('users/profile', p);
         })
         .catch((e) => next(e));
+    }
 }
 
 module.exports.create = (req, res, next) => {

@@ -21,7 +21,10 @@ window.addEventListener('load', () => {
   commentForm.forEach(commentF => {
     commentF.addEventListener("click", function (event) {
       const id = event.target.dataset.id;
-      axiosCommnet(id)
+      const textColor = event.target.dataset.textcolor;
+      console.log(event.target.dataset)
+      console.log('event.target.dataset')
+      axiosCommnet(id, textColor)
     })
   })
 
@@ -42,25 +45,26 @@ window.addEventListener('load', () => {
     })
   })
 
-  function axiosCommnet(id) {
+  function axiosCommnet(id, textColor) {
     axios
       .get(`/comments/${id}`)
       .then((response) => {
         console.log('estamos en axios --------------------------------')
         const { data } = response;
-        card(data)
+        card(data,textColor)
       })
       .catch((e) => console.error("Error getting data", e));
   }
-  const card = (data) => {
+  const card = (data, textColor) => {
+    console.log(textColor)
     let commentDiv = document.getElementById(`${data[0].body}`)
     commentDiv.innerHTML = "";
     data.forEach(c => {
-      let { name, comment, body, _id} = c;
+      let { name, comment, body, user} = c;
       let div = document.createElement("div");
       div.className = "__commentD row";
       div.innerHTML = `<div>
-      <a class="btn-outline" href="/page/${_id}" ><h5 class="__commentNDiv mt-2">${name}<span> dijo:</span></h5></a>
+      <a class="btn-outline" style="color:${textColor};" href="/page/${user}><h5 class="__commentNDiv mt-2"><b>${name}</b><span> dijo:</span></h5></a>
       <p class="__commentDiv">${comment}</p>
       </div>`
       commentDiv.appendChild(div);

@@ -13,6 +13,11 @@ body {
   background-repeat: repeat-y;
 }
 
+a {
+  outline: none;
+  text-decoration: none;
+}
+
 #__editForm {
   background-color: #fdd01bc0;
 padding: 10px 100px;
