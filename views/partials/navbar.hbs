@@ -10,7 +10,7 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav mr-auto mt-2 d-flex  text-center ">
         {{#if currentUser}}
-        <li><a class="dropdown-item" href="/profile"><img src="{{picture}}" alt="profile picture"
+        <li><a class="dropdown-item" href="/profile"><img src="{{#if userData}}{{userData.picture}} {{else}}{{picture}}{{/if}}" alt="profile picture"
               style="height: 80px;"></a></li>
         <div>
           <form action="/logout" method="POST">

@@ -5,8 +5,11 @@ const Friend = require("../models/friend.model");
 const mailer = require("../config/nodemailer.config");
 const flash = require("connect-flash");
 const Profile = require("../models/Profile.model");
+let userData = { userN: "", picture: "" };
 
 module.exports.showDashboard = ((req, res, next) => {
+  userData.userN = req.currentUser.userName;
+  userData.picture = req.currentUser.picture;
   Promise.all(
     [
       Post.find({ user: req.currentUser._id }),
@@ -23,6 +26,10 @@ module.exports.showDashboard = ((req, res, next) => {
         let posts = containerDashboard[0]
         let friends = containerDashboard[1]
         let pagesFollow = containerDashboard[2]
+
+        //USERDATA
+
+        
       //POSTS
         let i=0;
         posts.forEach(post => {
@@ -34,20 +41,7 @@ module.exports.showDashboard = ((req, res, next) => {
         });
         let vermas = true;
         // Friends
-        //console.log('FRIENDS: ' , friends)
-       
-  //      const switchUser = friends.map(friendship => {
-  //           
-  //        if (friendship.friend._id.toString() === req.currentUser._id.toString()){
-  //          let relation = {};
-  //          relation.id = friendship.id;
-  //          relation.status = friendship.status;
-  //          relation.profile = [...friendship.profileU]
-  //          relation.user = friendship.friend;
-  //          relation.friend = friendship.user;
-  //          friendship = relation
-  //      }
-  //      return friendship)
+   
         const switchUser = friends.map(friendship => {
           let relation = {};
           if (friendship.friend._id.toString() === req.currentUser._id.toString()){
@@ -78,7 +72,7 @@ module.exports.showDashboard = ((req, res, next) => {
      
        
         console.log("friendsSelected: " ,friendsSelected);
-        res.render('users/dashboard', { posts, vermas, friendsSelected, pagesFollow });
+        res.render('users/dashboard', { posts, vermas, friendsSelected, pagesFollow, userData });
       } else {
         res.render('users/dashboard');
       }
