@@ -10,9 +10,11 @@ module.exports.showDashboard = ((req, res, next) => {
   Promise.all(
     [
       Post.find({ user: req.currentUser._id }),
-      Friend.find({ user: req.currentUser._id })
-      .populate('profile')
-      .populate('friend'),
+      Friend.find({$or: [{user: req.currentUser._id }, { friend: req.currentUser._id }] })
+      .populate('user')
+      .populate('friend')
+      .populate('profileF')
+      .populate('profileU'),
       Profile.find({ followers: req.currentUser._id })
     ]
   )
@@ -20,7 +22,7 @@ module.exports.showDashboard = ((req, res, next) => {
       if (containerDashboard[0]) {
         let posts = containerDashboard[0]
         let friends = containerDashboard[1]
-        let pages = containerDashboard[2]
+        let pagesFollow = containerDashboard[2]
       //POSTS
         let i=0;
         posts.forEach(post => {
@@ -32,39 +34,59 @@ module.exports.showDashboard = ((req, res, next) => {
         });
         let vermas = true;
         // Friends
-        const friendsSelected = friends.filter ( friend => {
+        //console.log('FRIENDS: ' , friends)
+       
+  //      const switchUser = friends.map(friendship => {
+  //           
+  //        if (friendship.friend._id.toString() === req.currentUser._id.toString()){
+  //          let relation = {};
+  //          relation.id = friendship.id;
+  //          relation.status = friendship.status;
+  //          relation.profile = [...friendship.profileU]
+  //          relation.user = friendship.friend;
+  //          relation.friend = friendship.user;
+  //          friendship = relation
+  //      }
+  //      return friendship)
+        const switchUser = friends.map(friendship => {
+          let relation = {};
+          if (friendship.friend._id.toString() === req.currentUser._id.toString()){
+       
+            relation.id = friendship.id;
+            relation.status = friendship.status;
+            relation.profile = [...friendship.profileU]
+            relation.user = friendship.friend;
+            relation.friend = friendship.user;
+            friendship = relation        
+          } else {
+            relation.id = friendship.id;
+            relation.status = friendship.status;
+            relation.profile = [...friendship.profileF]
+            relation.user = friendship.user;
+            relation.friend = friendship.friend;
+            friendship = relation        
+          }
+          return friendship
+        })
+         console.log("SWITHUSER PROFILE: ", switchUser.profile)
          
-  
+        const friendsSelected = switchUser.filter ( friend => {
+         
+    
           return ((friend.status === 'Active' ) && (friend.profile[0].profileUser)) 
         })
-        //PAGES   
-        console.log("paginas: ", pages[0])
-
-   
-     //   if (pages[0]) {
-     //       console.log('hay paginaaaas', pages[0])
-     //       
-   //
-     //   } else {
-     //       console.log('no hay paginas')
-   //
-     //   }
-
-        res.render('users/dashboard', { posts, vermas, friendsSelected,pages });
-
+     
+       
+        console.log("friendsSelected: " ,friendsSelected);
+        res.render('users/dashboard', { posts, vermas, friendsSelected, pagesFollow });
       } else {
         res.render('users/dashboard');
       }
     })
     .catch((e) => next(e))
-
-
-  
-
 })
 
 module.exports.findUser = ((req, res, next) => {
-
   User.find({ userName: req.params.user })
     .then((user) => {
       if (user) {
@@ -93,6 +115,7 @@ module.exports.friendEmail = ((req, res, next) => {
       } else if (friends[1].length > 0) {
         friendship = friends[1][0]
       }
+  
       if (friendship) {
         if (friendship.status === 'Active' || friendship.status === 'Pending') {
           if (friendship.status === 'Active') {

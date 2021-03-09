@@ -34,34 +34,25 @@
             </nav>
 
             <div class="row align-items-center"> {{!-- List block--}}
-
-
                 {{#each posts as |postData| }} {{!-- Item list--}}
-
-
                 {{>post postData}}
-
                 {{/each}}
-
-
             </div> {{!-- End list block--}}
+        </div>
+          <div class="border border-2 rounded-3">
+        <div class="row align-items-center"> {{!-- pages List block--}}
 
-            <div class="row align-items-center"> {{!-- pages List block--}}
-
-
-                {{#each pages as |pageData| }} {{!-- pages Item list--}}
-
-
-                {{pageData}}
-
+            <h2 class="m-5">Páginas que sigues:</h2>
+            <div class="col-6 d-flex">
+                {{#each pagesFollow as |follow|}}
+                <div class="m-4" style="width: 300px; background-color: {{backgroundColor}}; color: {{textColor}};">
+                    {{> pages}}
+                </div>
                 {{/each}}
-
-
-            </div> {{!-- End list block--}}
-
-
+            </div>
+        </div> {{!-- End list block--}}
+        </div>
     </section>
-
     <section class="col-3">
         <div class="border border-2 rounded-3"> {{!-- Container busca usuarios--}}
             <form id="busca-usuario">
@@ -70,9 +61,10 @@
                         <h2>Busqueda de usuarios</h2>
                     </label>
                     <div class="input-group">
-                    <input name="inputUserName" id="inputUserName" type="text" class="form-control"
-                        placeholder="Nombre de usuario" aria-label="Nombre de usuario" aria-describedby="basic-addon2">
-                    <button id="userSearchIdButton" class="btn btn-outline-secondary">Busca</button>
+                        <input name="inputUserName" id="inputUserName" type="text" class="form-control"
+                            placeholder="Nombre de usuario" aria-label="Nombre de usuario"
+                            aria-describedby="basic-addon2">
+                        <button id="userSearchIdButton" class="btn btn-outline-secondary">Busca</button>
                     </div>
                 </div>
 
@@ -86,19 +78,21 @@
         </section>
         <section class="friends__list__container"> {{!-- List friends block--}}
             <ul class=" list-group friends_list">
-              {{#each friendsSelected as |friendData| }} {{!-- Item list--}}
+                {{#each friendsSelected as |friendData| }} {{!-- Item list--}}
 
-                
-  <li class="list-group-item  friend__info"> {{!-- Friend Item list--}}
-    <div class="input-group">
-       <input type="text" class="form-control" placeholder="{{friend.userName}}"
-            aria-label="{{friendData.friend.userName}}" disabled readonly>
-        <a class="btn btn-primary" style="background-color: #3c98e9;" href="/profile/{{friendData.profile.[0]._id}}">Perfil</a>
-        <a class="btn btn-primary" style="background-color: #3c98e9;" href="/dashboard/deletefriend/{{friendData._id}}">Eliminar</a>
+                     
+                <li class="list-group-item  friend__info"> {{!-- Friend Item list--}}
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="{{friend.userName}}"
+                            aria-label="{{friendData.friend.userName}}" disabled readonly>
+                        <a class="btn btn-primary" style="background-color: #3c98e9;"
+                            href="/page/{{friendData.profile.[0]._id}}">Perfil</a>
+                        <a class="btn btn-primary" style="background-color: #3c98e9;"
+                            href="/dashboard/deletefriend/{{friendData.id}}">Eliminar</a>
 
- 
-    </div>
-</li>
+
+                    </div>
+                </li>
 
                 {{/each}}
             </ul>
