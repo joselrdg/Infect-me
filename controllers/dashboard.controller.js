@@ -3,34 +3,90 @@ const User = require("../models/user.model");
 const Post = require("../models/Post.model");
 const Friend = require("../models/friend.model");
 const mailer = require("../config/nodemailer.config");
-const flash = require("connect-flash")
-
+const flash = require("connect-flash");
+const Profile = require("../models/Profile.model");
 
 module.exports.showDashboard = ((req, res, next) => {
+  Promise.all(
+    [
+      Post.find({ user: req.currentUser._id }),
+      Friend.find({$or: [{user: req.currentUser._id }, { friend: req.currentUser._id }] })
+      .populate('user')
+      .populate('friend')
+      .populate('profileF')
+      .populate('profileU'),
+      Profile.find({ followers: req.currentUser._id })
+    ]
+  )
+    .then((containerDashboard) => {
+      if (containerDashboard[0]) {
+        let posts = containerDashboard[0]
+        let friends = containerDashboard[1]
+        let pagesFollow = containerDashboard[2]
+      //POSTS
+        let i=0;
+        posts.forEach(post => {
+          if (i > 2) {
+            post.collapse = true;
 
-  Post.find({ user: req.currentUser._id })
-    .then((posts) => {
-
-
-
-      for (let i = 0; i <= (posts.length - 1); i++) {
-        if (i > 2) {
-          posts[i].collapse = true;
-
-        }
-
+          }
+          i++
+        });
+        let vermas = true;
+        // Friends
+        //console.log('FRIENDS: ' , friends)
+       
+  //      const switchUser = friends.map(friendship => {
+  //           
+  //        if (friendship.friend._id.toString() === req.currentUser._id.toString()){
+  //          let relation = {};
+  //          relation.id = friendship.id;
+  //          relation.status = friendship.status;
+  //          relation.profile = [...friendship.profileU]
+  //          relation.user = friendship.friend;
+  //          relation.friend = friendship.user;
+  //          friendship = relation
+  //      }
+  //      return friendship)
+        const switchUser = friends.map(friendship => {
+          let relation = {};
+          if (friendship.friend._id.toString() === req.currentUser._id.toString()){
+       
+            relation.id = friendship.id;
+            relation.status = friendship.status;
+            relation.profile = [...friendship.profileU]
+            relation.user = friendship.friend;
+            relation.friend = friendship.user;
+            friendship = relation        
+          } else {
+            relation.id = friendship.id;
+            relation.status = friendship.status;
+            relation.profile = [...friendship.profileF]
+            relation.user = friendship.user;
+            relation.friend = friendship.friend;
+            friendship = relation        
+          }
+          return friendship
+        })
+         console.log("SWITHUSER PROFILE: ", switchUser.profile)
+         
+        const friendsSelected = switchUser.filter ( friend => {
+         
+    
+          return ((friend.status === 'Active' ) && (friend.profile[0].profileUser)) 
+        })
+     
+       
+        console.log("friendsSelected: " ,friendsSelected);
+        res.render('users/dashboard', { posts, vermas, friendsSelected, pagesFollow });
+      } else {
+        res.render('users/dashboard');
       }
-      let vermas = true;
-      res.render('users/dashboard', { posts, vermas });
-
     })
-    .catch((e => next(e)));
-
-
+    .catch((e) => next(e))
 })
 
 module.exports.findUser = ((req, res, next) => {
-
   User.find({ userName: req.params.user })
     .then((user) => {
       if (user) {
@@ -59,17 +115,18 @@ module.exports.friendEmail = ((req, res, next) => {
       } else if (friends[1].length > 0) {
         friendship = friends[1][0]
       }
-      if (friendship){
-      if (friendship.status === 'Active' || friendship.status === 'Pending') {
-          if (friendship.status === 'Active'){
-            req.flash('flashMessage','Ya sois amigos')
+  
+      if (friendship) {
+        if (friendship.status === 'Active' || friendship.status === 'Pending') {
+          if (friendship.status === 'Active') {
+            req.flash('flashMessage', 'Ya sois amigos')
           }
-          if (friendship.status === 'Pending'){
-            req.flash('flashMessage','Hay una solicidud de amistad pendiente')
+          if (friendship.status === 'Pending') {
+            req.flash('flashMessage', 'Hay una solicidud de amistad pendiente')
           }
-       
-        res.redirect('/dashboard');
-      }
+
+          res.redirect('/dashboard');
+        }
       } else {
         const friendshipData = { user: req.currentUser._id, friend: req.body.frienduserid }
         // crear relacion de amistad
@@ -77,7 +134,7 @@ module.exports.friendEmail = ((req, res, next) => {
           .then((friendshipData) => {
             // enviar email de amistad
             mailer.sendMailFriend(req.currentUser.userName, req.body.friendemail, friendshipData.activationToken);
-            req.flash('flashMessage','Solicitud de amistad enviada')
+            req.flash('flashMessage', 'Solicitud de amistad enviada')
 
             res.redirect('/dashboard');
 
@@ -87,7 +144,7 @@ module.exports.friendEmail = ((req, res, next) => {
     .catch((e) => next(e))
 })
 
-module.exports.activateFriend = ((req,res,next) => {
+module.exports.activateFriend = ((req, res, next) => {
   Friend.findOneAndUpdate(
     {
       activationToken: req.params.activationToken
@@ -97,10 +154,22 @@ module.exports.activateFriend = ((req,res,next) => {
       activationToken: 'Active'
     }
   ).populate('user')
-  .then((friend) => {
-    console.log("Amigo ",friend.user)
-  res.render('friendship',{friend : friend})
-  })
-  .catch((e) => next(e))
+    .then((friend) => {
+      console.log("Amigo ", friend.user)
+      res.render('friendship', { friend: friend })
+    })
+    .catch((e) => next(e))
 
 });
+module.exports.deleteFriend = ((req,res,next) => {
+  Friend.deleteOne({_id: req.params.id})
+  .populate('friend')
+  .then((friendDeleted) => {
+   
+    req.flash('flashMessage', `Eliminada relación de amistad`)
+
+    res.redirect('/dashboard');
+
+  })
+  .catch((e) => next(e))
+})  
