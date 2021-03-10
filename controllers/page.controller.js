@@ -224,7 +224,7 @@ module.exports.deletePage = (req, res, next) => {
 module.exports.pagesCategory = (req, res, next) => {
     const category = categories.filter(category => { return category.index === req.params.index })
 
-    console.log("CATEGORIA: ", category[0].index)
+  
     Pages.find({ category: category[0].index })
         .populate('profile')
         .then((pages) => {
@@ -233,11 +233,9 @@ module.exports.pagesCategory = (req, res, next) => {
                 userN: req.currentUser.userName,
                 picture: req.currentUser.picture,
                 pages: pages,
-                categoryFilter: category[0].description
+                categoryFilter: category[0].description,
+                
             }
-            console.log("username: " + req.currentUser.userName)
-
-            console.log("PAGINAS:  ", pagesCategory)
             res.render('users/pagescategory', pagesCategory)
 
         })
