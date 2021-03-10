@@ -5,8 +5,12 @@ const Friend = require("../models/friend.model");
 const mailer = require("../config/nodemailer.config");
 const flash = require("connect-flash");
 const Profile = require("../models/Profile.model");
+const categories = require("../public/categories")
+let userData = { userN: "", picture: "" };
 
 module.exports.showDashboard = ((req, res, next) => {
+  userData.userN = req.currentUser.userName;
+  userData.picture = req.currentUser.picture;
   Promise.all(
     [
       Post.find({ user: req.currentUser._id }),
@@ -34,20 +38,7 @@ module.exports.showDashboard = ((req, res, next) => {
         });
         let vermas = true;
         // Friends
-        //console.log('FRIENDS: ' , friends)
-       
-  //      const switchUser = friends.map(friendship => {
-  //           
-  //        if (friendship.friend._id.toString() === req.currentUser._id.toString()){
-  //          let relation = {};
-  //          relation.id = friendship.id;
-  //          relation.status = friendship.status;
-  //          relation.profile = [...friendship.profileU]
-  //          relation.user = friendship.friend;
-  //          relation.friend = friendship.user;
-  //          friendship = relation
-  //      }
-  //      return friendship)
+   
         const switchUser = friends.map(friendship => {
           let relation = {};
           if (friendship.friend._id.toString() === req.currentUser._id.toString()){
@@ -68,17 +59,14 @@ module.exports.showDashboard = ((req, res, next) => {
           }
           return friendship
         })
-         console.log("SWITHUSER PROFILE: ", switchUser.profile)
-         
+  
         const friendsSelected = switchUser.filter ( friend => {
          
     
           return ((friend.status === 'Active' ) && (friend.profile[0].profileUser)) 
         })
-     
-       
-        console.log("friendsSelected: " ,friendsSelected);
-        res.render('users/dashboard', { posts, vermas, friendsSelected, pagesFollow });
+  
+        res.render('users/dashboard', { posts, vermas, friendsSelected, pagesFollow, userData,categories });
       } else {
         res.render('users/dashboard');
       }

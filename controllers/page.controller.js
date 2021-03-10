@@ -5,6 +5,7 @@ const Playlist = require("../models/Playlist.model");
 const Profile = require("../models/Profile.model");
 const ProfileBody = require("../models/Body.model");
 const Pages = require("../models/Pages.model");
+const categories = require("../public/categories")
 let userData = { userN: "", picture: "" };
 
 
@@ -47,17 +48,24 @@ module.exports.pages = (req, res, next) => {
 }
 
 module.exports.page = (req, res, next) => {
+    const idU = req.user._id
     const id = req.params.id
-    Profile.findById(id)
-        .populate('body')
-        .then((p) => {
-            p.userN = req.currentUser.userName;
-            p.picture = req.currentUser.picture
-            res.render('users/profile', p);
-        })
-        .catch((e) => next(e));
+    if (idU == id) {
+        res.redirect('/profile')
+    } else {
+        console.log("pagina: ", id)
+        Profile.findById(id)
+            .populate('body')
+            .then((p) => {
+                console.log("pagina: ", p)
+                p.userN = req.currentUser.userName;
+                p.picture = req.currentUser.picture
+                console.log("User name page: " + req.currentUser.userName + p.userN)
+                res.render('users/profile', p);
+            })
+            .catch((e) => next(e));
+    }
 }
-
 module.exports.create = (req, res, next) => {
     let p = { createPage: true };
     p.userN = req.currentUser.userName;
@@ -213,6 +221,30 @@ module.exports.deletePage = (req, res, next) => {
         .catch((e) => next(e));
 }
 
+module.exports.pagesCategory = (req, res, next) => {
+    const category = categories.filter(category => { return category.index === req.params.index })
+
+    console.log("CATEGORIA: ", category[0].index)
+    Pages.find({ category: category[0].index })
+        .populate('profile')
+        .then((pages) => {
+
+            let pagesCategory = {
+                userN: req.currentUser.userName,
+                picture: req.currentUser.picture,
+                pages: pages,
+                categoryFilter: category[0].description
+            }
+            console.log("username: " + req.currentUser.userName)
+
+            console.log("PAGINAS:  ", pagesCategory)
+            res.render('users/pagescategory', pagesCategory)
+
+        })
+        .catch((e) => next(e));
+}
+
+
 
 const checkBox = (body) => {
     if (body.bkgImgON === 'on') {
@@ -252,3 +284,4 @@ const checkBox = (body) => {
     }
     return body;
 }
+
