@@ -1,72 +1,40 @@
-  {{!--<div class="container">
-  <div class="row mt-5">
-    <div class="col-8">
-      <form action="/login" method="POST">
-        <div class="mb-3">
-          <label for="email" class="form-label">Email address</label>
-          <input type="email" name="email" value="{{user.email}}" class="form-control" id="email" required>
-        </div>
-        <div class="mb-3">
-          <label for="password" class="form-label">Password</label>
-          <input type="password" name="password" class="form-control" id="password" required>
-        </div>
-
-        {{#if error}}
-        <p>{{error}}</p>
-        {{/if}}
-        <div class="text-center">
-          <button type="submit" class="btn btn-secondary px-4" style="background-color: #fb369b;">Empezar</button>
-        </div>
-
-    </div>
-    <div class="col-4 mt-5">
-      <div>
-        <a class="btn btn-secondary  mx-5" style="background-color: #3c98e9;" href="/auth/google">Iniciar sesión con
-          Google</a>
-      </div>
-    </div>
-    </form>
-  </div> 
-
---}}
-
-<div class="text-center form-signin-container">
+<div id="__logForm">
+  <div class="text-center form-signin-container ">
     <main class="form-signin">
-        <form action="/login" method="POST">
- {{!--           <img class="mb-4" src="/docs/5.0/assets/brand/bootstrap-logo.svg" alt="logo" width="72" height="57">
-      --}}
-            <h1 class="h3 mb-3 fw-normal">Por favor inicia sesión</h1>
-            <label for="inputUserName" class="visually-hidden">Usuario</label>
-            <input type="text" id="userName" value="{{user.userName}}"
-                class="form-control {{#if errors.userName}}is-invalid{{/if}}" placeholder="User name" name="userName"
-                required="" autofocus="">
-            {{#if errors.userName}}
-            <div class="invalid-feedback">
-                {{errors.userName}}
-            </div>
-            {{/if}}
-            <label for="inputPassword" class="visually-hidden">Contraseña</label>
-            <input type="password" id="password" class="form-control {{#if errors.password}}is-invalid{{/if}}"
-                placeholder="Password" name="password" required="">
-            {{#if errors.password}}
-            <div class="invalid-feedback">
-                {{errors.password}}
-            </div>
-            {{/if}}
+      <form action="/login" method="POST" class=" p-3">
+        <div class="position-absolute top-50 start-50 translate-middle text-light">
+          {{!-- <h1 class="h3 mb-3 fw-normal">Por favor inicia sesión</h1> --}}
+          <label for="inputUserName" class="visually-hidden">Usuario</label>
+          <input type="text" id="userName" value="{{user.userName}}"
+            class="form-control __buttonLogFormI {{#if errors.userName}}is-invalid{{/if}}" placeholder="User name"
+            name="userName" required="" autofocus="">
+          {{#if errors.userName}}
+          <div class="invalid-feedback">
+            {{errors.userName}}
+          </div>
+          {{/if}}
+          <label for="inputPassword" class="visually-hidden">Contraseña</label>
+          <input type="password" id="password"
+            class="form-control __buttonLogFormI {{#if errors.password}}is-invalid{{/if}}" placeholder="Password"
+            name="password" required="">
+          {{#if errors.password}}
+          <div class="invalid-feedback">
+            {{errors.password}}
+          </div>
+          {{/if}}
 
-            <button class="w-100 btn btn-lg btn-primary" type="submit"> Iniciar sesión </button>
-            {{#if message}}
-            <p>{{message}}</p>
-            {{/if}}
-                <div class="col-4 mt-5">
-      <div>
-        {{!-- <a class="btn btn-lg btn-primary mx-5" style="background-color: #3c98e9;" href="/auth/google">Iniciar sesión con
-          Google</a> --}}
-          <a class="btn btn-lg btn-primary mx-5" style="background-color: #3c98e9;" href="/auth/youtube">Iniciar sesión con
-          Youtube</a>
-      </div>
-  
+          <button class="w-100 btn btn-lg btn-primary __buttonLogFormD" type="submit"> Iniciar sesión </button>
+          {{#if message}}
+          <p>{{message}}</p>
+          {{/if}}
 
-        </form>
+          <div>
+            <a class="w-100 btn btn-lg btn-primary my-2 __buttonLogFormD" href="/auth/youtube">Seguir con
+              Youtube</a>
+          </div>
+        </div>
+      </form>
     </main>
+  </div>
 </div>
+{{> footer}}

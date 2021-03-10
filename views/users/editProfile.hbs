@@ -41,14 +41,14 @@
                     <form action="/profile/edit/body/{{id}}" method="POST">
                         {{/if}}
                         {{#if createBody}}
-                    estamos en crate body a seca
+                        estamos en crate body a seca
                         <form action="/profile/create/body" method="POST">
                             {{/if}}
                             {{#if editPageHead}}
                             <form action="/page/edit/head/{{id}}" method="POST">
                                 {{/if}}
                                 {{#if createPageBody}}
-                            estamos en crate pagebody
+                                estamos en crate pagebody
                                 <form action="/page/create/body/{{profileId}}" method="POST">
                                     {{/if}}
 
@@ -260,6 +260,39 @@
                                             </div>
                                         </div>
 
+                                        <div class="form-group">
+                                            <label for="inputState" class="my-1">Elige tipografía:</label>
+                                            <select name="font" class=" __imputColorD">
+                                                <option  value="Permanent Marker">
+                                                    <p>Permanent Marker</p>
+                                                </option>
+                                                <option  value="Amatic SC">
+                                                    <p>Amatic SC</p>
+                                                </option>
+                                                <option value="Architects Daughter">
+                                                    <p>Architects Daughter</p>
+                                                </option>
+                                                <option value="Comfortaa">
+                                                    <p>Comfortaa</p>
+                                                </option>
+                                                <option value="Fascinate">
+                                                    <p>Fascinate</p>
+                                                </option>
+                                                <option value="Oi">
+                                                    <p>Oi</p>
+                                                </option>
+                                                <option value="Pacifico">
+                                                    <p>Pacifico</p>
+                                                </option>
+                                                <option value="Roboto">
+                                                    <p>Roboto</p>
+                                                </option>
+                                                <option value="sans-serif">
+                                                    <p>sans-serif</p>
+                                                </option>
+                                            </select>
+                                        </div>
+
                                         <div class="custom-control custom-checkbox">
                                             <input type="checkbox" name="col2" class="custom-control-input" {{#if
                                                 col2}}checked{{/if}}>
@@ -274,21 +307,21 @@
                                                 expandir la
                                                 cabecera.</label>
                                         </div>
-                                        {{#if editBody}}                                        <div class="custom-control custom-checkbox">
+                                        {{#if editBody}} <div class="custom-control custom-checkbox">
                                             <input type="checkbox" name="comment" class="custom-control-input" {{#if
                                                 comment}}checked{{/if}}>
                                             <label class="custom-control-label mx-2" for="comment">Selecciona añadir
                                                 comentarios.</label>
                                         </div>
                                         {{/if}}
-                                        {{#if createBody }}                                        <div class="custom-control custom-checkbox">
+                                        {{#if createBody }} <div class="custom-control custom-checkbox">
                                             <input type="checkbox" name="comment" class="custom-control-input" {{#if
                                                 comment}}checked{{/if}}>
                                             <label class="custom-control-label mx-2" for="comment">Selecciona añadir
                                                 comentarios.</label>
                                         </div>
                                         {{/if}}
-                                        {{#if createPageBody}}                                        <div class="custom-control custom-checkbox">
+                                        {{#if createPageBody}} <div class="custom-control custom-checkbox">
                                             <input type="checkbox" name="comment" class="custom-control-input" {{#if
                                                 comment}}checked{{/if}}>
                                             <label class="custom-control-label mx-2" for="comment">Selecciona añadir
@@ -297,7 +330,7 @@
                                         {{/if}}
                                     </div>
                                     <div class="text-center my-5">
-                                        <button type="submit" id="__buttonEditForm"
+                                        <button type="submit" class="__buttonEditForm"
                                             class="btn btn-primary my-1">Guardar</button>
                                     </div>
                                 </form>

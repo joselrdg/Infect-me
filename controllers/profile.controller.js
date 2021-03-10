@@ -74,6 +74,7 @@ module.exports.editHead = (req, res, next) => {
 
 module.exports.doEditHead = (req, res, next) => {
   let body = req.body;
+  console.log(req.body)
   body = checkBox(body);
   const query = { user: req.user._id };
   Profile.findOneAndUpdate(query, body, { new: true })
@@ -95,6 +96,7 @@ module.exports.doCreateBody = (req, res, next) => {
   Profile.findOne({ user: req.user._id })
     .then((profile) => {
       let body = checkBox(req.body);
+      console.log(req.body)
       body.profile = profile.id;
       ProfileBody.create(body)
         .then((p) => {
@@ -146,6 +148,7 @@ module.exports.editBody = (req, res, next) => {
 // terminar
 module.exports.doEditBody = (req, res, next) => {
   let body = checkBox(req.body);
+  console.log(req.body)
   const query = req.params.id;
   ProfileBody.findByIdAndUpdate(query, body, { new: true })
     .then((p) => {

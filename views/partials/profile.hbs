@@ -1,4 +1,4 @@
-<div class="{{#if fluid}}container-fluid text-center{{else}}container text-center{{/if}} text-center" style="background-color: {{backgroundColor}}; 
+<div class="{{#if fluid}}container-fluid text-center{{else}}container text-center{{/if}} text-center" style="font-family: {{font}}; background-color: {{backgroundColor}}; 
     {{#if bkgImgON}}background-image: url('{{backgroundImg}}');{{/if}}
     {{#if bkgImgCover}}background-repeat: no-repeat; background-size: cover;{{/if}}
     background-attachment: fixed;
@@ -35,7 +35,7 @@
                 height="{{imgHeightTwo}}">{{/if}}
 
             {{#if videoON}}
-            <div class="m-5">
+            <div style="margin-right: 3rem;">
                 <div class="videoPlayer embed-responsive embed-responsive-21by9">
                     <iframe class="embed-responsive-item" width="640" height="360"
                         src="{{video}}?autoplay=0&mute=0&loop=1" frameborder="0"

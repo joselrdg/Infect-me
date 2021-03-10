@@ -38,6 +38,7 @@ const profileBodySchema = new mongoose.Schema(
         subTitleTwo: String,
         textTwo: String,
         margin: String,
+        font: String,
         col2: Boolean,
         fluid: Boolean
     },
