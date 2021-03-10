@@ -11,15 +11,15 @@
         {{#each items}}
         <div class="col justify-content-center py-3 ytbCard">
             <div class="card text-white bg-dark" style="width: 10rem;">
-                <img class="card-img-top" src="{{image}}"
-                    alt="Card image cap">
+                <img class="card-img-top" src="{{image}}" alt="Card image cap">
                 <div class="card-body">
                     <h5 class="card-title">{{title}}</h5>
                     <p class="card-text">{{tracks}} Tracks</p>
                     <div class="text-center">
-                        <form action="/playlist/{{id}}/delete" method="POST">
+                        <form action="/playlist/{{_id}}/delete" method="POST">
+                            <input type="hidden" name="profile" value="{{profile}}" />
                             <button type="submit" class="btn btn-danger">Borrar</button>
-                        </form>                        
+                        </form>
                     </div>
                 </div>
             </div>

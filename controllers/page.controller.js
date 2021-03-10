@@ -209,11 +209,11 @@ module.exports.createBody = ((req, res, next) => {
 })
 
 module.exports.doCreateBody = (req, res, next) => {
+    let body = checkBox(req.body);
+    console.log(body)
     const query = { _id: req.params.id, user: req.currentUser._id }
     Profile.findOne({ _id: req.params.id, user: req.currentUser._id })
         .then((profile) => {
-            let body = req.body;
-            body = checkBox(body);
             body.profile = profile._id;
             ProfileBody.create(body)
                 .then((p) => {
@@ -271,6 +271,11 @@ module.exports.deletePage = (req, res, next) => {
 
 
 const checkBox = (body) => {
+    if (body.comment === 'on') {
+        body.comment = true;
+    } else {
+        body.comment = false;
+    }
     if (body.bkgImgON === 'on') {
         body.bkgImgON = true;
     } else {

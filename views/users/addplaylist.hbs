@@ -1,4 +1,26 @@
-{{> profile}}
+{{!-- {{> profile}} --}}
+{{#if delete}}
+{{else}}
+<div class="container">
+    <form>
+        <div class="mb-3 col-6">
+            <label for="" class="form-label">
+                <h2>Busca en youtube</h2>
+            </label>
+            <div class="input-group">
+                <input id="playInput" type="text" class="form-control"
+                    placeholder="Busca videos en youtube">
+                <a id="playSearch" class="btn btn-outline-secondary px-4">Buscar</a>
+            </div>
+        </div>
+    </form>
+    <div id="cardSearch" >
+
+    </div>
+</div>
+{{/if}}
+
+
 <div class="container">
     <h1 class="my-4">{{#if delete}}Elimina playlists:{{else}}Add playlists desde youtube:{{/if}}</h1>
     <div class="row">
@@ -23,6 +45,7 @@
                         </form>
                         {{else}}
                         <form action="/playlist/add" method="POST">
+                            <input type="hidden" id="profilePla" name="profile" value="{{profile}}"/>
                             <input type="hidden" name="ytbID" value="{{id}}" />
                             <input type="hidden" name="image" value="{{snippet.thumbnails.default.url}}" />
                             <input type="hidden" name="title" value="{{snippet.title}}" />

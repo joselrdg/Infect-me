@@ -56,9 +56,35 @@
                 <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
                     card's
                     content.</p>
-                <a href="/playlist/add" class="card-link">Añadir</a>
-                <a href="/playlist/delete" class="card-link">Eliminar</a>
+                <div>
+                    <form>
+                        <div class="form-group">
+                            <label for="inputState" class="my-1">Elige página:</label>
+                            <select id="selectPrf" class="form-control">
+                                {{#each profilesU as |profil|}}
+                                <option name="profile" value="{{_id}}">
+                                    {{#if profileUser}} <p> Tu perfil. </p>
+                                    {{else}}
+                                    {{#if titleOne}}<p>{{titleOne}}</p>
+                                    {{else}}
+                                    {{#if titleOne}}<p>{{titleTwo}}</p>
+                                    {{else}}<p>Sin título.</p>
+                                    {{/if}}{{/if}}{{/if}}
+                                </option>
+                                {{/each}}
+                            </select>
+                            <a id="choosePrf" class="btn btn-danger mx-2 my-3 mx-auto">Seleccionar</a>
+                        </div>
+                    </form>
+                </div>
+                <div id="editPlay"> </div>
+
             </div>
         </div>
     </div>
+</div>
+
+
+<div class="container text-center">
+
 </div>

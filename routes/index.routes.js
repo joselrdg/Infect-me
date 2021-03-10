@@ -35,14 +35,17 @@ router.get('/activate/:activationToken', secure.isNotAuthenticated, usersControl
 router.post('/logout', secure.isAuthenticated, usersController.logout)
 
 router.get('/control', secure.isAuthenticated, profileController.create)
-router.get("/playlist/add", secure.isAuthenticated, profileController.addPlaylist);
+// router.get("/playlist/add/playlist/:id", secure.isAuthenticated, profileController.addPlaylist);
+router.get("/playlist/add/:id", secure.isAuthenticated, profileController.addPlaylist);
 router.post("/playlist/add", secure.isAuthenticated, profileController.doAddPlaylist);
-router.get("/playlist/delete", secure.isAuthenticated, profileController.deletePlaylist);
+router.post("/video/add", secure.isAuthenticated, profileController.doAddPlayVideo);
+router.get("/playlist/search/:id/:search", secure.isAuthenticated, profileController.searchVideo);
+router.get("/playlist/delete/:id", secure.isAuthenticated, profileController.deletePlaylist);
 router.post("/playlist/:id/delete", secure.isAuthenticated, profileController.doDeletePlaylist);
+router.get('/library/:id', secure.isAuthenticated, profileController.library)
 
 // profile
 router.get('/profile', secure.isAuthenticated, profileController.profile)
-router.get('/profile/library', secure.isAuthenticated, profileController.library)
 router.get("/profile/edit/head", secure.isAuthenticated, profileController.editHead);
 router.post("/profile/edit/head", secure.isAuthenticated, profileController.doEditHead);
 router.get("/profile/create/body", secure.isAuthenticated, profileController.createBody);
