@@ -5,6 +5,7 @@ const Friend = require("../models/friend.model");
 const mailer = require("../config/nodemailer.config");
 const flash = require("connect-flash");
 const Profile = require("../models/Profile.model");
+const categories = require("../public/categories")
 let userData = { userN: "", picture: "" };
 
 module.exports.showDashboard = ((req, res, next) => {
@@ -26,10 +27,6 @@ module.exports.showDashboard = ((req, res, next) => {
         let posts = containerDashboard[0]
         let friends = containerDashboard[1]
         let pagesFollow = containerDashboard[2]
-
-        //USERDATA
-
-        
       //POSTS
         let i=0;
         posts.forEach(post => {
@@ -62,17 +59,14 @@ module.exports.showDashboard = ((req, res, next) => {
           }
           return friendship
         })
-         console.log("SWITHUSER PROFILE: ", switchUser.profile)
-         
+  
         const friendsSelected = switchUser.filter ( friend => {
          
     
           return ((friend.status === 'Active' ) && (friend.profile[0].profileUser)) 
         })
-     
-       
-        console.log("friendsSelected: " ,friendsSelected);
-        res.render('users/dashboard', { posts, vermas, friendsSelected, pagesFollow, userData });
+  
+        res.render('users/dashboard', { posts, vermas, friendsSelected, pagesFollow, userData,categories });
       } else {
         res.render('users/dashboard');
       }

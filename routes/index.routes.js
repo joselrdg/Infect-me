@@ -55,6 +55,7 @@ router.get("/profile/delete/body/:id", secure.isAuthenticated, profileController
 
 // //pages
 router.get("/pages", secure.isAuthenticated, pageController.pages);
+router.get("/pages/category/:index",secure.isAuthenticated,pageController.pagesCategory);
 router.get("/page/create", secure.isAuthenticated, pageController.create);
 router.post("/page/create", secure.isAuthenticated, pageController.doCreate);
 router.get('/page/edit', secure.isAuthenticated, pageController.findPages)
@@ -65,6 +66,7 @@ router.post("/page/create/body/:id", secure.isAuthenticated, pageController.doCr
 router.get("/page/edit/body/:id", secure.isAuthenticated, pageController.findBody);
 router.get("/page/delete/:id", secure.isAuthenticated, pageController.deletePage);
 router.get("/page/:id", secure.isAuthenticated, pageController.page);
+
 router.get("/follow/:id", secure.isAuthenticated, pageController.follow);
 
 // posts

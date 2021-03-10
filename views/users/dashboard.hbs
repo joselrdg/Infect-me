@@ -7,27 +7,12 @@
     <section class="col-2">
         <h3>Categorias</h3>
         <div class="list-group row">
-             <a href="#" class="list-group-item list-group-item-action rounded-pill mb-2 category__button" >Naturaleza y aventura</a>
-                  <a href="#" class="list-group-item list-group-item-action rounded-pill mb-2 category__button">Arte</a>
-           <a href="#" class="list-group-item list-group-item-action rounded-pill mb-2 category__button" >Tecnología</a>
-            <a href="#" class="list-group-item list-group-item-action rounded-pill mb-2 category__button" >Salud y bienestar</a>
-            <a href="#" class="list-group-item list-group-item-action rounded-pill mb-2 category__button" >Deportes y condición física</a>
-            <a href="#" class="list-group-item list-group-item-action rounded-pill mb-2 category__button" >Fotografiá</a>
-            <a href="#" class="list-group-item list-group-item-action rounded-pill mb-2 category__button" >Cocina y bebida</a>
-            <a href="#" class="list-group-item list-group-item-action rounded-pill mb-2 category__button" >Escritura</a>
-            <a href="#" class="list-group-item list-group-item-action rounded-pill mb-2 category__button" >Idiomas</a>
-            <a href="#" class="list-group-item list-group-item-action rounded-pill mb-2 category__button">Cultura</a>
-            <a href="#" class="list-group-item list-group-item-action rounded-pill mb-2 category__button">Música</a>
-            <a href="#" class="list-group-item list-group-item-action rounded-pill mb-2 category__button">Cine</a>
-            <a href="#" class="list-group-item list-group-item-action rounded-pill mb-2 category__button">Creencias</a>
-            <a href="#" class="list-group-item list-group-item-action rounded-pill mb-2 category__button">Club de lectura</a>
-            <a href="#" class="list-group-item list-group-item-action rounded-pill mb-2 category__button">Mascotas</a>
-            <a href="#" class="list-group-item list-group-item-action rounded-pill mb-2 category__button">Aficiones y manualidades</a>
-            <a href="#" class="list-group-item list-group-item-action rounded-pill mb-2 category__button">Moda y belleza</a>
-            <a href="#" class="list-group-item list-group-item-action rounded-pill mb-2 category__button">Vida social</a>
-            <a href="#" class="list-group-item list-group-item-action rounded-pill mb-2 category__button">Carrera y negocios</a>
+            {{#each categories as |category|}}
+           <a href="/pages/category/{{category.index}}" class="list-group-item list-group-item-action rounded-pill mb-2 category__button">{{category.description}}</a>
+  
+                    {{/each}}
        </div>
-       
+            
 
 
     </section>
