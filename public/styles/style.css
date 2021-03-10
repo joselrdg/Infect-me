@@ -194,3 +194,8 @@ input[type]:focus {
 .card__title {
   height: 25px;
 }
+
+.category__button {
+  background: #fb369b;
+  width: 150px;
+}

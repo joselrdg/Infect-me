@@ -6,6 +6,7 @@ const Profile = require("../models/Profile.model");
 const Comment = require("../models/Comments.model");
 const ProfileBody = require("../models/Body.model");
 const Pages = require("../models/Pages.model");
+const categories = require("../public/categories")
 let userData = { userN: "", picture: "" };
 
 module.exports.doComment = (req, res, next) => {
@@ -113,7 +114,6 @@ module.exports.page = (req, res, next) => {
         .catch((e) => next(e));
     }
 }
-
 module.exports.create = (req, res, next) => {
     let p = { createPage: true };
     p.userN = req.currentUser.userName;
@@ -269,6 +269,30 @@ module.exports.deletePage = (req, res, next) => {
         .catch((e) => next(e));
 }
 
+module.exports.pagesCategory = (req, res, next) => {
+    const category = categories.filter(category => { return category.index === req.params.index })
+
+    console.log("CATEGORIA: ", category[0].index)
+    Pages.find({ category: category[0].index })
+        .populate('profile')
+        .then((pages) => {
+
+            let pagesCategory = {
+                userN: req.currentUser.userName,
+                picture: req.currentUser.picture,
+                pages: pages,
+                categoryFilter: category[0].description
+            }
+            console.log("username: " + req.currentUser.userName)
+
+            console.log("PAGINAS:  ", pagesCategory)
+            res.render('users/pagescategory', pagesCategory)
+
+        })
+        .catch((e) => next(e));
+}
+
+
 
 const checkBox = (body) => {
     if (body.comment === 'on') {
@@ -313,3 +337,4 @@ const checkBox = (body) => {
     }
     return body;
 }
+

@@ -18,6 +18,7 @@ router.post('/register', secure.isNotAuthenticated, usersController.doRegister)
 router.get('/dashboard',secure.isAuthenticated, dashboardController.showDashboard)
 router.get('/dashboard/findUser/:user',secure.isAuthenticated, dashboardController.findUser)
 router.post('/dashboard/createfriend',secure.isAuthenticated, dashboardController.friendEmail)
+router.get('/dashboard/deletefriend/:id',secure.isAuthenticated,dashboardController.deleteFriend)
 router.get('/dashboard/activate/:activationToken',secure.isNotAuthenticated, dashboardController.activateFriend)
 
 router.get('/login', secure.isNotAuthenticated, usersController.login)
@@ -57,6 +58,7 @@ router.get("/profile/delete/body/:id", secure.isAuthenticated, profileController
 
 // //pages
 router.get("/pages", secure.isAuthenticated, pageController.pages);
+router.get("/pages/category/:index",secure.isAuthenticated,pageController.pagesCategory);
 router.get("/page/create", secure.isAuthenticated, pageController.create);
 router.post("/page/create", secure.isAuthenticated, pageController.doCreate);
 router.get('/page/edit', secure.isAuthenticated, pageController.findPages)
