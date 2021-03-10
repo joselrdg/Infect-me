@@ -1,9 +1,19 @@
-{{> profile}}
-<div class="container">
-    <div class="row">
-        <h2>Playlists</h2>
-        {{#each playlist}}
-        {{> playlistCard }}
-        {{/each}}
+<div class="container-fluid px-0 pb-5"
+    style=" background-image: url('{{bkgImgBODY}}'); background-color: {{bkgBODY}}; color: {{txtColorBODY}}">
+    {{> profile}}
+    {{> players}}
+    <div class="container">
+        <div class="row">
+            <h2>Playlists</h2>
+            {{#each playlist}}
+            {{> playlistCard }}
+            {{/each}}
+        </div>
+        <div class="row">
+            <h2>Videos</h2>
+            {{#each videolist}}
+            {{> playlistCard }}
+            {{/each}}
+        </div>
     </div>
 </div>

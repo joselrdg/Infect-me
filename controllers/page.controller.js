@@ -3,11 +3,44 @@ const User = require("../models/user.model");
 const Youtube = require("../controllers/youtube.controller");
 const Playlist = require("../models/Playlist.model");
 const Profile = require("../models/Profile.model");
+const Comment = require("../models/Comments.model");
 const ProfileBody = require("../models/Body.model");
 const Pages = require("../models/Pages.model");
 const categories = require("../public/categories")
 let userData = { userN: "", picture: "" };
 
+module.exports.doComment = (req, res, next) => {
+    const query = {
+        body: req.body.body,
+        user: req.user._id,
+        name: req.user.userName,
+        comment: req.body.comment
+    }
+    if (req.body.comment) {
+        Comment.create(query)
+            .then(p => {
+                console.log('comentario creado')
+                return;
+            })
+            .catch((e) => next(e));
+    } else {
+        console.log('NO ESTA')
+        return;
+    }
+}
+
+module.exports.comments = (req, res, next) => {
+    const query = {
+        body: req.params.id
+    }
+    console.log('estamos en comments')
+    Comment.find(query)
+        .then(comments => {
+            console.log(comments)
+            res.json(comments)
+        })
+        .catch((e) => next(e));
+}
 
 module.exports.follow = (req, res, next) => {
     const id = req.params.id;
@@ -15,6 +48,17 @@ module.exports.follow = (req, res, next) => {
     Profile.findByIdAndUpdate(id, { followers: idU })
         .then((p) => {
             console.log('seguidor añadido')
+            res.redirect(`/page/${id}`);
+        })
+        .catch((e) => next(e));
+}
+
+module.exports.unfollow = (req, res, next) => {
+    const id = req.params.id;
+    const idU = req.user._id;
+    Profile.findByIdAndUpdate(id, { $pull: { followers: idU } })
+        .then((p) => {
+            console.log('seguidor eliminado')
             res.redirect(`/page/${id}`);
         })
         .catch((e) => next(e));
@@ -36,7 +80,7 @@ module.exports.pages = (req, res, next) => {
                     console.log('paginas seguidas')
                     if (f[0]) {
                         console.log('hay paginaaaas')
-                        pagesUser.pagesFollow = f
+                        pagesUser.pagesFollow = f;
                         res.render('users/pages', pagesUser);
                     } else {
                         console.log('no hay paginas')
@@ -53,17 +97,21 @@ module.exports.page = (req, res, next) => {
     if (idU == id) {
         res.redirect('/profile')
     } else {
-        console.log("pagina: ", id)
         Profile.findById(id)
-            .populate('body')
-            .then((p) => {
-                console.log("pagina: ", p)
-                p.userN = req.currentUser.userName;
-                p.picture = req.currentUser.picture
-                console.log("User name page: " + req.currentUser.userName + p.userN)
-                res.render('users/profile', p);
-            })
-            .catch((e) => next(e));
+        .populate('body')
+        .then((p) => {
+            const idU = req.user._id
+            const esta = p.followers.indexOf(idU)
+            if (esta) {
+                p.follow = true;
+            } else {
+                p.follow = false;
+            }
+            p.userN = req.currentUser.userName;
+            p.picture = req.currentUser.picture
+            res.render('users/profile', p);
+        })
+        .catch((e) => next(e));
     }
 }
 module.exports.create = (req, res, next) => {
@@ -161,11 +209,11 @@ module.exports.createBody = ((req, res, next) => {
 })
 
 module.exports.doCreateBody = (req, res, next) => {
+    let body = checkBox(req.body);
+    console.log(body)
     const query = { _id: req.params.id, user: req.currentUser._id }
     Profile.findOne({ _id: req.params.id, user: req.currentUser._id })
         .then((profile) => {
-            let body = req.body;
-            body = checkBox(body);
             body.profile = profile._id;
             ProfileBody.create(body)
                 .then((p) => {
@@ -247,6 +295,11 @@ module.exports.pagesCategory = (req, res, next) => {
 
 
 const checkBox = (body) => {
+    if (body.comment === 'on') {
+        body.comment = true;
+    } else {
+        body.comment = false;
+    }
     if (body.bkgImgON === 'on') {
         body.bkgImgON = true;
     } else {

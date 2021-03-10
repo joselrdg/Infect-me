@@ -4,10 +4,8 @@
         <div class="card my-5" style="width: 18rem;">
             <div class="card-body">
                 <h5 class="card-title">Perfil</h5>
-                <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
-                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-                    card's
-                    content.</p>
+                <h6 class="card-subtitle mb-2 text-muted">Ponte guapo</h6>
+                <p class="card-text">Crea tu página de presentación, incluye colores, fotos, videos y todo lo que te interese.</p>
                 <div>
                     <a href="/profile/edit/head" class="card-link">Editar cabezera</a>
                 </div>
@@ -23,10 +21,8 @@
         <div class="card my-5" style="width: 18rem;">
             <div class="card-body">
                 <h5 class="card-title">Páginas</h5>
-                <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
-                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-                    card's
-                    content.</p>
+                <h6 class="card-subtitle mb-2 text-muted">Presume</h6>
+                <p class="card-text">Crea contenidos increibles sobre todo lo que te interesa y enseñaselos al mundo.</p>
                 <div>
                     <a href="/pages" class="card-link">Páginas</a>
                 </div>
@@ -41,7 +37,7 @@
         <div class="card my-5" style="width: 18rem;">
             <div class="card-body">
                 <h5 class="card-title">Posts</h5>
-                <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
+                <h6 class="card-subtitle mb-2 text-muted">Desahógate</h6>
                 <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
                     card's
                     content.</p>
@@ -51,14 +47,38 @@
         </div>
         <div class="card my-5" style="width: 18rem;">
             <div class="card-body">
-                <h5 class="card-title">Playlists</h5>
-                <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
-                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-                    card's
-                    content.</p>
-                <a href="/playlist/add" class="card-link">Añadir</a>
-                <a href="/playlist/delete" class="card-link">Eliminar</a>
+                <h5 class="card-title">Biblioteca</h5>
+                <h6 class="card-subtitle mb-2 text-muted">Disfruta</h6>
+                <p class="card-text">Añade videos y playlist desde Youtube.</p>
+                <div>
+                    <form>
+                        <div class="form-group">
+                            <label for="inputState" class="my-1">Elige página:</label>
+                            <select id="selectPrf" class="form-control">
+                                {{#each profilesU as |profil|}}
+                                <option name="profile" value="{{_id}}">
+                                    {{#if profileUser}} <p> Tu perfil. </p>
+                                    {{else}}
+                                    {{#if titleOne}}<p>{{titleOne}}</p>
+                                    {{else}}
+                                    {{#if titleOne}}<p>{{titleTwo}}</p>
+                                    {{else}}<p>Sin título.</p>
+                                    {{/if}}{{/if}}{{/if}}
+                                </option>
+                                {{/each}}
+                            </select>
+                            <a id="choosePrf" class="btn btn-danger mx-2 my-3 mx-auto">Seleccionar</a>
+                        </div>
+                    </form>
+                </div>
+                <div id="editPlay"> </div>
+
             </div>
         </div>
     </div>
+</div>
+
+
+<div class="container text-center">
+
 </div>

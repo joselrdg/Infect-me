@@ -1,20 +1,147 @@
+@import url('https://fonts.googleapis.com/css2?family=Amatic+SC:wght@700&family=Architects+Daughter&family=Comfortaa:wght@700&family=Fascinate&family=Oi&family=Pacifico&family=Permanent+Marker&family=Roboto:wght@500&display=swap');/* 
+font-family: 'Amatic SC', cursive;
+font-family: 'Architects Daughter', cursive;
+font-family: 'Comfortaa', cursive;
+font-family: 'Fascinate', cursive;
+font-family: 'Oi', cursive;
+font-family: 'Pacifico', cursive;
+font-family: 'Permanent Marker', cursive;
+font-family: 'Roboto', sans-serif;
+
 /* clores:
 rosa: #fb369b
 azul/morado oscuro: #1c2550
 azul claro: #3c98e9
 azul casi negro: #001a33
 amarillo: #fdcf1b
+naranja:#ffad19
 */
 
+
+
+
 body {
-  margin-bottom: 100px;
+
+  font-family:  'Permanent Marker';
   background-image: url("../images/fondodos.png");
   background-repeat: repeat-y;
 }
 
+a {
+  outline: none;
+  text-decoration: none;
+}
+ 
+
+
+.__carouseImg {
+  background-color: rgba(0,0,0,0.8);
+  filter:brightness(0.8);
+}
+
+#__logForm {
+  height: 100vh;
+  width: 100%;
+  background-image: url("../images/couple.png");
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+
+#__editForm {
+  background-color: #fdd01bc0;
+padding: 10px 100px;
+}
+
+.__buttonLogFormD {
+  background-color: #ffa6ca;
+  border-color: #907fd0;
+  box-shadow: 0 1px 1px rgba(229, 103, 23, 0.075) inset,
+    0 0 8px rgba(255, 144, 0, 0.6);
+    padding: 5px 50px  5px 50px;
+}
+
+.__buttonLogFormI {
+  background-color: #8ee1c6;
+  border-color: #907fd0;
+  box-shadow: 0 1px 1px rgba(229, 103, 23, 0.075) inset,
+    0 0 8px rgba(255, 144, 0, 0.6);
+    padding: 5px 50px  5px 50px;
+}
+
+.__buttonEditForm {
+  background-color: #ffad19;
+  border-color: rgb(255, 144, 0);
+  box-shadow: 0 1px 1px rgba(229, 103, 23, 0.075) inset,
+    0 0 8px rgba(255, 144, 0, 0.6);
+    padding: 5px 50px  5px 50px;
+}
+
+.__imputColorI {
+  background: #fdcf1b;
+  border: 0;
+}
+
+.__imputColorD {
+  background: #fdcf1b;
+  border: 0;
+}
+
+.__commentForm {
+  background: #fdd01b00;
+  width: 100;
+}
+
+.__commets {
+  margin: 1rem 10rem;
+}
+
+.__commentDiv {
+  border-bottom: 1px solid #fb369b;
+
+}
+
+.__editForm {
+  background: #fdcf1b;
+  border: 0;
+  border-bottom: 1px solid #fb369b;
+  outline: none;
+  border-radius: 0px;
+}
+
+input[type=range]{
+  background-color: #fb369b;
+  -webkit-appearance: left; 
+  background-color:linear-gradient(to right, #02C38A  calc(var(--value)*1%), black 0);
+}
+
+input[type='range']:focus {
+  outline: none;
+  background-color: #fb369b;
+}
+
+.__emergency{
+  background-color: rgba(0, 0, 0, 0);
+  border: none;
+}
+
+textarea:focus,
+input:focus,
+input[type]:focus {
+  border-color: rgb(255, 144, 0);
+  box-shadow: 0 1px 1px rgba(229, 103, 23, 0.075) inset,
+    0 0 8px rgba(255, 145, 0, 0);
+  outline: 0 none;
+  background-color: #ffad19;
+}
+
+.__menuUser {
+  font-size: 2rem;
+}
+
 #whatIsIt {
-  background-color:#fdcf1b;
-  height:80vw;
+  background-color: #fdcf1b;
+  height: 80vw;
 }
 
 .form-signin-container {
@@ -22,7 +149,6 @@ body {
   align-items: center;
   padding-top: 40px;
   padding-bottom: 40px;
-      
 }
 .form-signin {
   width: 100%;
@@ -46,7 +172,6 @@ body {
 .form-signin input[type="email"] {
   margin-bottom: -1px;
   border-radius: 0;
- 
 }
 .form-signin input[type="password"] {
   margin-bottom: 10px;
@@ -61,8 +186,6 @@ body {
 }
 
 .card__container {
-  
-
   max-height: 160px;
 }
 .card__description {

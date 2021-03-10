@@ -8,6 +8,11 @@ const profileBodySchema = new mongoose.Schema(
             ref: "Profile",
             required: true
         },
+        followBody: {
+            type: Boolean,
+            default: true
+        },
+        comment: Boolean,
         bkgImgBODY: String,
         bkgBODY: String,
         txtColorBODY: String,
@@ -33,6 +38,7 @@ const profileBodySchema = new mongoose.Schema(
         subTitleTwo: String,
         textTwo: String,
         margin: String,
+        font: String,
         col2: Boolean,
         fluid: Boolean
     },
