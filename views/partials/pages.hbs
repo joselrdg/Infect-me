@@ -38,7 +38,7 @@
     </div>
     <div class="text-center my-3"
         style="background-color: {{#if backgroundColor}}{{backgroundColor}}{{else}}violet{{/if}};">
-        <a class="btn btn-warning px-5" href="/page/{{#if idProfile}}{{idProfile}}{{else}}{{id}}{{/if}}" role="button">Visitar</a>
+        <a class="btn btn-warning px-5" href="/page/{{#if idProfile}}{{idProfile}}{{else}}{{#if profile.id}}{{profile.id}}{{else}}{{id}}{{/if}}{{/if}}" role="button">Visitar</a>
     </div>
 </div>
 

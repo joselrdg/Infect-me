@@ -197,5 +197,6 @@ input[type]:focus {
 
 .category__button {
   background: #fb369b;
-  width: 150px;
+  width: fit-content;
+  height: fit-content;
 }

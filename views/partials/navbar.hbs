@@ -29,7 +29,7 @@
                 <a class="" href="/control"><img src="./images/sheep.png" alt="control Panel" style="height: 80px;"></a>
               </li>
               <li class="nav-item">
-                <a class="" href="/profile"><img src="{{picture}}" alt="profile picture" style="height: 80px;"></a>
+                <a class="" href="/profile"><img src="{{#if userData}}{{userData.picture}} {{else}}{{picture}}{{/if}}" alt="profile picture" style="height: 80px;"></a>
               </li>
               <li class="nav-item">
                 <form action="/logout" method="POST">
