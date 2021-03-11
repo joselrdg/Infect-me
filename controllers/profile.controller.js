@@ -32,10 +32,14 @@ module.exports.profile = (req, res, next) => {
         }
         Profile.create(idP)
           .then((p) => {
-            p.userN = userN;
-            p.picture = picture;
-            console.log('Perfil creado')
-            res.render('users/profile', p);
+            User.findByIdAndUpdate(idP.user, { profileID: p._id })
+              .then((u) => {
+                console.log(u)
+                p.userN = userN;
+                p.picture = picture;
+                console.log('Perfil creado')
+                res.render('users/profile', p);
+              })
           })
       }
     })
@@ -168,19 +172,21 @@ module.exports.deleteBody = (req, res, next) => {
 }
 
 module.exports.library = (req, res, next) => {
-  let userDat = {
-    userName: req.user.userName,
-    picture: req.user.picture
+  if (req.params.id == req.user.id) {
+    console.log(req.user)
+
+  } else {
+    Profile.findById(req.params.id)
+      .populate('playlist')
+      .populate('videolist')
+      .then((p) => {
+        console.log(p)
+        p.userName = req.user.userName;
+        p.picture = req.user.picture;
+        res.render('users/library', p);
+      })
+      .catch((e) => next(e));
   }
-  Profile.findById(req.params.id)
-    .populate('playlist')
-    .populate('videolist')
-    .then((p) => {
-      p.userName = req.user.userName;
-      p.picture = req.user.picture;
-      res.render('users/library', p);
-    })
-    .catch((e) => next(e));
 }
 
 
@@ -193,7 +199,7 @@ module.exports.addPlaylist = (req, res, next) => {
   }
 }
 
-module.exports.searchVideo  = (req, res, next) => {
+module.exports.searchVideo = (req, res, next) => {
   const search = req.params.search;
   const token = req.user.social.google.refresh_token;
   if (token) {
@@ -233,10 +239,10 @@ module.exports.deletePlaylist = (req, res, next) => {
     profile: idP
   }
   Playlist.find({ profile: idP })
-    .then((p) => { 
-      userDat.items = p; 
-      userDat.delete = true; 
-      res.render('users/deletePlaylist', userDat) 
+    .then((p) => {
+      userDat.items = p;
+      userDat.delete = true;
+      res.render('users/deletePlaylist', userDat)
     })
     .catch((e) => next(e));
 
@@ -251,6 +257,7 @@ module.exports.doDeletePlaylist = (req, res, next) => {
 
 
 const checkBox = (body) => {
+  console.log(body)
   if (body.comment === 'on') {
     body.comment = true;
   } else {

@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Amatic+SC:wght@700&family=Architects+Daughter&family=Comfortaa:wght@700&family=Fascinate&family=Oi&family=Pacifico&family=Permanent+Marker&family=Roboto:wght@500&display=swap');/* 
+@import url("https://fonts.googleapis.com/css2?family=Amatic+SC:wght@700&family=Architects+Daughter&family=Comfortaa:wght@700&family=Fascinate&family=Oi&family=Pacifico&family=Permanent+Marker&family=Roboto:wght@500&display=swap"); /* 
 font-family: 'Amatic SC', cursive;
 font-family: 'Architects Daughter', cursive;
 font-family: 'Comfortaa', cursive;
@@ -17,26 +17,27 @@ amarillo: #fdcf1b
 naranja:#ffad19
 */
 
-
-
-
 body {
-
-  font-family:  'Permanent Marker';
-  background-image: url("../images/fondodos.png");
-  background-repeat: repeat-y;
+  margin: 0px;
+  padding: 0px;
+  font-family: "Permanent Marker";
+  background-color: #001a33;
+  /* background-image: url("../images/fondodos.png");
+  background-repeat: repeat-y; */
 }
 
 a {
   outline: none;
   text-decoration: none;
 }
- 
 
+#__navBar {
+  background-color: #001a33;
+}
 
 .__carouseImg {
-  background-color: rgba(0,0,0,0.8);
-  filter:brightness(0.8);
+  background-color: rgba(0, 0, 0, 0.8);
+  filter: brightness(0.8);
 }
 
 #__logForm {
@@ -47,18 +48,21 @@ a {
   background-position: center;
 }
 
-
 #__editForm {
   background-color: #fdd01bc0;
-padding: 10px 100px;
+  margin: 10px 100px;
+}
+
+#__logo {
+  width:15rem;
 }
 
 .__buttonLogFormD {
-  background-color: #ffa6ca;
+  background-color: #3c98e9;
   border-color: #907fd0;
   box-shadow: 0 1px 1px rgba(229, 103, 23, 0.075) inset,
     0 0 8px rgba(255, 144, 0, 0.6);
-    padding: 5px 50px  5px 50px;
+  padding: 5px 50px 5px 50px;
 }
 
 .__buttonLogFormI {
@@ -66,7 +70,7 @@ padding: 10px 100px;
   border-color: #907fd0;
   box-shadow: 0 1px 1px rgba(229, 103, 23, 0.075) inset,
     0 0 8px rgba(255, 144, 0, 0.6);
-    padding: 5px 50px  5px 50px;
+  padding: 5px 50px 5px 50px;
 }
 
 .__buttonEditForm {
@@ -74,7 +78,7 @@ padding: 10px 100px;
   border-color: rgb(255, 144, 0);
   box-shadow: 0 1px 1px rgba(229, 103, 23, 0.075) inset,
     0 0 8px rgba(255, 144, 0, 0.6);
-    padding: 5px 50px  5px 50px;
+  padding: 5px 50px 5px 50px;
 }
 
 .__imputColorI {
@@ -98,7 +102,6 @@ padding: 10px 100px;
 
 .__commentDiv {
   border-bottom: 1px solid #fb369b;
-
 }
 
 .__editForm {
@@ -109,21 +112,27 @@ padding: 10px 100px;
   border-radius: 0px;
 }
 
-input[type=range]{
+input[type="range"] {
   background-color: #fb369b;
-  -webkit-appearance: left; 
-  background-color:linear-gradient(to right, #02C38A  calc(var(--value)*1%), black 0);
+  -webkit-appearance: left;
+  background-color: linear-gradient(
+    to right,
+    #02c38a calc(var(--value) * 1%),
+    black 0
+  );
 }
 
-input[type='range']:focus {
+input[type="range"]:focus {
   outline: none;
   background-color: #fb369b;
 }
 
-.__emergency{
+.__emergency {
   background-color: rgba(0, 0, 0, 0);
   border: none;
 }
+
+
 
 textarea:focus,
 input:focus,

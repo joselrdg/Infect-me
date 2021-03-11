@@ -1,6 +1,7 @@
 <div class="{{#if fluid}}container-fluid text-center{{else}}container text-center{{/if}} text-center" style="font-family: {{font}}; background-color: {{backgroundColor}}; 
     {{#if bkgImgON}}background-image: url('{{backgroundImg}}');{{/if}}
     {{#if bkgImgCover}}background-repeat: no-repeat; background-size: cover;{{/if}}
+    {{#if radius}}border-radius: {{radius}}px;{{/if}}
     background-attachment: fixed;
     color: {{textColor}}">
     {{#if followBody}}

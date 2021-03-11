@@ -40,6 +40,7 @@ const profileBodySchema = new mongoose.Schema(
         margin: String,
         font: String,
         col2: Boolean,
+        radius: String,
         fluid: Boolean
     },
     {

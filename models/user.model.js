@@ -48,6 +48,9 @@ const userSchema = new Schema(
             type: String,
             default: './images/userIcon.png'
         },
+        profileID: {
+            type: String
+        },
         active: {
             type: Boolean,
             default: false
@@ -64,7 +67,6 @@ const userSchema = new Schema(
             }
 
         },
-        // playlist: [{type: Schema.Types.ObjectId, ref: 'Playlist'}]
     },
     {
         timestamps: { createdAt: "created_at", updatedAt: "updated_at" }

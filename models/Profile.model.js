@@ -17,17 +17,47 @@ const profileSchema = new mongoose.Schema(
             type: mongoose.SchemaTypes.ObjectId,
             ref: "User"
         }],
-        bkgImgBODY: String,
-        bkgBODY: String,
-        txtColorBODY: String,
-        backgroundImg: String,
-        bkgImgON: Boolean,
-        bkgImgCover: Boolean,
+        bkgImgBODY: {
+            type: String,
+            default: ''
+        },
+        bkgBODY: {
+            type: String,
+            default: '#001a33'
+        },
+        txtColorBODY: {
+            type: String,
+            default: '#fdcf1b'
+        },
+        backgroundImg: {
+            type: String,
+            default: '/images/influencer.jpg'
+        },
+        bkgImgON: {
+            type: Boolean,
+            default: true
+        },
+        bkgImgCover: {
+            type: Boolean,
+            default: true
+        },
         backgroundColor: String,
-        textColor: String,
-        imgOneON: Boolean,
-        imageOne: String,
-        imgWidthOne: String,
+        textColor: {
+            type: String,
+            default: '#fdcf1b'
+        },
+        imgOneON: {
+            type: Boolean,
+            default: true
+        },
+        imageOne: {
+            type: String,
+            default: '/images/unicorn.png'
+        },
+        imgWidthOne: {
+            type: String,
+            default: '200'
+        },
         imgHeightOne: String,
         imgTwoON: Boolean,
         imageTwo: String,
@@ -35,15 +65,28 @@ const profileSchema = new mongoose.Schema(
         imgHeightTwo: String,
         video: String,
         videoON: Boolean,
-        titleOne: String,
-        subTitleOne: String,
+        titleOne: {
+            type: String,
+            default: 'Este es tu perfil'
+        },
+        subTitleOne: {
+            type: String,
+            default: 'Ponlo guapo en el panel de control'
+        },
         textOne: String,
         titleTwo: String,
         subTitleTwo: String,
         textTwo: String,
         margin: String,
-        font: String,
+        font: {
+            type: String,
+            default: 'Amatic SC'
+        },
         col2: Boolean,
+        radius: {
+            type: String,
+            default: '100'
+        },
         fluid: Boolean
     },
     {
