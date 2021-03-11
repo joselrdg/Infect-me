@@ -1,35 +1,37 @@
-<section id="main" class="container-fluid mx-0 px-0 position-relative">
+<section id="main" class=" position-relative">
     <div id="carouselExampleSlidesOnly " class="carousel slide" data-bs-ride="carousel">
         <div class="carousel-inner">
-            <div class="carousel-item active" data-bs-interval="10000">
-                <img src="./images/simon-weisser-unsplash.jpg" class="d-block w-100" alt="...">
+            <div class="carousel-item active" data-bs-interval="5000">
+                <img src="./images/simon-weisser-unsplash.jpg" class="d-block w-100 __carouseImg" alt="...">
             </div>
-            <div class="carousel-item" data-bs-interval="10000">
-                <img src="./images/oscar-soderlund-unsplash.jpg" class="d-block w-100" alt="...">
+            <div class="carousel-item" data-bs-interval="5000">
+                <img src="./images/oscar-soderlund-unsplash.jpg" class="d-block w-100 __carouseImg" alt="...">
             </div>
-            <div class="carousel-item" data-bs-interval="10000">
-                <img src="./images/jose-antonio-gallego-unsplash.jpg" class="d-block w-100" alt="...">
+            <div class="carousel-item" data-bs-interval="5000">
+                <img src="./images/jose-antonio-gallego-unsplash.jpg" class="d-block w-100 __carouseImg" alt="...">
             </div>
 
             <div class="position-absolute top-50 start-50 translate-middle text-light">
                 <div class="d-flex flex-column text-center">
                     <img src="./images/logo-white.png" alt="infect me logo">
                     <h3 class="my-5">
-                        {{!-- Construye tu mundo, <br> --}}
-                        Homenajea tus aficiones, comparte, <br>
+                        {{!-- Homenajea tus aficiones, <br> --}}
+                        Construye tu mundo, comparte, <br>
                         y encuentra a otra gente como tú.</h3>
                     {{!-- <div> --}}
-                        <a class="btn btn-secondary my-2  mx-5" style="background-color: #fb369b;" href="/login">Empezar</a>
-                        <a class="btn btn-secondary  mx-5" style="background-color: #3c98e9;" href="/register">Registrase</a>
+                        <a class="btn btn-secondary my-2  mx-5" style="background-color: #fb369b;"
+                            href="/login">Empezar</a>
+                        <a class="btn btn-secondary  mx-5" style="background-color: #3c98e9; margin-bottom: ;"
+                            href="/register">Registrase</a>
                         {{!--
-                    </div> --}}       
-                     <p class="mt-5" style="color: #fb369b;">Infect-me for Ironhack, created by José Luis Rodríguez and Luis Gallego.</p>
-              
+                    </div> --}}
                 </div>
+            </div>
+            <div class="position-absolute bottom-0 start-50 translate-middle">
+                {{> footer}}
             </div>
         </div>
     </div>
-
 </section>
 
 <!--

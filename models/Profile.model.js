@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 const User = require('./user.model');
-const ProfileBody = require('./Body.model');
+// const ProfileBody = require('./Body.model');
 
 const profileSchema = new mongoose.Schema(
     {
@@ -42,6 +42,7 @@ const profileSchema = new mongoose.Schema(
         subTitleTwo: String,
         textTwo: String,
         margin: String,
+        font: String,
         col2: Boolean,
         fluid: Boolean
     },
@@ -57,6 +58,18 @@ const profileSchema = new mongoose.Schema(
 
 profileSchema.virtual("body", {
     ref: "ProfileBody",
+    foreignField: "profile",
+    localField: "_id",
+});
+
+profileSchema.virtual("playlist", {
+    ref: "Playlist",
+    foreignField: "profile",
+    localField: "_id",
+});
+
+profileSchema.virtual("videolist", {
+    ref: "Videolist",
     foreignField: "profile",
     localField: "_id",
 });

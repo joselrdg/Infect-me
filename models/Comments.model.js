@@ -8,16 +8,19 @@ const commentsSchema = new mongoose.Schema(
             ref: "Profile",
             required: true
         },
-        users: {
+        user: {
             type: mongoose.SchemaTypes.ObjectId,
             ref: "User",
+            required: true
+        },
+        name: {
+            type: String,
             required: true
         },
         comment: {
             type: String,
             required: true
-        },
-        image: String        
+        }       
     }
 )
 

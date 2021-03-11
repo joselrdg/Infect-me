@@ -1,9 +1,19 @@
-<div class="{{#if fluid}}container-fluid text-center{{else}}container text-center{{/if}} text-center" style="background-color: {{backgroundColor}}; 
+<div class="{{#if fluid}}container-fluid text-center{{else}}container text-center{{/if}} text-center" style="font-family: {{font}}; background-color: {{backgroundColor}}; 
     {{#if bkgImgON}}background-image: url('{{backgroundImg}}');{{/if}}
     {{#if bkgImgCover}}background-repeat: no-repeat; background-size: cover;{{/if}}
     background-attachment: fixed;
     color: {{textColor}}">
-    <a href="/follow/{{id}}">Seguir</a>
+    {{#if followBody}}
+    {{else}}
+    {{#if profileUser}}
+    {{else}}    
+    {{#if follow}}
+    <a href="/follow/{{id}}"><img src="../images/follow.png" alt=""></a>
+    {{else}}
+    <a href="/stopfollow/{{id}}"><img src="../images/unfollow.png" alt=""></a>
+    {{/if}}
+    {{/if}}
+    {{/if}}
     <div class="row d-flex align-items-center">
         <div class="col">
             <h1 class="pt-5 mb-3">{{titleOne}}</h1>
@@ -11,8 +21,8 @@
             {{#if imgOneON}}<img class="my-3" src="{{imageOne}}" alt="header image" width="{{imgWidthOne}}"
                 height="{{imgHeightOne}}">{{/if}}
 
-            <h3 class="pt-3 my-3">{{subTitleOne}}</h3>
-            <p class="pt-3 mb-5">{{textOne}}</p>
+            <h3 class="pt-3">{{subTitleOne}}</h3>
+            <p class="pt-3">{{textOne}}</p>
 
             {{#if col2}}
         </div>
@@ -25,7 +35,7 @@
                 height="{{imgHeightTwo}}">{{/if}}
 
             {{#if videoON}}
-            <div class="m-5">
+            <div style="margin-right: 3rem;">
                 <div class="videoPlayer embed-responsive embed-responsive-21by9">
                     <iframe class="embed-responsive-item" width="640" height="360"
                         src="{{video}}?autoplay=0&mute=0&loop=1" frameborder="0"
@@ -34,24 +44,33 @@
                 </div>
             </div>
             {{/if}}
-            <h3 class="pt-3 my-3">{{subTitleTwo}}</h3>
-            <p class="pt-3 mb-5">{{textTwo}}</p>
+            <h3 class="pt-3">{{subTitleTwo}}</h3>
+            <p class="pt-3 ">{{textTwo}}</p>
         </div>
     </div>
-    <div>
-        <a href="">Comentarios</a>
+    <div style=" margin: 0em 20em; display: {{#if comment}} block {{else}} none {{/if}}; color: {{textColor}}">
         <div>
-            <form>
+            <form action="/comment" method="POST">
                 <div class="form-group">
-                    <label for="exampleInputEmail1"></label>
-                    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
-                        placeholder="Escribe un comentario:">
-                    <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone
-                        else.</small>
+                    <div class="form-row">
+                        <input type="hidden" name="body" value="{{id}}" />
+                        <div class="col d-flex">
+                            {{!-- <label for="exampleFormControlTextarea1"></label> --}}
+                            <textarea style="color: {{textColor}};" name="comment" class="form-control __commentForm"
+                                placeholder="Escribe un comentario." rows="1"></textarea>
+                            <button type="submit" class="btn btn-outline mx-2 __commentForm"
+                                style="color: {{textColor}};">Publicar{{userN}}</button>
+                        </div>
+                    </div>
+                    {{!-- <small id="emailHelp" class="form-text" style="color: {{textColor}};">Never share your
+                        personal data
+                        with other people.</small> --}}
                 </div>
-                <button type="submit" class="btn btn-primary">Submit</button>
             </form>
-
+            <a data-id="{{id}}" data-textcolor="{{txtColorBODY}}" class="btn btn-outline mx-2 __seeComments" style="color: {{textColor}};">Ver
+                comentarios</a>
+                <a data-id="{{id}}" class="btn btn-outline mx-2 __hideComments" style="color: {{textColor}};">Ocultar
+                comentarios</a>               
         </div>
     </div>
 </div>
