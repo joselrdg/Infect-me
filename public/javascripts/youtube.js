@@ -17,6 +17,25 @@ window.addEventListener('load', () => {
     })
   })
 
+  const buttonAddP = document.querySelectorAll('.buttonAddP')
+  buttonAddP.forEach(card => {
+    card.addEventListener("click", function (event) {
+      console.log('click')
+      const { profile, ytbid, image, title, tracks } = event.target.dataset;
+      if (tracks) {
+        const query = {
+          profile: profile,
+          ytbID: ytbid,
+          image: image,
+          title: title,
+          tracks: tracks
+        }
+        axiosAddPlaylist(query)
+      }
+    })
+  })
+
+
   const playSearch = document.getElementById('playSearch')
   if (playSearch) {
     playSearch.addEventListener("click", function () {
@@ -45,8 +64,8 @@ window.addEventListener('load', () => {
       let div = document.createElement("div");
       div.className = "__selectPrf";
       div.innerHTML = `<div>
-    <a href="/playlist/add/${selectPrf}/" class="card-link">Añadir</a>
-    <a href="/playlist/delete/${selectPrf}" class="card-link">Eliminar</a>
+    <a href="/playlist/add/${selectPrf}/" class="card-link __panelLink">Añadir</a>
+    <a href="/playlist/delete/${selectPrf}" class="card-link __panelLink">Eliminar</a>
       </div>`
       divEditPy.appendChild(div);
     })
@@ -70,6 +89,33 @@ window.addEventListener('load', () => {
   })
 
 })
+
+
+function axiosAddPlaylist(query) {
+  axios
+    .post(`/playlist/add`, query)
+    .then((response) => {
+      const { data } = response;
+      if (data.title) {
+        const {title} = data;
+        console.log(title)
+        modalPlay(title)
+      } else { return }
+    })
+    .catch((e) => console.error("Error getting data", e));
+}
+
+const modalPlay = (title) => {
+  let modalPlay = document.getElementById('modalPlay')
+  modalPlay.innerHTML = "";
+  let div = document.createElement("div");
+  div.className = "modalPlay";
+  div.innerHTML = `<div>
+    <h4>Recurso ${title} añadido.</h4>
+    <p>Ya puedes verlo en tu biblioteca.</p>
+    </div>`
+    modalPlay.appendChild(div);
+}
 
 function axiosPlaySearch(id, search) {
   axios
@@ -106,7 +152,7 @@ const card = (data, id) => {
                           <input type="hidden" name="image" value="${image}" />
                           <input type="hidden" name="title" value="${title}" />
                           <input type="hidden" name="description" value="${description}"/>
-                          <button type="submit" class="btn btn-danger">Add</button>
+                          <button type="submit" class="btn btn-danger buttonAddP">Add</button>
                       </form>
                   </div>
               </div>

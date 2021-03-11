@@ -215,7 +215,8 @@ module.exports.doAddPlaylist = (req, res, next) => {
   Playlist.create(playlist)
     .then((p) => {
       console.log(`playlist añadida`)
-      res.redirect(`/playlist/add/${req.body.profile}`)
+      res.json(p)
+      // res.redirect(`/playlist/add/${req.body.profile}`)
     })
     .catch((e) => next(e));
 }
@@ -227,6 +228,7 @@ module.exports.doAddPlayVideo = (req, res, next) => {
     .then((p) => {
       console.log(`video añadido`)
       res.redirect(`/playlist/add/${req.body.profile}`)
+      // Youtube.ytbPlaylists(req, res, next, 'playlist')
     })
     .catch((e) => next(e));
 }

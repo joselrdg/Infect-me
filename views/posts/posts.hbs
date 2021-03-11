@@ -1,18 +1,35 @@
-<h2>Posts</h2>
-<section>
-	{{#each posts as |post|}}
-	<div>
-		<h3>
-			{{!-- <a href="/posts/{{post._id}}">{{post.title}}</a> --}}
-		</h3>
-		<p>{{post.description}}</p>
-		<img alt="Post image" src="{{post.image}}">
-		<div>
-			{{#each post.tags as |tag|}}
-			<p>{{tag}}</p>
-			{{/each}}
+<div class="container">
+	<section class="row">
+		{{#each posts as |post|}}
+		<div class="col">
+			<div class="postCard d-flex flex-column">
+				<div class="card">
+					<div class="card-header d-flex align-items-center">
+						<img alt="Post image" id="__imgPost" src="{{userImg}}">
+						<h5 class="px-3">{{userName}}</h5> 
+					</div>
+					<div class="card-body">
+						<a href="/posts/{{_id}}">
+							<h5 class="card-title">{{title}}</h5>
+						</a>
+						<blockquote class="blockquote mb-0">
+							<p>{{description}}</p>
+							<footer class="blockquote-footer"><cite title="Source Title">
+									{{#each post.tags as |tag|}}
+									<span>#{{tag}}</span>
+									{{/each}}
+								</cite></footer>
+						</blockquote>
+					</div>
+				</div>
+				{{#if image}}
+				<img alt="Post image" src="{{image}}">
+				{{/if}}
+				<div>
+				</div>
+			</div>
 		</div>
-	</div>
-	{{/each}}
-</section>
-<a href="/posts/create">Create</a>
+		{{/each}}
+	</section>
+	<a href="/posts/create">Create</a>
+</div>

@@ -1,22 +1,22 @@
-<div class="col justify-content-center py-3 ytbCard">
-  <div class="card text-white bg-dark" style="width:{{#if description}}16rem{{else}}10rem{{/if}};">
-    <img class="card-img-top" src=" {{#if ytbID}}{{image}}{{else}}{{snippet.thumbnails.default.url}}{{/if}}"
+<div class="col justify-content-center py-3 ytbCard ">
+  <div class="card bg-dark ytbCardP" style="width:{{#if description}}16rem{{else}}10rem{{/if}};">
+    <img class="card-img-top ytbCardP" src=" {{#if ytbID}}{{image}}{{else}}{{snippet.thumbnails.default.url}}{{/if}}"
       alt="Card image cap">
     <div class="card-body">
       <h5 class="card-title">{{#if ytbID}} {{title}} {{else}}{{snippet.title}}{{/if}}</h5>
       <p class="card-text">{{#if ytbID}} {{tracks}} {{else}}{{contentDetails.itemCount}}{{/if}} Tracks</p>
       <div class="text-center">
         {{#if ytbID}}
-        <a data-id="{{ytbID}}" data-play='true' data-accion={{#if description}}'video'{{else}}'playlist'{{/if}} class="btn btn-danger gPlaylist">Play</a>
+        <a data-id="{{ytbID}}" data-play='true' data-accion={{#if description}}'video'{{else}}'playlist'{{/if}}
+          class="btn btn-danger gPlaylist">Play</a>
         {{else}}
-        <form action="/playlist/add" method="POST">
-        <input type="hidden" name="profile" value="{{profile}}"/>
-          <input type="hidden" name="ytbID" value="{{id}}" />
-          <input type="hidden" name="image" value="{{snippet.thumbnails.default.url}}" />
-          <input type="hidden" name="title" value="{{snippet.title}}" />
-          <input type="hidden" name="tracks" value="{{contentDetails.itemCount}}" />
-          <button type="submit" class="btn btn-danger">Add</button>
-        </form>
+          <a class="btn btn-danger buttonAddP"
+          data-profile="{{profile}}"
+          data-ytbid="{{id}}"
+          data-image="{{snippet.thumbnails.default.url}}"
+          data-title="{{snippet.title}}"
+          data-tracks="{{contentDetails.itemCount}}"
+          >Add</a>         
         {{/if}}
       </div>
     </div>

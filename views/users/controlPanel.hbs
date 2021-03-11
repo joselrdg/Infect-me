@@ -1,51 +1,57 @@
-<div class="container">
-    <h1 class="my-5">Panel de control:</h1>
-    <div class="row d-flex justify-content-around">
-        <div class="card my-5" style="width: 18rem;">
+<div class="container-fluid __containerPanel">
+    {{!-- <div class="container text-center">
+    <h1 class="pt-2">Panel de control:</h1>
+    </div> --}}
+    <div class="row d-flex justify-content-center">
+        <div class="card __panelCard m-5">
             <div class="card-body">
                 <h5 class="card-title">Perfil</h5>
                 <h6 class="card-subtitle mb-2 text-muted">Ponte guapo</h6>
-                <p class="card-text">Crea tu página de presentación, incluye colores, fotos, videos y todo lo que te interese.</p>
+                <p class="card-text">Crea tu página de presentación, incluye colores, fotos, videos y todo lo que te
+                    interese.</p>
                 <div>
-                    <a href="/profile/edit/head" class="card-link">Editar cabezera</a>
+                    <a href="/profile/edit/head" class="card-link __panelLink">Editar cabezera</a>
                 </div>
                 <div>
-                    <a href="/profile/create/body" class="card-link">Crear contenedor</a>
+                    <a href="/profile/create/body" class="card-link __panelLink">Crear contenedor</a>
                 </div>
                 <div>
-                    <a href="/profile/edit/body" class="card-link">Editar contenedores</a>
+                    <a href="/profile/edit/body" class="card-link __panelLink">Editar contenedores</a>
                 </div>
             </div>
         </div>
 
-        <div class="card my-5" style="width: 18rem;">
+        <div class="card m-5 __panelCard">
             <div class="card-body">
                 <h5 class="card-title">Páginas</h5>
                 <h6 class="card-subtitle mb-2 text-muted">Presume</h6>
-                <p class="card-text">Crea contenidos increibles sobre todo lo que te interesa y enseñaselos al mundo.</p>
+                <p class="card-text">Crea contenidos increibles sobre todo lo que te interesa y enseñaselos al mundo.
+                </p>
                 <div>
-                    <a href="/pages" class="card-link">Páginas</a>
+                    <a href="/pages" class="card-link __panelLink">Páginas</a>
                 </div>
                 <div>
-                    <a href="/page/create" class="card-link">Crear página</a>
+                    <a href="/page/create" class="card-link __panelLink">Crear página</a>
                 </div>
                 <div>
-                    <a href="/page/edit" class="card-link">Editar páginas</a>
+                    <a href="/page/edit" class="card-link __panelLink">Editar páginas</a>
                 </div>
             </div>
         </div>
-        <div class="card my-5" style="width: 18rem;">
+    </div>
+    <div class="row d-flex justify-content-around">
+        <div class="card my-5 __panelCard">
             <div class="card-body">
                 <h5 class="card-title">Posts</h5>
                 <h6 class="card-subtitle mb-2 text-muted">Desahógate</h6>
                 <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
                     card's
                     content.</p>
-                <a href="#" class="card-link">Card link</a>
-                <a href="#" class="card-link">Another link</a>
+                <a href="#" class="card-link __panelLink">Card link</a>
+                <a href="#" class="card-link __panelLink">Another link</a>
             </div>
         </div>
-        <div class="card my-5" style="width: 18rem;">
+        <div class="card my-5 __panelCard">
             <div class="card-body">
                 <h5 class="card-title">Biblioteca</h5>
                 <h6 class="card-subtitle mb-2 text-muted">Disfruta</h6>
@@ -67,7 +73,7 @@
                                 </option>
                                 {{/each}}
                             </select>
-                            <a id="choosePrf" class="btn btn-danger mx-2 my-3 mx-auto">Seleccionar</a>
+                            <a id="choosePrf" class="btn btn-danger mx-2 my-3 mx-auto __panelLinkB">Seleccionar</a>
                         </div>
                     </form>
                 </div>

@@ -7,7 +7,15 @@ const postSchema = new mongoose.Schema({
         ref: "User",
         required: true
     },
-    title: {
+    userName: {
+        type: String,
+        required: true
+    },
+    userImg: {
+        type: String,
+        required: true
+    },
+    titulo: {
         type: String,
         required: true
     },
@@ -15,7 +23,10 @@ const postSchema = new mongoose.Schema({
         type: String,
         required: true 
     },
-    image: { // mirar si subir enlace o archivo o video...
+    image: { 
+        type: String
+    },
+    video: { 
         type: String
     },
     tags: [String]
