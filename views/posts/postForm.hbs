@@ -1,36 +1,66 @@
-<div class="container">
-    <div class="col">
-        <div class="row">
-            {{!-- conflicto con el título --}}
-            <h1>{{#if post._id}}Edit{{else}}Create{{/if}} post</h1>
-        </div>
-        {{!-- <form action="/posts{{#if post.title}}/{{_id}}/edit{{else}}/create{{/if}}" method="POST"> --}}
-            <form action="/posts/create/" method="POST">
-                <div class="mb-3">
-                    <label for="title" class="form-label">Title</label>
-                    <input type="text" class="form-control" id="title" name="title" value="{{post.title}}">
-                    {{#if errors.title}}
-                    <div class="invalid-feedback">
-                        {{errors.title}}
+<div class="container __postForm">
+    <div class="col ">
+        <form action="/posts{{#if titulo}}/edit/{{_id}}{{else}}/create{{/if}}" method="POST">
+            {{!-- <form action="/posts/create/" method="POST" class="text-center __postForm"> --}}
+                <div class="position-absolute top-50 start-50 translate-middle text-center">
+                    <input type="hidden" name="userName" value="{{currentUser.userName}}">
+                    <input type="hidden" name="userImg" value="{{currentUser.picture}}">
+                    <h4 class="my-4">{{#if titulo}}Edita el{{else}}Crea un{{/if}} post</h4>
+                    <hr>
+                    <div class="mb-3">
+                        <label for="title" class="form-label visually-hidden"></label>
+                        <input type="text" class="form-control __imputColorI" id="title" name="titulo"
+                            value="{{titulo}}" placeholder="Pon un título...">
+                        {{#if errors.title}}
+                        <div class="invalid-feedback">
+                            {{errors.title}}
+                        </div>
+                        {{/if}}
                     </div>
-                    {{/if}}
+                    <div class="mb-3">
+                        <label for="description" class="form-label visually-hidden">Description</label>
+                        <textarea class="form-control __imputColorI" type="text" id="description" name="description"
+                            placeholder="¿Qué te cuentas?">{{description}}</textarea>
+                    </div>
+                    <div class="text-center">
+                        <p>Si quieres añade una imagen o un vídeo</p>
+                        <a href=""><img src="/images/video.png" class="__imgFormPost" alt=""></a>
+                        <a href=""><img src="/images/camara.png" class="__imgFormPost" alt=""></a>
+                    </div>
+                    <div class="mb-3">
+                        <label for="formGroupExampleInput2" class="form-label visually-hidden">Imagen</label>
+                        <input type="text" class="form-control __imputColorI" {{#if image}}value="{{image}}" {{/if}}
+                            name="image" placeholder="Pon el enlace a una imagen">
+                    </div>
+                    <div class="mb-3">
+                        <label for="formGroupExampleInput2" class="form-label visually-hidden">Imagen</label>
+                        <input type="text" class="form-control __imputColorI" {{#if video}}value="{{video}}" {{/if}}
+                            name="video" placeholder="Pon el enlace a un video">
+                    </div>
+                    <div class="mb-3">
+                        <label for="tags" class="form-label visually-hidden">Tags</label>
+                        <input type="text" class="form-control __imputColorI" id="tags" name="tags"
+                            placeholder="Ingrese sus tags separados por comas" value="{{tags}}">
+                    </div>
+                    <div>
+                        <label for="inputState" class="my-1">Elige página:</label>
+                        <select name="profile" class="form-control __imputColorI">
+                            {{#each profilesU as |profil|}}
+                            <option name="profile" value="{{_id}}">
+                                {{#if profileUser}} <p> Tu perfil. </p>
+                                {{else}}
+                                {{#if titleOne}}<p>{{titleOne}}</p>
+                                {{else}}
+                                {{#if titleOne}}<p>{{titleTwo}}</p>
+                                {{else}}<p>Sin título.</p>
+                                {{/if}}{{/if}}{{/if}}
+                            </option>
+                            {{/each}}
+                        </select>
+                    </div>
+                    <button type="submit" class="btn __buttonEditForm mt-2" style="height: 35px;">{{#if
+                        titulo}}Edit{{else}}Create{{/if}}</button>
                 </div>
-                <div class="mb-3">
-                    <label for="description" class="form-label">Description</label>
-                    <textarea class="form-control" type="text" id="description"
-                        name="description">{{description}}</textarea>
-                </div>
-                <div class="mb-3">
-                    <label for="formGroupExampleInput2" class="form-label">Imagen? video? mirar</label>
-                    <input type="text" class="form-control" id="formGroupExampleInput2"
-                        placeholder="Another input placeholder">
-                </div>
-                <div class="mb-3">
-                    <label for="tags" class="form-label">Tags</label>
-                    <input type="text" class="form-control" id="tags" name="tags"
-                        placeholder="Ingrese sus tags separados por comas" value="{{tags}}">
-                </div>
-                <button type="submit" class="btn btn-primary">{{#if post.title}}Edit{{else}}Create{{/if}}</button>
             </form>
     </div>
 </div>

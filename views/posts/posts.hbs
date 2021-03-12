@@ -1,18 +1,75 @@
-<h2>Posts</h2>
-<section>
-	{{#each posts as |post|}}
-	<div>
-		<h3>
-			{{!-- <a href="/posts/{{post._id}}">{{post.title}}</a> --}}
-		</h3>
-		<p>{{post.description}}</p>
-		<img alt="Post image" src="{{post.image}}">
-		<div>
-			{{#each post.tags as |tag|}}
-			<p>{{tag}}</p>
+<a id="__idea" class="btn __floatRight sticky-top "><img src="/images/luz.png" alt=""></a>
+<div class="container" id="__hiddenFPost" >
+    <div class="col __postForm">
+        <form action="/posts/create" method="POST">
+                <div  class=" text-center">
+                    <input type="hidden" name="userName" value="{{currentUser.userName}}">
+                    <input type="hidden" name="userImg" value="{{currentUser.picture}}">
+                    <h4 class="my-4">Crea un post</h4>
+                    <div class="mb-3">
+                        <label for="title" class="form-label visually-hidden"></label>
+                        <input type="text" class="form-control __imputColorI" id="title" name="titulo"
+                            placeholder="Pon un título...">
+                        
+                    </div>
+                    <div class="mb-3">
+                        <label for="description" class="form-label visually-hidden">Description</label>
+                        <textarea class="form-control __imputColorI" type="text" id="description" name="description"
+                            placeholder="¿Qué te cuentas?"></textarea>
+                    </div>
+                    <div class="text-center">
+                        <p>Si quieres puedes añadir una imagen o un vídeo</p>
+                        <a href=""><img src="/images/video.png" class="__imgFormPost" alt=""></a>
+                        <a href=""><img src="/images/camara.png" class="__imgFormPost" alt=""></a>
+                    </div>
+                    <div class="mb-3">
+                        <label for="formGroupExampleInput2" class="form-label visually-hidden">Imagen</label>
+                        <input type="text" class="form-control __imputColorI" name="image"
+                            placeholder="Pon el enlace a una imagen">
+                    </div>
+                    <div class="mb-3">
+                        <label for="formGroupExampleInput2" class="form-label visually-hidden">Imagen</label>
+                        <input type="text" class="form-control __imputColorI" name="video"
+                            placeholder="Pon el enlace a un video">
+                    </div>
+                    <div class="mb-3">
+                        <label for="tags" class="form-label visually-hidden">Tags</label>
+                        <input type="text" class="form-control __imputColorI" id="tags" name="tags"
+                            placeholder="Ingrese sus tags separados por comas" value="{{tags}}">
+                    </div>
+                    <div>
+                        <label for="inputState" class="my-1">Elige página:</label>
+                        <select name="profile" class="form-control __imputColorI">
+                            {{#each profilesU as |profil|}}
+                            <option name="profile" value="{{_id}}">
+                                {{#if profileUser}} <p> Tu perfil. </p>
+                                {{else}}
+                                {{#if titleOne}}<p>{{titleOne}}</p>
+                                {{else}}
+                                {{#if titleOne}}<p>{{titleTwo}}</p>
+                                {{else}}<p>Sin título.</p>
+                                {{/if}}{{/if}}{{/if}}
+                            </option>
+                            {{/each}}
+                        </select>
+                    </div>
+                    <button type="submit" class="btn __buttonEditForm mt-2">Crear</button>
+                </div>
+            </form>
+    </div>
+</div>
+
+
+<div  class="container-fluid">
+	
+	<div id="clousePostForm" class="container">
+		<section class="row">
+			{{#each posts as |post|}}
+			<div class="col">
+				{{>post}}
+			</div>
 			{{/each}}
-		</div>
+		</section>
 	</div>
-	{{/each}}
-</section>
-<a href="/posts/create">Create</a>
+</div>
+

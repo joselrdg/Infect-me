@@ -11,29 +11,32 @@
   <link rel="stylesheet" href="/styles/style.css">
 </head>
 
+{{#if currentUser}}
 <body>
-  <div class="container mt-3" id="navbarHome">
-    {{> navbar}}
-  </div>
+  {{else}}
+<body style="background-image: url(/images/fondodos.png); background-repeat: repeat-y;">
+{{/if}}
 
-  {{{body}}}
-  {{#if flashMessage}}
-  <div class="position-fixed bottom-50 start-50 translate-middle p-3" style="z-index: 5">
-    <div id="liveToast" class="toast show" role="alert" aria-live="assertive" aria-atomic="true">
-      <div class="toast-header">
-        <strong class="me-auto">Infect-me</strong>
-        <!--   <button type="button" id="buttonToast" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button> -->
-      </div>
-      <div class="toast-body">
-        {{flashMessage}}
+  <div id="wrapper">
+    {{> navbar}}
+    {{{body}}}
+    {{#if flashMessage}}
+    <div class="position-fixed bottom-50 start-50 translate-middle p-3" style="z-index: 5">
+      <div id="liveToast" class="toast show" role="alert" aria-live="assertive" aria-atomic="true">
+        <div class="toast-header">
+          <strong class="me-auto">Infect-me</strong>
+          <!--   <button type="button" id="buttonToast" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button> -->
+        </div>
+        <div class="toast-body">
+          {{flashMessage}}
+        </div>
       </div>
     </div>
+    {{/if}}
+    {{#if currentUser}}
+    {{> footer}}
+    {{/if}}
   </div>
-  {{/if}}
-  {{#if currentUser}}
-  {{> footer}}
-  {{/if}}
-
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0"
     crossorigin="anonymous"></script>

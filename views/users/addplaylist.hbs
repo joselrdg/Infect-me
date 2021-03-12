@@ -1,28 +1,29 @@
 {{!-- {{> profile}} --}}
+
+
 {{#if delete}}
 {{else}}
 <div class="container">
     <form>
         <div class="mb-3 col-6">
-            <label for="" class="form-label">
-                <h2>Busca en youtube</h2>
+            <label for="Buscayoutube" class="form-label">
             </label>
             <div class="input-group">
-                <input id="playInput" type="text" class="form-control"
-                    placeholder="Busca videos en youtube">
+                <input id="playInput" type="text" class="form-control" placeholder="Busca videos en youtube">
                 <a id="playSearch" class="btn btn-outline-secondary px-4">Buscar</a>
             </div>
         </div>
     </form>
-    <div id="cardSearch" >
-
+    <div id="cardSearch">
     </div>
 </div>
 {{/if}}
+<div id="modalPlay" class="container text-center pt-3">
+</div>
 
 
 <div class="container">
-    <h1 class="my-4">{{#if delete}}Elimina playlists:{{else}}Add playlists desde youtube:{{/if}}</h1>
+    <h1 class="my-4">{{#if delete}}Elimina playlists:{{else}}Add tus playlists de youtube:{{/if}}</h1>
     <div class="row">
         <h2>Playlists</h2>
         {{#if errors.title}}
@@ -44,14 +45,10 @@
                             <button type="submit" class="btn btn-danger">Borrar</button>
                         </form>
                         {{else}}
-                        <form action="/playlist/add" method="POST">
-                            <input type="hidden" id="profilePla" name="profile" value="{{profile}}"/>
-                            <input type="hidden" name="ytbID" value="{{id}}" />
-                            <input type="hidden" name="image" value="{{snippet.thumbnails.default.url}}" />
-                            <input type="hidden" name="title" value="{{snippet.title}}" />
-                            <input type="hidden" name="tracks" value="{{contentDetails.itemCount}}" />
-                            <button type="submit" class="btn btn-danger">Add</button>
-                        </form>
+                        <input type="hidden" id="profilePla" value="{{profile}}">
+                        <a class="btn btn-danger buttonAddP" data-profile="{{profile}}" data-ytbID="{{id}}"
+                            data-image="{{snippet.thumbnails.default.url}}" data-title="{{snippet.title}}"
+                            data-tracks="{{contentDetails.itemCount}}">Add</a>
                         {{/if}}
                     </div>
                 </div>

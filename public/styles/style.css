@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Amatic+SC:wght@700&family=Architects+Daughter&family=Comfortaa:wght@700&family=Fascinate&family=Oi&family=Pacifico&family=Permanent+Marker&family=Roboto:wght@500&display=swap');/* 
+@import url("https://fonts.googleapis.com/css2?family=Amatic+SC:wght@700&family=Architects+Daughter&family=Comfortaa:wght@700&family=Fascinate&family=Oi&family=Pacifico&family=Permanent+Marker&family=Roboto:wght@500&display=swap"); /* 
 font-family: 'Amatic SC', cursive;
 font-family: 'Architects Daughter', cursive;
 font-family: 'Comfortaa', cursive;
@@ -18,28 +18,117 @@ naranja:#ffad19
 */
 
 
-
-
 body {
-
-  font-family:  'Permanent Marker';
-  background-image: url("../images/fondodos.png");
-  background-repeat: repeat-y;
+  margin: 0px;
+  padding: 0px;
+  font-family: "Architects Daughter";
+  background-color: #001a33;
+  color: #fdcf1b;
+   /* background-image: url("/images/stars2.png");
+  background-repeat: repeat; */
 }
 
 a {
   outline: none;
   text-decoration: none;
 }
- 
 
+/* 
+.__footer{
+  bottom: 0;
+  left: 0;
+} */
 
-.__carouseImg {
-  background-color: rgba(0,0,0,0.8);
-  filter:brightness(0.8);
+.__floatRight {
+  padding: 4rem 4rem 0rem 1rem;
+  /* margin-right: 5rem; */
+  float: right;
+}
+.__bkgLog {
+  background-image: url("/images/fondodos.png");
+  background-repeat: repeat-y;
 }
 
-#__logForm {
+#__navBar {
+  background-color: #001a33;
+}
+
+.__panelCard {
+  background-color: #1c2550;
+  color: #ffad19;
+  border-radius: 20px;
+  width: 18rem;
+}
+
+.__panelLink {
+  color: #fb369b;
+}
+
+#choosePrf{
+  background-color: #fb369b;
+}
+
+
+.__panelLinkB {
+  background-color: #3c98e9;
+  color: #ffad19;
+  border: 1px solid #001a33;
+}
+
+.__containerPanel {
+  background-image: url("/images/banner.png");
+  background-repeat: repeat-x;
+  background-position: center;
+}
+
+.__carouseImg {
+  background-color: rgba(0, 0, 0, 0.8);
+  filter: brightness(0.8);
+}
+
+/* .__postForm {
+  width: 30%;
+  margin-left:auto;
+  margin-right:auto;
+  padding-bottom: 2rem;
+} */
+
+/* #__hiddenFPost{
+  transition-timing-function: cubic-bezier;
+} */
+
+div#__hiddenFPost{
+  height:0px;
+  width:0px;
+  padding: .5em;
+  box-sizing: border-box;
+  visibility:hidden;
+  overflow: hidden;
+  font-weight: bold;
+  transition: height 2s, width 2s, padding 1s, visibility 1s, opacity 0.5s ease-out;
+}
+
+.__postColor {
+  color: #e49708;
+}
+
+.postCard {
+  font-family: 'Architects Daughter', cursive;
+  width: 30rem;
+  margin: 2rem;
+  border-radius: 5px;
+}
+
+.__imgFormPost {
+  height: 4rem;
+  margin:10px 2rem;
+}
+
+#__imgPost{
+  width: 2rem;
+  border-radius: 5px;
+}
+.__logForm {
   height: 100vh;
   width: 100%;
   background-image: url("../images/couple.png");
@@ -47,18 +136,21 @@ a {
   background-position: center;
 }
 
-
 #__editForm {
-  background-color: #fdd01bc0;
-padding: 10px 100px;
+  /* background-color: #fdd01bc0; */
+  /* margin: 10px 100px; */
+}
+
+#__logo {
+  width: 15rem;
 }
 
 .__buttonLogFormD {
-  background-color: #ffa6ca;
+  background-color: #3c98e9;
   border-color: #907fd0;
   box-shadow: 0 1px 1px rgba(229, 103, 23, 0.075) inset,
     0 0 8px rgba(255, 144, 0, 0.6);
-    padding: 5px 50px  5px 50px;
+  padding: 5px 50px 5px 50px;
 }
 
 .__buttonLogFormI {
@@ -66,7 +158,7 @@ padding: 10px 100px;
   border-color: #907fd0;
   box-shadow: 0 1px 1px rgba(229, 103, 23, 0.075) inset,
     0 0 8px rgba(255, 144, 0, 0.6);
-    padding: 5px 50px  5px 50px;
+  padding: 5px 50px 5px 50px;
 }
 
 .__buttonEditForm {
@@ -74,21 +166,22 @@ padding: 10px 100px;
   border-color: rgb(255, 144, 0);
   box-shadow: 0 1px 1px rgba(229, 103, 23, 0.075) inset,
     0 0 8px rgba(255, 144, 0, 0.6);
-    padding: 5px 50px  5px 50px;
+  padding: 5px 50px 5px 50px;
 }
 
+
 .__imputColorI {
-  background: #fdcf1b;
+  background: #f6b850;
   border: 0;
 }
 
 .__imputColorD {
-  background: #fdcf1b;
+  background: #f6b850;
   border: 0;
 }
 
 .__commentForm {
-  background: #fdd01b00;
+  background: #14100186;
   width: 100;
 }
 
@@ -98,31 +191,42 @@ padding: 10px 100px;
 
 .__commentDiv {
   border-bottom: 1px solid #fb369b;
-
 }
 
 .__editForm {
-  background: #fdcf1b;
+  background: #f6b850;
   border: 0;
   border-bottom: 1px solid #fb369b;
   outline: none;
   border-radius: 0px;
 }
 
-input[type=range]{
+input[type="range"] {
   background-color: #fb369b;
-  -webkit-appearance: left; 
-  background-color:linear-gradient(to right, #02C38A  calc(var(--value)*1%), black 0);
+  -webkit-appearance: left;
+  background-color: linear-gradient(
+    to right,
+    #02c38a calc(var(--value) * 1%),
+    black 0
+  );
 }
 
-input[type='range']:focus {
+input[type="range"]:focus {
   outline: none;
   background-color: #fb369b;
 }
 
-.__emergency{
+.__emergency {
   background-color: rgba(0, 0, 0, 0);
   border: none;
+}
+
+.ytbCardP {
+  border-radius: 20px;
+}
+
+#modalPlay {
+  color: #fb369b;
 }
 
 textarea:focus,

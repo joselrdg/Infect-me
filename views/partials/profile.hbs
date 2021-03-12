@@ -1,19 +1,22 @@
-<div class="{{#if fluid}}container-fluid text-center{{else}}container text-center{{/if}} text-center" style="font-family: {{font}}; background-color: {{backgroundColor}}; 
-    {{#if bkgImgON}}background-image: url('{{backgroundImg}}');{{/if}}
-    {{#if bkgImgCover}}background-repeat: no-repeat; background-size: cover;{{/if}}
-    background-attachment: fixed;
-    color: {{textColor}}">
     {{#if followBody}}
     {{else}}
     {{#if profileUser}}
     {{else}}    
     {{#if follow}}
-    <a href="/follow/{{id}}"><img src="../images/follow.png" alt=""></a>
+    <a class="__floatRight  sticky-top" href="/follow/{{id}}"><img src="../images/follow.png" alt=""></a>
     {{else}}
-    <a href="/stopfollow/{{id}}"><img src="../images/unfollow.png" alt=""></a>
+    <a class="__floatRight" href="/stopfollow/{{id}}"><img src="../images/unfollow.png" alt=""></a>
     {{/if}}
     {{/if}}
     {{/if}}
+
+<div class="{{#if fluid}}container-fluid text-center{{else}}container text-center{{/if}} text-center" style="font-family: {{font}}; background-color: {{backgroundColor}}; 
+    {{#if bkgImgON}}background-image: url('{{backgroundImg}}');{{/if}}
+    {{#if bkgImgCover}}background-repeat: no-repeat; background-size: cover;{{/if}}
+    {{#if radius}}border-radius: {{radius}}px;{{/if}}
+    background-attachment: fixed;
+    color: {{textColor}}">
+
     <div class="row d-flex align-items-center">
         <div class="col">
             <h1 class="pt-5 mb-3">{{titleOne}}</h1>

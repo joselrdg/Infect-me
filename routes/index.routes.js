@@ -30,7 +30,6 @@ router.get('/auth/google/callback', usersController.doLoginGoogle)
 
 router.get('/youtube/playlists', secure.isAuthenticated, youtubeController.ytbPlaylists)
 
-
 router.get('/activate/:activationToken', secure.isNotAuthenticated, usersController.activate)
 
 router.post('/logout', secure.isAuthenticated, usersController.logout)
@@ -77,12 +76,13 @@ router.get("/comments/:id", secure.isAuthenticated, pageController.comments)
 
 // posts
 router.get("/posts/list", secure.isAuthenticated, postsController.list);
+router.get("/posts/list/:id", secure.isAuthenticated, postsController.listUser);
 router.get("/posts/create", secure.isAuthenticated, postsController.create);
 router.post("/posts/create", secure.isAuthenticated, postsController.doCreate);
-router.get("/posts/:id/edit", secure.isAuthenticated, postsController.edit);
-router.post("/posts/:id/edit", secure.isAuthenticated, postsController.doEdit);
-router.get("/posts/:id/delete", secure.isAuthenticated, postsController.delete);
-router.post("/posts/:id/delete", secure.isAuthenticated, postsController.doDelete);
+router.get("/posts/edit/:id", secure.isAuthenticated, postsController.edit);
+router.post("/posts/edit/:id", secure.isAuthenticated, postsController.doEdit);
+router.get("/posts/delete/:id", secure.isAuthenticated, postsController.delete);
+router.post("/posts/delete/:id", secure.isAuthenticated, postsController.doDelete);
 router.get("/posts/:id", secure.isAuthenticated, postsController.detail);
 
 module.exports = router;
