@@ -6,25 +6,25 @@ const mongoose = require("mongoose");
 
 // Passport strategy Handler
 const LocalStrategy = require('passport-local').Strategy;
-const GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
-const YoutubeV3Strategy = require('passport-youtube-v3').Strategy
+// const GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
+// const YoutubeV3Strategy = require('passport-youtube-v3').Strategy
 
 const User = require('../models/user.model')
 // Session handler
 //const session = require("session");
 //const bcrypt = require("bcrypt");
 
-const configGg = {
-    clientID: process.env.GOOGLE_CLIENT_ID,
-    clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-    callbackURL: process.env.GOOGLE_REDIRECT_URI || '/auth/google/callback',
-    scope: ['https://www.googleapis.com/auth/youtube.readonly',
-        , 'https://www.googleapis.com/auth/userinfo.email',
-        'https://www.googleapis.com/auth/userinfo.profile'],
-    authorizationParams: {
-        access_type: 'offline'
-    }
-};
+// const configGg = {
+//     clientID: process.env.GOOGLE_CLIENT_ID,
+//     clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+//     callbackURL: process.env.GOOGLE_REDIRECT_URI || '/auth/google/callback',
+//     scope: ['https://www.googleapis.com/auth/youtube.readonly',
+//         , 'https://www.googleapis.com/auth/userinfo.email',
+//         'https://www.googleapis.com/auth/userinfo.profile'],
+//     authorizationParams: {
+//         access_type: 'offline'
+//     }
+// };
 
 
 
@@ -80,60 +80,60 @@ passport.use('local-Auth', new LocalStrategy(
 ) // localStrategy instance
 );
 
-passport.use('google-auth', new GoogleStrategy(
-    configGg,
-    (accessToken, refreshToken, profile, next) => {
-        const googleID = profile.id;
-        console.log(profile)
-        const email = profile.emails[0] ? profile.emails[0].value : undefined;
-        if (googleID && email) {
-            User.findOne({
-                $or: [
-                    { email: email },
-                    { 'social.google.googleID': googleID }
-                ]
-            })
-                .then(user => {
-                    if (!user) {
-                        const newUserInstance = new User({
-                            userName: profile.displayName,                            
-                            email,
-                            password: 'Aa1' + mongoose.Types.ObjectId(),
-                            social: {
-                                google: {
-                                    googleID,
-                                    access_token: accessToken,
-                                    refresh_token: refreshToken
-                                }
-                            },
-                            picture: profile._json.picture,
-                            active: true
-                        })
-                        return newUserInstance.save()
-                            .then(newUser => next(null, newUser))
-                    } else {
-                        next(null, user)
-                    }
-                })
-                .catch(next)
-        } else {
-            next(null, null, { error: 'Error conectando con Google OAuth' })
-        }
-    }
-))
+// passport.use('google-auth', new GoogleStrategy(
+//     configGg,
+//     (accessToken, refreshToken, profile, next) => {
+//         const googleID = profile.id;
+//         console.log(profile)
+//         const email = profile.emails[0] ? profile.emails[0].value : undefined;
+//         if (googleID && email) {
+//             User.findOne({
+//                 $or: [
+//                     { email: email },
+//                     { 'social.google.googleID': googleID }
+//                 ]
+//             })
+//                 .then(user => {
+//                     if (!user) {
+//                         const newUserInstance = new User({
+//                             userName: profile.displayName,                            
+//                             email,
+//                             password: 'Aa1' + mongoose.Types.ObjectId(),
+//                             social: {
+//                                 google: {
+//                                     googleID,
+//                                     access_token: accessToken,
+//                                     refresh_token: refreshToken
+//                                 }
+//                             },
+//                             picture: profile._json.picture,
+//                             active: true
+//                         })
+//                         return newUserInstance.save()
+//                             .then(newUser => next(null, newUser))
+//                     } else {
+//                         next(null, user)
+//                     }
+//                 })
+//                 .catch(next)
+//         } else {
+//             next(null, null, { error: 'Error conectando con Google OAuth' })
+//         }
+//     }
+// ))
 
-passport.use('youtube-auth', new YoutubeV3Strategy(
-    configGg,
-    (accessToken, refreshToken, profile, next) => {
-        console.log('----estamos en youtube passport------')
-        const googleID = profile.id;
-        if (googleID && refreshToken) {
-            next(null, user)
-        } else {
-            next(null, null, { error: 'Error conectando con Google OAuth' })
-        }
-    }
-))
+// passport.use('youtube-auth', new YoutubeV3Strategy(
+//     configGg,
+//     (accessToken, refreshToken, profile, next) => {
+//         console.log('----estamos en youtube passport------')
+//         const googleID = profile.id;
+//         if (googleID && refreshToken) {
+//             next(null, user)
+//         } else {
+//             next(null, null, { error: 'Error conectando con Google OAuth' })
+//         }
+//     }
+// ))
 
 
 

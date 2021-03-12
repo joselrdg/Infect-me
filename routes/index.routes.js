@@ -5,7 +5,7 @@ const usersController = require('../controllers/users.controller');
 const postsController = require("../controllers/posts.controller");
 const profileController = require("../controllers/profile.controller");
 const pageController = require("../controllers/page.controller");
-const youtubeController = require("../controllers/youtube.controller");
+// const youtubeController = require("../controllers/youtube.controller");
 const dashboardController = require("../controllers/dashboard.controller");
 const secure = require("../middlewares/secure.middleware");
 const GOOGLE_SCOPES = ['https://www.googleapis.com/auth/youtube.readonly', 'https://www.googleapis.com/auth/userinfo.email', 'https://www.googleapis.com/auth/userinfo.profile']
@@ -24,11 +24,13 @@ router.get('/dashboard/activate/:activationToken',secure.isNotAuthenticated, das
 router.get('/login', secure.isNotAuthenticated, usersController.login)
 router.post('/login', secure.isNotAuthenticated, usersController.doLogin)
 // router.get('/auth/google', passport.authenticate('google-auth'))
-router.get('/auth/youtube', passport.authenticate('youtube-auth'))
-router.get('/auth/google/callback', usersController.doLoginGoogle)
+
+// router.get('/auth/youtube', passport.authenticate('youtube-auth'))
+// router.get('/auth/google/callback', usersController.doLoginGoogle)
+
 // router.get('/auth/google/callback', usersController.youtube)
 
-router.get('/youtube/playlists', secure.isAuthenticated, youtubeController.ytbPlaylists)
+// router.get('/youtube/playlists', secure.isAuthenticated, youtubeController.ytbPlaylists)
 
 router.get('/activate/:activationToken', secure.isNotAuthenticated, usersController.activate)
 
