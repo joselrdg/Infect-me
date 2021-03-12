@@ -35,6 +35,25 @@ window.addEventListener('load', () => {
     })
   })
 
+  const clousePostForm = document.getElementById('clousePostForm')
+  if (clousePostForm) {
+    clousePostForm.addEventListener("click", function () {
+      __cFormPost.innerHTML = "";
+    })
+  }
+
+  const idea = document.getElementById('__idea')
+  if (idea) {
+    idea.addEventListener("click", function () {
+      console.log('click')
+      let x = document.getElementById("__hiddenFPost");
+      if (x.style.display === "none") {
+          x.style.display = "block";
+      } else {
+          x.style.display = "none";
+      }
+    })
+  }
 
   const playSearch = document.getElementById('playSearch')
   if (playSearch) {
@@ -97,7 +116,7 @@ function axiosAddPlaylist(query) {
     .then((response) => {
       const { data } = response;
       if (data.title) {
-        const {title} = data;
+        const { title } = data;
         console.log(title)
         modalPlay(title)
       } else { return }
@@ -114,7 +133,7 @@ const modalPlay = (title) => {
     <h4>Recurso ${title} añadido.</h4>
     <p>Ya puedes verlo en tu biblioteca.</p>
     </div>`
-    modalPlay.appendChild(div);
+  modalPlay.appendChild(div);
 }
 
 function axiosPlaySearch(id, search) {

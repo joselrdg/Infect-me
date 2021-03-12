@@ -1,30 +1,37 @@
-<div class="col-4 {{#if collapse}}collapse multi-collapse{{/if}}">
-<div class="m-1 border border-2 rounded-3 card" style="width: 18rem;">
+{{!-- <div class="col-4 {{#if collapse}}collapse multi-collapse{{/if}}">
+  <div class="m-1 border border-2 rounded-3 card" style="width: 18rem;">
     <img src={{image}} class="card-img-top" alt="...">
-    
+
     <div class="card-body card__container overflow-hidden">
-        <h5 class="card-title card__title overflow-hidden">{{title}}</h5>
-        <p class="card-text card__description text-truncate overflow-hidden">{{description}}</p>
-        <a href="#" class="btn btn-primary">Ver post</a>
-    </div>
-</div>
-</div>
-{{!--  
- <div class="panel-group">
-  <div class="panel panel-default">
-    <div class="panel-heading">
-      <h4 class="panel-title">
-        <a data-toggle="collapse" href="#collapse1">Collapsible list group</a>
-      </h4>
-    </div>
-    <div id="collapse1" class="panel-collapse collapse">
-      <ul class="list-group">
-        <li class="list-group-item">One</li>
-        <li class="list-group-item">Two</li>
-        <li class="list-group-item">Three</li>
-      </ul>
-      <div class="panel-footer">Footer</div>
+      <h5 class="card-title card__title overflow-hidden">{{title}}</h5>
+      <p class="card-text card__description text-truncate overflow-hidden">{{description}}</p>
+      <a href="#" class="btn btn-primary">Ver post</a>
     </div>
   </div>
-</div> 
---}}
+</div> --}}
+<div class="postCard d-flex flex-column ">
+  <a href="/posts/{{_id}}"  class="__postColor">
+    <div class="card">
+      <div class="card-header d-flex align-items-center">
+        <img alt="Post image" id="__imgPost" src="{{userImg}}">
+        <h5 class="px-3">{{userName}}</h5>
+      </div>
+    </div>
+    {{#if image}}
+    <img alt="Post image" class="img-fluid" src="{{image}}">
+    {{/if}}
+    <div class="card ">
+      <div class="card-body">
+        <h4 class="card-title __postColor"><b>{{titulo}}</b></h4>
+        <blockquote class="blockquote mb-0">
+          <p>{{description}}</p>
+          <footer class="blockquote-footer mt-2"><cite title="Source Title">
+              <span>{{#each tags as |tag|}}
+                #{{tag}}
+                {{/each}}</span>
+            </cite></footer>
+        </blockquote>
+      </div>
+    </div>
+  </a>
+</div>

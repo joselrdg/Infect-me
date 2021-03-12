@@ -2,23 +2,22 @@
 const Post = require("../models/Post.model");
 const mongoose = require("mongoose");
 
-// const path = require('path');
-
-// module.exports.list = (req, res, next) => {
-//   Post.find(
-//     req.query.title
-//       ? {
-//         title: { $regex: req.query.title, $options: "i" },
-//       }
-//       : {}
-//   )
-//     .then((posts) => {
-//       res.render("posts/posts", { posts: posts, title: req.query.title });
-//     })
-//     .catch((e) => next(e));
-// };
 
 module.exports.list = (req, res, next) => {
+  Post.find(
+    req.query.title
+      ? {
+        title: { $regex: req.query.title, $options: "i" },
+      }
+      : {}
+  )
+    .then((posts) => {
+      res.render("posts/posts", { posts: posts, title: req.query.title });
+    })
+    .catch((e) => next(e));
+};
+
+module.exports.listUser = (req, res, next) => {
   console.log(req.currentUser)
   Post.find({ user: req.user._id })
   .then((posts) => {
@@ -29,13 +28,17 @@ module.exports.list = (req, res, next) => {
 };
 
 module.exports.detail = (req, res, next) => {
-  const idU = req.user._id
   Post.findById(req.params.id)
-    .then((post) => {
-      if (post.user = req.user._id) {
+  .then((post) => {
+      const currUserId = req.currentUser._id
+      const {user} = post;
+      if(currUserId.equals(user)){
+        console.log('son iguales')        
         res.render("posts/post", { ...post.toJSON(), delete: false, userEdit: true });
       } else {
-        res.render("posts/post", { ...post.toJSON(), delete: false, userEdit: false });      }
+        console.log('NO son iguales')
+        res.render("posts/post", { ...post.toJSON(), delete: false, userEdit: false });      
+      }
     })
     .catch((e) => next(e));
 };

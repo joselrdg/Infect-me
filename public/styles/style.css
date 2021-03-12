@@ -20,7 +20,7 @@ naranja:#ffad19
 body {
   margin: 0px;
   padding: 0px;
-  font-family: "Permanent Marker";
+  font-family: "Architects Daughter";
   background-color: #001a33;
   color: #fdcf1b;
   /* background-image: url("/images/fondodos.png");
@@ -32,6 +32,17 @@ a {
   text-decoration: none;
 }
 
+/* 
+.__footer{
+  bottom: 0;
+  left: 0;
+} */
+
+.__floatRight {
+  padding: 4rem 4rem 0rem 1rem;
+  /* margin-right: 5rem; */
+  float: right;
+}
 .__bkgLog {
   /* background-color: aqua; */
   background-image: url("/images/fondodos.png");
@@ -52,6 +63,8 @@ a {
 .__panelLink {
   color: #fb369b;
 }
+
+
 .__panelLinkB {
   background-color: #3c98e9;
   color: #ffad19;
@@ -70,11 +83,34 @@ a {
 }
 
 .__postForm {
-  background-color: #ffad19;
+  width: 30%;
+  margin:auto;
+  padding-bottom: 2rem;
+  transition: all
+}
+
+#__hiddenFPost{
+  transition-timing-function: linear;
+}
+
+.overlay{    
+  height: 100%;
+  width: 0;
+  position: fixed; 
+  z-index: 1; 
+  left: 100%;
+  top: 0;
+  background-color: #944743; 
+  overflow-x: hidden; 
+  transition: 1s; 
+  }
+
+.__postColor {
+  color: #e49708;
 }
 
 .postCard {
-  background-color: #3c98e9;
+  font-family: 'Architects Daughter', cursive;
   max-width: 30rem;
   margin: 2rem;
   border-radius: 5px;
@@ -98,8 +134,8 @@ a {
 }
 
 #__editForm {
-  background-color: #fdd01bc0;
-  margin: 10px 100px;
+  /* background-color: #fdd01bc0; */
+  /* margin: 10px 100px; */
 }
 
 #__logo {
@@ -136,12 +172,12 @@ a {
 }
 
 .__imputColorD {
-  background: #fdcf1b;
+  background: #f6b850;
   border: 0;
 }
 
 .__commentForm {
-  background: #fdd01b00;
+  background: #14100186;
   width: 100;
 }
 
@@ -154,7 +190,7 @@ a {
 }
 
 .__editForm {
-  background: #fdcf1b;
+  background: #f6b850;
   border: 0;
   border-bottom: 1px solid #fb369b;
   outline: none;
