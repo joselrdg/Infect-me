@@ -1,33 +1,35 @@
 <div class="container">
-    <h1>Post</h1>
-    {{!-- <section>
-        <h3>{{title}}</h3>
-        <p>{{description}}</p>
-        <div>
-            {{#each tags as |tag|}}
-            <p>{{tag}}</p>
-            {{/each}}
+    <div class="row justify-content-center">
+        {{>post}}
+    </div>
+    <div class="row text-center">
+        {{#if userEdit}}
+        <div class="__color">
+            <a class="px-3" href="/posts/edit/{{_id}}">Edit</a>
+            <a class="px-3" href="/posts/delete/{{_id}}">Delete</a>
         </div>
-    </section> --}}
+        {{/if}}
+    </div>
+</div>
 
-    {{!-- Mostrarlos solo si es el creador del post --}}
-    {{!-- <a href="/posts/{{_id}}/edit">Edit</a>
-    <a href="/posts/{{_id}}/delete">Delete</a> --}}
-    
-    
-    {{!-- {{#if delete}}
-    <div class="container">
-        <div class="modal-content">
-            <div class="modal-body">
-                <p>Are you sure you want to delete?</p>
-            </div>
-            <div class="modal-footer">
-                <form action="/posts/{{_id}}/delete" method="POST"><button type="submit"
-                        class="btn btn-primary">Yes</button>
-                </form>
-                <a href="/posts/{{_id}}" type="submit" class="btn btn-danger">No</a>
-            </div>
+
+
+
+
+
+{{#if deleteModal}}
+<div class="container">
+    <div class="modal-content">
+        <div class="modal-body">
+            <p>Are you sure you want to delete?</p>
+        </div>
+        <div class="modal-footer">
+            <form action="/posts/delete/{{_id}}" method="POST"><button type="submit"
+                    class="btn btn-primary">Yes</button>
+            </form>
+            <a href="/posts/{{_id}}" type="submit" class="btn btn-danger">No</a>
         </div>
     </div>
-    {{/if}} --}}
+</div>
+{{/if}}
 </div>
