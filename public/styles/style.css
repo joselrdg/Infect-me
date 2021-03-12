@@ -17,14 +17,15 @@ amarillo: #fdcf1b
 naranja:#ffad19
 */
 
+
 body {
   margin: 0px;
   padding: 0px;
   font-family: "Architects Daughter";
   background-color: #001a33;
   color: #fdcf1b;
-  /* background-image: url("/images/fondodos.png");
-  background-repeat: repeat-y; */
+   /* background-image: url("/images/stars2.png");
+  background-repeat: repeat; */
 }
 
 a {
@@ -44,7 +45,6 @@ a {
   float: right;
 }
 .__bkgLog {
-  /* background-color: aqua; */
   background-image: url("/images/fondodos.png");
   background-repeat: repeat-y;
 }
@@ -62,6 +62,10 @@ a {
 
 .__panelLink {
   color: #fb369b;
+}
+
+#choosePrf{
+  background-color: #fb369b;
 }
 
 
@@ -82,28 +86,27 @@ a {
   filter: brightness(0.8);
 }
 
-.__postForm {
+/* .__postForm {
   width: 30%;
-  margin:auto;
+  margin-left:auto;
+  margin-right:auto;
   padding-bottom: 2rem;
-  transition: all
-}
+} */
 
-#__hiddenFPost{
-  transition-timing-function: linear;
-}
+/* #__hiddenFPost{
+  transition-timing-function: cubic-bezier;
+} */
 
-.overlay{    
-  height: 100%;
-  width: 0;
-  position: fixed; 
-  z-index: 1; 
-  left: 100%;
-  top: 0;
-  background-color: #944743; 
-  overflow-x: hidden; 
-  transition: 1s; 
-  }
+div#__hiddenFPost{
+  height:0px;
+  width:0px;
+  padding: .5em;
+  box-sizing: border-box;
+  visibility:hidden;
+  overflow: hidden;
+  font-weight: bold;
+  transition: height 2s, width 2s, padding 1s, visibility 1s, opacity 0.5s ease-out;
+}
 
 .__postColor {
   color: #e49708;
@@ -111,7 +114,7 @@ a {
 
 .postCard {
   font-family: 'Architects Daughter', cursive;
-  max-width: 30rem;
+  width: 30rem;
   margin: 2rem;
   border-radius: 5px;
 }
@@ -165,6 +168,7 @@ a {
     0 0 8px rgba(255, 144, 0, 0.6);
   padding: 5px 50px 5px 50px;
 }
+
 
 .__imputColorI {
   background: #f6b850;

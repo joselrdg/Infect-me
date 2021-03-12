@@ -1,53 +1,69 @@
 
-const Post = require("../models/Post.model");
 const mongoose = require("mongoose");
+const Post = require("../models/Post.model");
+const Profile = require("../models/Profile.model");
 
 
 module.exports.list = (req, res, next) => {
-  Post.find(
-    req.query.title
-      ? {
-        title: { $regex: req.query.title, $options: "i" },
-      }
-      : {}
-  )
-    .then((posts) => {
-      res.render("posts/posts", { posts: posts, title: req.query.title });
+  const query = { user: req.user._id }
+  Profile.find(query)
+    .then((p) => {
+      Post.find(
+        req.query.title
+          ? {
+            title: { $regex: req.query.title, $options: "i" },
+          }
+          : {})
+        .then((posts) => {
+          res.render("posts/posts", { posts: posts, title: req.query.title, profilesU: p });
+        })
     })
     .catch((e) => next(e));
 };
 
 module.exports.listUser = (req, res, next) => {
-  console.log(req.currentUser)
-  Post.find({ user: req.user._id })
-  .then((posts) => {
-      console.log(posts[0])
-      res.render("posts/posts", { posts: posts, title: req.query.title });
+  console.log(req.params.id)
+  const query = { user: req.user._id }
+  Profile.find(query)
+    .then((p) => {
+      console.log(p)
+      Post.find({ profile: req.params.id })
+        .then((posts) => {
+          console.log(posts[0])
+          res.render("posts/posts", { posts: posts, title: req.query.title, profilesU: p });
+        })
     })
     .catch((e) => next(e));
 };
 
 module.exports.detail = (req, res, next) => {
   Post.findById(req.params.id)
-  .then((post) => {
+    .then((post) => {
       const currUserId = req.currentUser._id
-      const {user} = post;
-      if(currUserId.equals(user)){
-        console.log('son iguales')        
+      const { user } = post;
+      if (currUserId.equals(user)) {
+        console.log('son iguales')
         res.render("posts/post", { ...post.toJSON(), delete: false, userEdit: true });
       } else {
         console.log('NO son iguales')
-        res.render("posts/post", { ...post.toJSON(), delete: false, userEdit: false });      
+        res.render("posts/post", { ...post.toJSON(), delete: false, userEdit: false });
       }
     })
     .catch((e) => next(e));
 };
 
 module.exports.create = (req, res, next) => {
-  res.render("posts/postForm");
+  const query = { user: req.user._id }
+  Profile.find(query)
+    .then((p) => {
+      const data = { profilesU: p }
+      res.render("posts/postForm", data);
+    })
+
 };
 
 module.exports.doCreate = (req, res, next) => {
+  console.log(req.body)
   function renderWithErrors(errors) {
     res.status(400).render("posts/postForm", {
       errors: errors,
@@ -64,7 +80,7 @@ module.exports.doCreate = (req, res, next) => {
     .then((p) => {
       if (p.user == req.user._id) {
         p.userEdit = true;
-        res.render("posts/post", p)
+        res.redirect("/posts/list")
       }
     })
     .catch((e) => {

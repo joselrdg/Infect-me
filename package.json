@@ -11,6 +11,7 @@
   "author": "José Luis Rodríguez & Luis Gallego",
   "license": "ISC",
   "dependencies": {
+    "@cloudfour/transition-hidden-element": "^2.0.2",
     "arrify": "^2.0.0",
     "axios": "^0.21.1",
     "bcrypt": "^5.0.0",

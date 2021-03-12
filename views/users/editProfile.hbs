@@ -7,7 +7,7 @@
             <a href="/profile/create/body" class="btn btn-success my-4 px-5">Crear</a>
         </div> --}}
         <div>
-            <a href="/control" class="btn btn-success my-4 px-5">Panel de control</a>
+            <a href="/control" class="btn __buttonLogFormI my-4 px-5">Panel de control</a>
         </div>
         <div class="d-flex">
             {{!-- <div class="row"> --}}
@@ -16,9 +16,9 @@
                     <div class="" style="width: 300px; background-color: {{backgroundColor}}; color: {{textColor}};">
                         {{> pages}}
                         {{#if category}}
-                        <a href="/page/edit/head/{{idProfile}}" class="btn btn-success my-2 mx-2 px-4">Cabezera</a>
-                        <a href="/page/create/body/{{idProfile}}" class="btn btn-success my-2 mx-2 px-4">Cuerpo</a>
-                        <a href="/page/edit/body/{{idProfile}}" class="btn btn-success my-2 mx-2 px-4">Editar cuerpo</a>
+                        <a href="/page/edit/head/{{idProfile}}" class="btn my-2 mx-2 px-4 __buttonEditForm">Cabezera</a>
+                        <a href="/page/create/body/{{idProfile}}" class="btn __buttonEditForm my-2 mx-2 px-4">+ Cuerpo</a>
+                        <a href="/page/edit/body/{{idProfile}}" class="btn __buttonEditForm my-2 mx-2 px-4">Editar cuerpo</a>
                         <a href="/page/delete/{{idProfile}}" class="btn btn-danger my-2 mx-2 px-4">Eliminar</a>
                         {{else}}
                         <a href="/profile/edit/body/{{id}}" class="btn btn-success mx-2 px-4">Editar</a>

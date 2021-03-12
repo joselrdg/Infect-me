@@ -28,7 +28,8 @@ module.exports.profile = (req, res, next) => {
       } else {
         const idP = {
           user: req.currentUser._id,
-          profileUser: true
+          profileUser: true,
+          titleOne: 'Este es tú perfil'
         }
         Profile.create(idP)
           .then((p) => {

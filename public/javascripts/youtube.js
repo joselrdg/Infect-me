@@ -35,23 +35,41 @@ window.addEventListener('load', () => {
     })
   })
 
-  const clousePostForm = document.getElementById('clousePostForm')
-  if (clousePostForm) {
-    clousePostForm.addEventListener("click", function () {
-      __cFormPost.innerHTML = "";
-    })
-  }
+  // const clousePostForm = document.getElementById('clousePostForm')
+  // if (clousePostForm) {
+  //   clousePostForm.addEventListener("click", function () {
+  //     __cFormPost.innerHTML = "";
+  //   })
+  // }
 
   const idea = document.getElementById('__idea')
   if (idea) {
     idea.addEventListener("click", function () {
       console.log('click')
-      let x = document.getElementById("__hiddenFPost");
-      if (x.style.display === "none") {
-          x.style.display = "block";
-      } else {
-          x.style.display = "none";
+      let hint = document.getElementById("__hiddenFPost");
+      const height = '45';
+      const width ='30';
+      console.log(width + 'x' + height);
+      if(hint.style.visibility == 'hidden'){
+        hint.style.visibility = 'visible';
+        hint.style.opacity = '1';
+        hint.style.height = height+'rem';
+        hint.style.width = width +'rem';
+        hint.style.padding = '.5em';
       }
+      else{
+        hint.style.visibility = 'hidden';
+        hint.style.opacity = '0';
+        hint.style.height = '0';
+        hint.style.width = '0';
+        hint.style.padding = '0';
+      }
+
+      // if (x.style.display === "none") {
+      //     x.style.display = "block";
+      // } else {
+      //     x.style.display = "none";
+      // }
     })
   }
 

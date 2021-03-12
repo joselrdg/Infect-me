@@ -76,7 +76,7 @@ router.get("/comments/:id", secure.isAuthenticated, pageController.comments)
 
 // posts
 router.get("/posts/list", secure.isAuthenticated, postsController.list);
-router.get("/posts/list/user", secure.isAuthenticated, postsController.listUser);
+router.get("/posts/list/:id", secure.isAuthenticated, postsController.listUser);
 router.get("/posts/create", secure.isAuthenticated, postsController.create);
 router.post("/posts/create", secure.isAuthenticated, postsController.doCreate);
 router.get("/posts/edit/:id", secure.isAuthenticated, postsController.edit);

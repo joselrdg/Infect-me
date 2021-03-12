@@ -1,19 +1,19 @@
-<div class="container ">
+<div class="position-absolute top-50 start-50 translate-middle text-center ">
     <form action="/page/create" method="POST">
         <div class="form-group">
-            <label for="titleOne">Nombre</label>
-            <input type="text" name="titleOne" class="form-control my-3" placeholder="Nombre">
+            <label for="titleOne" >Nombre</label>
+            <input type="text" name="titleOne" class="form-control my-3 __imputColorI" placeholder="Nombre">
         </div>
 
         <div class="form-group my-2">
             <label for="subTitleOne">Descripción</label>
-            <input type="text" name="subTitleOne" class="form-control my-3" placeholder="Descripción">
+            <input type="text" name="subTitleOne" class="form-control my-3 __imputColorI" placeholder="Descripción">
         </div>
         <div class="row">
             <div class="col-md-6">
                 <div>
                     <label for="category">Categoría</label>
-                    <select multiple class="form-control my-2" name="category">
+                    <select multiple class="form-control my-2 __imputColorI" name="category">
                         <option value="naturaleza">Naturaleza y aventura</option>
                         <option value="tecnologia">Tecnología</option>
                         <option value="salud">Salud y bienestar</option>
@@ -41,22 +41,22 @@
 
                 <div class="m-4 ">
                     <label for="backgroundColor">Color del fondo:</label>
-                    <input name="bkgColor" value="{{bkgColor}}" type="color" class="form-control my-2 px-5">
+                    <input name="bkgColor" value="{{bkgColor}}" type="color" class="form-control my-2 px-5 __imputColorI">
                 </div>
                 <div class="m-4">
                     <label for="backgroundColor">Color del texto:</label>
-                    <input name="textColor" value="#e6dba3" type="color" class="form-control  px-5">
+                    <input name="textColor" value="#e6dba3" type="color" class="form-control __imputColorI px-5">
                 </div>
             </div>
         </div>
 
         <div class="form-group my-3">
             <label for="textTwo">Etiquetas:</label>
-            <input type="text" name="tags" class="form-control my-3" placeholder="Palabras clave">
+            <input type="text" name="tags" class="form-control my-3 __imputColorI" placeholder="Palabras clave">
         </div>
 
         <div class="text-center my-5">
-            <button type="submit" class="btn btn-primary my-1">Guardar</button>
+            <button type="submit" class="btn btn-primary my-1 __buttonEditForm">Guardar</button>
         </div>
     </form>
 </div>

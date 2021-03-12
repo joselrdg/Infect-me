@@ -11,7 +11,12 @@
   <link rel="stylesheet" href="/styles/style.css">
 </head>
 
+{{#if currentUser}}
 <body>
+  {{else}}
+<body style="background-image: url(/images/fondodos.png); background-repeat: repeat-y;">
+{{/if}}
+
   <div id="wrapper">
     {{> navbar}}
     {{{body}}}

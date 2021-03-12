@@ -7,11 +7,16 @@ const postSchema = new mongoose.Schema({
         ref: "User",
         required: true
     },
+    profile: {
+        type: mongoose.SchemaTypes.ObjectId,
+        ref: "Profile",
+        required: true
+    },
     userName: {
         type: String,
         required: true
     },
-    userImg: {
+    userImg: {    
         type: String,
         required: true
     },

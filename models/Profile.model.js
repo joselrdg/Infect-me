@@ -67,7 +67,7 @@ const profileSchema = new mongoose.Schema(
         videoON: Boolean,
         titleOne: {
             type: String,
-            default: 'Este es tu perfil'
+            default: 'Esta es tu página'
         },
         subTitleOne: {
             type: String,
@@ -113,6 +113,12 @@ profileSchema.virtual("playlist", {
 
 profileSchema.virtual("videolist", {
     ref: "Videolist",
+    foreignField: "profile",
+    localField: "_id",
+});
+
+profileSchema.virtual("posts", {
+    ref: "Post",
     foreignField: "profile",
     localField: "_id",
 });

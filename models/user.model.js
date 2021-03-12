@@ -98,11 +98,11 @@ userSchema.pre('save', function (next) {
     }
 })
 
-// userSchema.virtual("posts", {
-//     ref: "Post",
-//     foreignField: "user",
-//     localField: "_id",
-// });
+userSchema.virtual("posts", {
+    ref: "Post",
+    foreignField: "user",
+    localField: "_id",
+});
 
 userSchema.virtual("profile", {
     ref: "Profile",

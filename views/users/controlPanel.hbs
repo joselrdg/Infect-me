@@ -1,6 +1,6 @@
 <div class="container-fluid __containerPanel">
     {{!-- <div class="container text-center">
-    <h1 class="pt-2">Panel de control:</h1>
+        <h1 class="pt-2">Panel de control:</h1>
     </div> --}}
     <div class="row d-flex justify-content-center">
         <div class="card __panelCard m-5">
@@ -44,11 +44,18 @@
             <div class="card-body">
                 <h5 class="card-title">Posts</h5>
                 <h6 class="card-subtitle mb-2 text-muted">Desahógate</h6>
-                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-                    card's
-                    content.</p>
-                <a href="#" class="card-link __panelLink">Card link</a>
-                <a href="#" class="card-link __panelLink">Another link</a>
+                <p class="card-text">Publica tus inquietudes o lo que quieras contarnos, a traves de textos, fotos o
+                    videos.
+                    En tus posts podras crear y editar.</p>
+                <div>
+                    <a href="/posts/list/user" class="card-link __panelLink">Tus posts</a>
+                </div>
+                <div>
+                    <a href="/posts/create" class="card-link __panelLink">Crea un post</a>
+                </div>
+                <div>
+                    <a href="/posts/list" class="card-link __panelLink">Lista de posts</a>
+                </div>
             </div>
         </div>
         <div class="card my-5 __panelCard">
@@ -60,7 +67,7 @@
                     <form>
                         <div class="form-group">
                             <label for="inputState" class="my-1">Elige página:</label>
-                            <select id="selectPrf" class="form-control">
+                            <select id="selectPrf" class="form-control __imputColorI">
                                 {{#each profilesU as |profil|}}
                                 <option name="profile" value="{{_id}}">
                                     {{#if profileUser}} <p> Tu perfil. </p>

@@ -6,6 +6,7 @@
                     <input type="hidden" name="userName" value="{{currentUser.userName}}">
                     <input type="hidden" name="userImg" value="{{currentUser.picture}}">
                     <h4 class="my-4">{{#if titulo}}Edita el{{else}}Crea un{{/if}} post</h4>
+                    <hr>
                     <div class="mb-3">
                         <label for="title" class="form-label visually-hidden"></label>
                         <input type="text" class="form-control __imputColorI" id="title" name="titulo"
@@ -28,20 +29,37 @@
                     </div>
                     <div class="mb-3">
                         <label for="formGroupExampleInput2" class="form-label visually-hidden">Imagen</label>
-                        <input type="text" class="form-control __imputColorI" {{#if image}}value="{{image}}"{{/if}} name="image"
-                            placeholder="Pon el enlace a una imagen">
+                        <input type="text" class="form-control __imputColorI" {{#if image}}value="{{image}}" {{/if}}
+                            name="image" placeholder="Pon el enlace a una imagen">
                     </div>
                     <div class="mb-3">
                         <label for="formGroupExampleInput2" class="form-label visually-hidden">Imagen</label>
-                        <input type="text" class="form-control __imputColorI" {{#if video}}value="{{video}}"{{/if}} name="video"
-                            placeholder="Pon el enlace a un video">
+                        <input type="text" class="form-control __imputColorI" {{#if video}}value="{{video}}" {{/if}}
+                            name="video" placeholder="Pon el enlace a un video">
                     </div>
                     <div class="mb-3">
                         <label for="tags" class="form-label visually-hidden">Tags</label>
                         <input type="text" class="form-control __imputColorI" id="tags" name="tags"
                             placeholder="Ingrese sus tags separados por comas" value="{{tags}}">
                     </div>
-                    <button type="submit" class="btn __buttonEditForm">{{#if titulo}}Edit{{else}}Create{{/if}}</button>
+                    <div>
+                        <label for="inputState" class="my-1">Elige página:</label>
+                        <select name="profile" class="form-control __imputColorI">
+                            {{#each profilesU as |profil|}}
+                            <option name="profile" value="{{_id}}">
+                                {{#if profileUser}} <p> Tu perfil. </p>
+                                {{else}}
+                                {{#if titleOne}}<p>{{titleOne}}</p>
+                                {{else}}
+                                {{#if titleOne}}<p>{{titleTwo}}</p>
+                                {{else}}<p>Sin título.</p>
+                                {{/if}}{{/if}}{{/if}}
+                            </option>
+                            {{/each}}
+                        </select>
+                    </div>
+                    <button type="submit" class="btn __buttonEditForm mt-2" style="height: 35px;">{{#if
+                        titulo}}Edit{{else}}Create{{/if}}</button>
                 </div>
             </form>
     </div>

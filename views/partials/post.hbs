@@ -10,25 +10,27 @@
   </div>
 </div> --}}
 <div class="postCard d-flex flex-column ">
-  <a href="/posts/{{_id}}"  class="__postColor">
+  <a href="/posts/{{_id}}" class="__postColor">
     <div class="card">
       <div class="card-header d-flex align-items-center">
         <img alt="Post image" id="__imgPost" src="{{userImg}}">
         <h5 class="px-3">{{userName}}</h5>
       </div>
     </div>
-    {{#if image}}
-    <img alt="Post image" class="img-fluid" src="{{image}}">
-    {{/if}}
     <div class="card ">
+      {{#if image}}
+      <img alt="Post image" class="card-img-top" src="{{image}}">
+      {{/if}}
       <div class="card-body">
         <h4 class="card-title __postColor"><b>{{titulo}}</b></h4>
         <blockquote class="blockquote mb-0">
           <p>{{description}}</p>
           <footer class="blockquote-footer mt-2"><cite title="Source Title">
-              <span>{{#each tags as |tag|}}
-                #{{tag}}
-                {{/each}}</span>
+              <p>
+                {{#each tags as |tag|}}
+                <span> #{{tag}}</span>
+                {{/each}}
+              </p>
             </cite></footer>
         </blockquote>
       </div>
