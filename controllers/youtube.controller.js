@@ -99,10 +99,7 @@ const dataVideoYtb = (req, res, next, search) => {
             }
             if (data) {
                 let arrayList = data.data.items;
-                const idP = req.params.id;                
-                // arrayList.forEach(element => {
-                //     element.profile = idP;
-                // });
+                const idP = req.params.id;
                 let userData = {
                     userName: req.user.userName,
                     picture: req.user.picture,
