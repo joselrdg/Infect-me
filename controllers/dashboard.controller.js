@@ -28,14 +28,15 @@ module.exports.showDashboard = ((req, res, next) => {
         let friends = containerDashboard[1]
         let pagesFollow = containerDashboard[2]
       //POSTS
-        let i=0;
-        posts.forEach(post => {
-          if (i > 2) {
-            post.collapse = true;
-
-          }
-          i++
-        });
+    
+  //    let i=0;
+  //      posts.forEach(post => {
+  //        if (i > 2) {
+  //          post.collapse = true;
+//
+  //        }
+  //        i++
+  //      });
         let vermas = true;
         // Friends
    

@@ -291,6 +291,7 @@ input[type]:focus {
 
 .card__container {
   max-height: 160px;
+  
 }
 .card__description {
   height: 50px;
