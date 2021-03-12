@@ -35,12 +35,6 @@ window.addEventListener('load', () => {
     })
   })
 
-  // const clousePostForm = document.getElementById('clousePostForm')
-  // if (clousePostForm) {
-  //   clousePostForm.addEventListener("click", function () {
-  //     __cFormPost.innerHTML = "";
-  //   })
-  // }
 
   const idea = document.getElementById('__idea')
   if (idea) {
