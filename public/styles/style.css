@@ -305,3 +305,31 @@ input[type]:focus {
   width: fit-content;
   height: fit-content;
 }
+
+.toast__container {
+  background: #fb369b;
+}
+.toast__message {
+  color: black;
+  
+}
+.seach__section {
+  margin: 0 auto;
+  padding: 10px;
+}
+.friends_button {
+  background: #fb369b;
+}
+.friends__list__container {
+  background: #fb369b;
+}
+.friends__info {
+  background: #fb369b;
+}
+.friends__list {
+  background: #fb369b;
+}
+.friends__text {
+  color:black;
+  background: #fb369b;
+}

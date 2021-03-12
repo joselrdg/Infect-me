@@ -284,6 +284,7 @@ module.exports.pagesCategory = (req, res, next) => {
                 categoryFilter: category[0].description,
                 
             }
+            
             res.render('users/pagescategory', pagesCategory)
 
         })
