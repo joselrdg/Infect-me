@@ -17,7 +17,7 @@ const User = require('../models/user.model')
 const configGg = {
     clientID: process.env.GOOGLE_CLIENT_ID,
     clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-    callbackURL: process.env.GOOGLE_REDIRECT_UR || '/auth/google/callback',
+    callbackURL: process.env.GOOGLE_REDIRECT_URI || '/auth/google/callback',
     scope: ['https://www.googleapis.com/auth/youtube.readonly',
         , 'https://www.googleapis.com/auth/userinfo.email',
         'https://www.googleapis.com/auth/userinfo.profile'],

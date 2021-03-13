@@ -26,8 +26,9 @@ router.post('/login', secure.isNotAuthenticated, usersController.doLogin)
 // router.get('/auth/google', passport.authenticate('google-auth'))
 
 router.get('/auth/youtube', passport.authenticate('youtube-auth'))
-router.get('/auth/google/callback', usersController.doLoginGoogle) 
+router.get('/auth/google/cb', usersController.doLoginGoogle) 
 
+router.get('/auth/google/callback', usersController.doLoginGoogle) 
 // router.get('/auth/google/callback', usersController.youtube)
 
 router.get('/youtube/playlists', secure.isAuthenticated, youtubeController.ytbPlaylists)
