@@ -193,8 +193,8 @@ module.exports.library = (req, res, next) => {
 
 module.exports.addPlaylist = (req, res, next) => {
   const token = req.user.social.google.refresh_token;
+  Youtube.ytbPlaylists(req, res, next, 'playlist')
   if (token) {
-    Youtube.ytbPlaylists(req, res, next, 'playlist')
   } else {
     res.redirect('/control');
   }
