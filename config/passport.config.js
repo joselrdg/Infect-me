@@ -141,7 +141,7 @@ passport.use('youtube-auth', new YoutubeV3Strategy(
                     if (!user) {
                         const newUserInstance = new User({
                             userName: profile.displayName,                            
-                            email,
+                            // email,
                             password: 'Aa1' + mongoose.Types.ObjectId(),
                             social: {
                                 google: {
