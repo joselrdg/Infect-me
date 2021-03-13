@@ -82,7 +82,7 @@ module.exports.doLoginGoogle = (req, res, next) => {
     passport.authenticate('youtube', (error, user, validations) => {
     })
   } else {
-    passport.authenticate('google-auth', (error, user, validations) => {
+    passport.authenticate('youtube-auth', (error, user, validations) => {
       if (error) {
         next(error);
       } else if (!user) {
