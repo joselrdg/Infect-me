@@ -2,7 +2,7 @@
 const config = {
     clientID: process.env.GOOGLE_CLIENT_ID,
     clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-    callbackURL: process.env.GOOGLE_REDIRECT_URI
+    callbackURL: process.env.GOOGLE_REDIRECT_UR
 };
 
 const Playlist = require("../models/Playlist.model");
@@ -11,7 +11,7 @@ const { google } = require('googleapis');
 const oauth2Client = new google.auth.OAuth2(
     process.env.GOOGLE_CLIENT_ID,
     process.env.GOOGLE_CLIENT_SECRET,
-    process.env.GOOGLE_REDIRECT_URI
+    process.env.GOOGLE_REDIRECT_UR
 );
 const Youtube = google.youtube({
     version: 'v3',

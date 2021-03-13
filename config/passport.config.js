@@ -17,7 +17,7 @@ const User = require('../models/user.model')
 const configGg = {
     clientID: process.env.GOOGLE_CLIENT_ID,
     clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-    callbackURL: process.env.GOOGLE_REDIRECT_URI || '/auth/google/callback',
+    callbackURL: process.env.GOOGLE_REDIRECT_UR || '/auth/google/callback',
     scope: ['https://www.googleapis.com/auth/youtube.readonly',
         , 'https://www.googleapis.com/auth/userinfo.email',
         'https://www.googleapis.com/auth/userinfo.profile'],
@@ -85,7 +85,6 @@ passport.use('google-auth', new GoogleStrategy(
     configGg,
     (accessToken, refreshToken, profile, next) => {
         const googleID = profile.id;
-        console.log(profile)
         const email = profile.emails[0] ? profile.emails[0].value : undefined;
         if (googleID && email) {
             User.findOne({
@@ -110,7 +109,6 @@ passport.use('google-auth', new GoogleStrategy(
                             picture: profile._json.picture,
                             active: true
                         })
-                        console.log(newUserInstance)
                         return newUserInstance.save()
                             .then(newUser => next(null, newUser))
                     } else {
@@ -128,9 +126,8 @@ passport.use('youtube-auth', new YoutubeV3Strategy(
     configGg,
     (accessToken, refreshToken, profile, next) => {
         const googleID = profile.id;
-        console.log(profile)
         // const email = profile.emails[0] ? profile.emails[0].value : undefined;
-        if (googleID) {
+        // if (googleID) {
             User.findOne(
                     { 'social.google.googleID': googleID }
                
@@ -151,17 +148,24 @@ passport.use('youtube-auth', new YoutubeV3Strategy(
                             picture: profile._json.picture,
                             active: true
                         })
-                        console.log(newUserInstance)
+
+                        console.log('nuevo usuario')
                         return newUserInstance.save()
                             .then(newUser => next(null, newUser))
                     } else {
+                        user.social.google.refresh_token = refreshToken;
+                        if (!user.social.google.accessToken){
+                            user.social.google.accessToken = accessToken;
+                            user.picture = profile._json.picture;
+                        } 
+                        console.log('ya estaba el usuario')
                         next(null, user)
                     }
                 })
-                .catch(next)
-        } else {
-            next(null, null, { error: 'Error conectando con Google OAuth' })
-        }
+        //         .catch(next)
+        // } else {
+        //     next(null, null, { error: 'Error conectando con Google OAuth' })
+        // }
     }
 ))
 
