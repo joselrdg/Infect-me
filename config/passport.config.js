@@ -130,7 +130,7 @@ passport.use('youtube-auth', new YoutubeV3Strategy(
         const googleID = profile.id;
         console.log(profile)
         const email = profile.emails[0] ? profile.emails[0].value : undefined;
-        if (googleID && email) {
+        if (googleID) {
             User.findOne({
                 $or: [
                     { email: email },
