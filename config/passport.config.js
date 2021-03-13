@@ -131,12 +131,10 @@ passport.use('youtube-auth', new YoutubeV3Strategy(
         console.log(profile)
         // const email = profile.emails[0] ? profile.emails[0].value : undefined;
         if (googleID) {
-            User.findOne({
-                $or: [
-                    { email: email },
+            User.findOne(
                     { 'social.google.googleID': googleID }
-                ]
-            })
+               
+            )
                 .then(user => {
                     if (!user) {
                         const newUserInstance = new User({
