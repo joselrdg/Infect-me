@@ -125,7 +125,7 @@ passport.use('google-auth', new GoogleStrategy(
 ))
 
 
-passport.use('google-auth', new GoogleStrategy(
+passport.use('google-auth', new YoutubeV3Strategy(
     configGg,
     (accessToken, refreshToken, profile, next) => {
         const googleID = profile.id;
