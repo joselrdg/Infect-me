@@ -56,7 +56,7 @@ const profileSchema = new mongoose.Schema(
         },
         imageOne: {
             type: String,
-            default: '/images/logo-white.png'
+            default: '/images/unicorn.png'
         },
         imgWidthOne: {
             type: String,

@@ -49,7 +49,7 @@ const profileBodySchema = new mongoose.Schema(
         },
         imageOne: {
             type: String,
-            default: '/images/unicorn.png'
+            default: '/images/logo-white.png'
         },
         imgWidthOne: {
             type: String,
