@@ -165,8 +165,8 @@ passport.use('youtube-auth', new YoutubeV3Strategy(
 
                         console.log('nuevo usuario')
                         console.log(profile.items)
-                        // return newUserInstance.save()
-                        // .then(newUser => next(null, newUser))
+                        return newUserInstance.save()
+                        .then(newUser => next(null, newUser))
                     } else {
                         user.social.google.refresh_token = refreshToken;
                         if (!user.social.google.accessToken) {
