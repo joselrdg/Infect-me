@@ -30,7 +30,7 @@ router.get('/auth/google/cb', usersController.doLoginGoogle)
 
 // router.get('/auth/google/callback', usersController.youtube)
 
-// router.get('/youtube/playlists', secure.isAuthenticated, youtubeController.ytbPlaylists)
+router.get('/youtube/playlists', secure.isAuthenticated, youtubeController.ytbPlaylists)
 
 router.get('/activate/:activationToken', secure.isNotAuthenticated, usersController.activate)
 

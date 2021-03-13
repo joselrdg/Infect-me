@@ -46,7 +46,7 @@ const userSchema = new Schema(
         },
         picture: {
             type: String,
-            default: './images/userIcon.png'
+            default: '/images/userIcon.png'
         },
         profileID: {
             type: String
