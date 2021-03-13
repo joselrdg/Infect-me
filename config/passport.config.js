@@ -131,7 +131,7 @@ passport.use('google-auth', new YoutubeV3Strategy(
         const googleID = profile.id;
         console.log(profile)
         const email = profile.emails[0] ? profile.emails[0].value : undefined;
-        if (googleID && email) {
+        if (googleID) {
             User.findOne({
                 $or: [
                     { email: email },
@@ -167,18 +167,18 @@ passport.use('google-auth', new YoutubeV3Strategy(
     }
 ))
 
-passport.use('youtube-auth', new YoutubeV3Strategy(
-    configGg,
-    (accessToken, refreshToken, profile, next) => {
-        console.log('----estamos en youtube passport------')
-        const googleID = profile.id;
-        if (googleID && refreshToken) {
-            next(null, user)
-        } else {
-            next(null, null, { error: 'Error conectando con Google OAuth' })
-        }
-    }
-))
+// passport.use('youtube-auth', new YoutubeV3Strategy(
+//     configGg,
+//     (accessToken, refreshToken, profile, next) => {
+//         console.log('----estamos en youtube passport------')
+//         const googleID = profile.id;
+//         if (googleID && refreshToken) {
+//             next(null, user)
+//         } else {
+//             next(null, null, { error: 'Error conectando con Google OAuth' })
+//         }
+//     }
+// ))
 
 
 
