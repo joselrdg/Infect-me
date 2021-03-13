@@ -196,7 +196,7 @@ module.exports.addPlaylist = (req, res, next) => {
   if (token) {
     Youtube.ytbPlaylists(req, res, next, 'playlist')
   } else {
-    res.render('users/controlPanel');
+    res.redirect('/control');
   }
 }
 
