@@ -124,62 +124,18 @@ passport.use('google-auth', new GoogleStrategy(
     }
 ))
 
-
 passport.use('youtube-auth', new YoutubeV3Strategy(
     configGg,
     (accessToken, refreshToken, profile, next) => {
+        console.log('----estamos en youtube passport------')
         const googleID = profile.id;
-        console.log(profile)
-        const email = profile.emails[0] ? profile.emails[0].value : undefined;
-        if (googleID) {
-            User.findOne({
-                $or: [
-                    { email: email },
-                    { 'social.google.googleID': googleID }
-                ]
-            })
-                .then(user => {
-                    if (!user) {
-                        const newUserInstance = new User({
-                            userName: profile.displayName,                            
-                            email,
-                            password: 'Aa1' + mongoose.Types.ObjectId(),
-                            social: {
-                                google: {
-                                    googleID,
-                                    access_token: accessToken,
-                                    refresh_token: refreshToken
-                                }
-                            },
-                            picture: profile._json.picture,
-                            active: true
-                        })
-                        return newUserInstance.save()
-                            .then(newUser => next(null, newUser))
-                    } else {
-                        next(null, user)
-                    }
-                })
-                .catch(next)
+        if (googleID && refreshToken) {
+            next(null, user)
         } else {
             next(null, null, { error: 'Error conectando con Google OAuth' })
         }
     }
 ))
-
-// passport.use('youtube-auth', new YoutubeV3Strategy(
-//     configGg,
-//     (accessToken, refreshToken, profile, next) => {
-//         console.log('----estamos en youtube passport------')
-//         const googleID = profile.id;
-//         if (googleID && refreshToken) {
-//             next(null, user)
-//         } else {
-//             next(null, null, { error: 'Error conectando con Google OAuth' })
-//         }
-//     }
-// ))
-
 
 
 
