@@ -18,7 +18,11 @@ window.addEventListener('load', () => {
     //         })
     //         .catch((e) => { console.error(`Error axios my posts: ${e}`) })
     // });
-    document.getElementById('userSearchIdButton').addEventListener('click', function (event) {
+
+    
+    const userSearch = document.getElementById('userSearchIdButton')
+    if (userSearch){
+        userSearch.addEventListener('click', function (event) {
         event.preventDefault();
         const inputName = document.querySelector('#inputUserName');
         axios.get(`/dashboard/findUser/${inputName.value}`)
@@ -60,7 +64,7 @@ window.addEventListener('load', () => {
 
     })
 
-
+}
 
 
 
