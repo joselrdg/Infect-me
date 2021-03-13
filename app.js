@@ -35,7 +35,7 @@ hbs.registerPartials(__dirname + '/views/partials')
 app.use(express.static(path.join(__dirname, 'public')));
 app.set("view engine", "hbs");
 app.use(flash())
-app.use(favicon('public/images/favicon.ico'));
+app.use(favicon('public/images/logo-white.png'));
 
 // Web Title
 app.locals.title = 'Infect-me';

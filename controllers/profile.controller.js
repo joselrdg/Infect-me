@@ -193,10 +193,10 @@ module.exports.library = (req, res, next) => {
 
 module.exports.addPlaylist = (req, res, next) => {
   const token = req.user.social.google.refresh_token;
+  Youtube.ytbPlaylists(req, res, next, 'playlist')
   if (token) {
-    Youtube.ytbPlaylists(req, res, next, 'playlist')
   } else {
-    res.render('users/controlPanel');
+    res.redirect('/control');
   }
 }
 
@@ -261,6 +261,11 @@ module.exports.doDeletePlaylist = (req, res, next) => {
 
 const checkBox = (body) => {
   console.log(body)
+  if (body.bkgBodycolorOn === 'on') {
+    body.bkgBodycolorOn = true;
+  } else {
+    body.bkgBodycolorOn = false;
+  };
   if (body.comment === 'on') {
     body.comment = true;
   } else {
@@ -301,5 +306,6 @@ const checkBox = (body) => {
   } else {
     body.fluid = false;
   };
+  console.log(body)
   return body;
 };

@@ -2,7 +2,7 @@
 const config = {
     clientID: process.env.GOOGLE_CLIENT_ID,
     clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-    callbackURL: process.env.GOOGLE_REDIRECT_URI
+    callbackURL: process.env.GOOGLE_REDIRECT_URI || '/auth/google/callback'
 };
 
 const Playlist = require("../models/Playlist.model");
@@ -11,7 +11,7 @@ const { google } = require('googleapis');
 const oauth2Client = new google.auth.OAuth2(
     process.env.GOOGLE_CLIENT_ID,
     process.env.GOOGLE_CLIENT_SECRET,
-    process.env.GOOGLE_REDIRECT_URI
+    process.env.GOOGLE_REDIRECT_URI || '/auth/google/callback'
 );
 const Youtube = google.youtube({
     version: 'v3',
@@ -99,10 +99,7 @@ const dataVideoYtb = (req, res, next, search) => {
             }
             if (data) {
                 let arrayList = data.data.items;
-                const idP = req.params.id;                
-                // arrayList.forEach(element => {
-                //     element.profile = idP;
-                // });
+                const idP = req.params.id;
                 let userData = {
                     userName: req.user.userName,
                     picture: req.user.picture,

@@ -14,16 +14,47 @@ const profileBodySchema = new mongoose.Schema(
         },
         comment: Boolean,
         bkgImgBODY: String,
-        bkgBODY: String,
-        txtColorBODY: String,
-        backgroundImg: String,
-        bkgImgON: Boolean,
-        bkgImgCover: Boolean,
+        bkgBODY: {
+            type: String,
+            default: '#001a33'
+        },
+        bkgBodycolorOn: {
+            type: Boolean,
+            default: true
+        },
+        txtColorBODY: {
+            type: String,
+            default: '#fdcf1b'
+        },
+        backgroundImg: {
+            type: String,
+            default: '/images/influencer.jpg'
+        },
+        bkgImgON: {
+            type: Boolean,
+            default: true
+        },
+        bkgImgCover: {
+            type: Boolean,
+            default: true
+        },
         backgroundColor: String,
-        textColor: String,
-        imgOneON: Boolean,
-        imageOne: String,
-        imgWidthOne: String,
+        textColor: {
+            type: String,
+            default: '#fdcf1b'
+        },
+        imgOneON: {
+            type: Boolean,
+            default: true
+        },
+        imageOne: {
+            type: String,
+            default: '/images/logo-white.png'
+        },
+        imgWidthOne: {
+            type: String,
+            default: '200'
+        },
         imgHeightOne: String,
         imgTwoON: Boolean,
         imageTwo: String,

@@ -19,7 +19,7 @@ const userSchema = new Schema(
         },
         email: {
             type: String,
-            required: 'You need to add an email',
+            required: false,
             lowercase: true,
             match: [EMAIL_PATTERN, 'Invalid email'],
             trim: true
@@ -46,7 +46,7 @@ const userSchema = new Schema(
         },
         picture: {
             type: String,
-            default: './images/userIcon.png'
+            default: '/images/userIcon.png'
         },
         profileID: {
             type: String

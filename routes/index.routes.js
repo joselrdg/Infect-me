@@ -24,8 +24,11 @@ router.get('/dashboard/activate/:activationToken',secure.isNotAuthenticated, das
 router.get('/login', secure.isNotAuthenticated, usersController.login)
 router.post('/login', secure.isNotAuthenticated, usersController.doLogin)
 // router.get('/auth/google', passport.authenticate('google-auth'))
+
 router.get('/auth/youtube', passport.authenticate('youtube-auth'))
-router.get('/auth/google/callback', usersController.doLoginGoogle)
+router.get('/auth/google/cb', usersController.doLoginGoogle) 
+
+router.get('/auth/google/callback', usersController.doLoginGoogle) 
 // router.get('/auth/google/callback', usersController.youtube)
 
 router.get('/youtube/playlists', secure.isAuthenticated, youtubeController.ytbPlaylists)
@@ -35,7 +38,7 @@ router.get('/activate/:activationToken', secure.isNotAuthenticated, usersControl
 router.post('/logout', secure.isAuthenticated, usersController.logout)
 
 router.get('/control', secure.isAuthenticated, profileController.create)
-// router.get("/playlist/add/playlist/:id", secure.isAuthenticated, profileController.addPlaylist);
+router.get("/playlist/add/playlist/:id", secure.isAuthenticated, profileController.addPlaylist);
 router.get("/playlist/add/:id", secure.isAuthenticated, profileController.addPlaylist);
 router.post("/playlist/add", secure.isAuthenticated, profileController.doAddPlaylist);
 router.post("/video/add", secure.isAuthenticated, profileController.doAddPlayVideo);

@@ -11,8 +11,8 @@ const YoutubeV3Strategy = require('passport-youtube-v3').Strategy
 
 const User = require('../models/user.model')
 // Session handler
-//const session = require("session");
-//const bcrypt = require("bcrypt");
+// const session = require("session");
+// const bcrypt = require("bcrypt");
 
 const configGg = {
     clientID: process.env.GOOGLE_CLIENT_ID,
@@ -80,11 +80,11 @@ passport.use('local-Auth', new LocalStrategy(
 ) // localStrategy instance
 );
 
+
 passport.use('google-auth', new GoogleStrategy(
     configGg,
     (accessToken, refreshToken, profile, next) => {
         const googleID = profile.id;
-        console.log(profile)
         const email = profile.emails[0] ? profile.emails[0].value : undefined;
         if (googleID && email) {
             User.findOne({
@@ -125,16 +125,49 @@ passport.use('google-auth', new GoogleStrategy(
 passport.use('youtube-auth', new YoutubeV3Strategy(
     configGg,
     (accessToken, refreshToken, profile, next) => {
-        console.log('----estamos en youtube passport------')
         const googleID = profile.id;
-        if (googleID && refreshToken) {
-            next(null, user)
-        } else {
-            next(null, null, { error: 'Error conectando con Google OAuth' })
-        }
+        // const email = profile.emails[0] ? profile.emails[0].value : undefined;
+        // if (googleID) {
+            User.findOne(
+                    { 'social.google.googleID': googleID }
+               
+            )
+                .then(user => {
+                    if (!user) {
+                        const newUserInstance = new User({
+                            userName: profile.displayName,                            
+                            // email,
+                            password: 'Aa1' + mongoose.Types.ObjectId(),
+                            social: {
+                                google: {
+                                    googleID,
+                                    access_token: accessToken,
+                                    refresh_token: refreshToken
+                                }
+                            },
+                            picture: profile._json.picture,
+                            active: true
+                        })
+
+                        console.log('nuevo usuario')
+                        return newUserInstance.save()
+                            .then(newUser => next(null, newUser))
+                    } else {
+                        user.social.google.refresh_token = refreshToken;
+                        if (!user.social.google.accessToken){
+                            user.social.google.accessToken = accessToken;
+                            user.picture = profile._json.picture;
+                        } 
+                        console.log('ya estaba el usuario')
+                        next(null, user)
+                    }
+                })
+        //         .catch(next)
+        // } else {
+        //     next(null, null, { error: 'Error conectando con Google OAuth' })
+        // }
     }
 ))
-
 
 
 
