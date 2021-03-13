@@ -9,11 +9,12 @@
 
         <div class="row">
             {{#each categories as |category|}}
-           <a href="/pages/category/{{category.index}}" class="col-6 me-2 rounded-pill mb-2 category__button">{{category.description}}</a>
-  
-                    {{/each}}
-       </div>
-   
+            <a href="/pages/category/{{category.index}}"
+                class="col-6 me-2 rounded-pill mb-2 category__button">{{category.description}}</a>
+
+            {{/each}}
+        </div>
+
 
 
     </section>
@@ -25,18 +26,11 @@
             {{!-- Nav bar block--}}
             <nav class="navbar navbar-expand-lg navbar-light bg-light">
                 <div class="container-fluid">
-                    <a class="navbar-brand" href="#">Mis posts</a>
+                    <h5 class="navbar-brand">Mis posts</h5>
 
                     <div class="collapse navbar-collapse" id="navbarNav">
                         <ul class="navbar-nav">
- {{!-- 
-                            <li class="nav-item">
-                                <a id='mypostsButton' class="nav-link active" aria-current="page"
-                                    data-bs-toggle="collapse" role="button" data-bs-target=".multi-collapse"
-                                    aria-expanded="false" aria-controls="collapseExample" href="#">{{#if vermas}}Ver
-                                    mas{{else}}Ver menos{{/if}}</a>
-                            </li>
-   --}}    
+
                             <li class="nav-item">
                                 <a class="nav-link active" href="/posts/create">crear un post</a>
                             </li>
@@ -47,57 +41,42 @@
 
             <div class="row align-items-center"> {{!-- List block--}}
                 {{#each posts as |postData| }} {{!-- Item list--}}
-                {{>post postData}}
+                {{>postlist postData}}
                 {{/each}}
             </div> {{!-- End list block--}}
         </div>
-        <div class="border border-2 rounded-3">
+        <div class="border border-2 rounded-3 mt-5">
             <nav class="navbar navbar-expand-lg navbar-light bg-light">
                 <div class="container-fluid">
-                    <a class="navbar-brand" href="#">Páginas favoritas</a>
+                    <h5 class="navbar-brand" >Páginas favoritas</h5>
 
-                    <div class="collapse navbar-collapse" id="navbarNav">
- {{!--
-                       <ul class="navbar-nav">
-                            <li class="nav-item">
-                                <a id='pagesButton' class="nav-link active" aria-current="page"
-                                    data-bs-toggle="collapse" role="button" data-bs-target=".multi-collapse"
-                                    aria-expanded="false" aria-controls="collapseExample" href="#">{{#if vermas}}Ver
-                                    mas{{else}}Ver menos{{/if}}</a>
-                            </li>
-                            <li>
-
-                        </ul>
-       --}} 
-                    </div>
                 </div>
             </nav>
             <div class="row align-items-center"> {{!-- pages List block--}}
 
-
-          {{!--       <div class="col-6 d-flex">
-                --}}
-                    {{#each pagesFollow as |follow|}}
-                    <div class="col-3 m-4">
-                        {{> pages}}
-                    </div>
-                    {{/each}}
+                {{#each pagesFollow as |follow|}}
+                <div class="col-3 m-4">
+                    {{> pages}}
                 </div>
-            </div> {{!-- End list block--}}
+                {{/each}}
+            </div>
+        </div> {{!-- End list block--}}
         </div>
     </section>
     <section class="col-3">
-        <div class="border border-2 rounded-3"> {{!-- Container busca usuarios--}}
+        <div> {{!-- Container busca usuarios--}}
             <form id="busca-usuario">
                 <div class="mb-3">
-                    <label for="exampleFormControlInput1" class="form-label">
+                    <label for="exampleFormControlInput1" class="form-label seach__section">
+                       
                         <h2>Busqueda de usuarios</h2>
+                       
                     </label>
                     <div class="input-group">
                         <input name="inputUserName" id="inputUserName" type="text" class="form-control"
                             placeholder="Nombre de usuario" aria-label="Nombre de usuario"
                             aria-describedby="basic-addon2">
-                        <button id="userSearchIdButton" class="btn btn-outline-secondary">Busca</button>
+                        <button id="userSearchIdButton" class="btn friends_button">Busca</button>
                     </div>
                 </div>
 
@@ -105,8 +84,8 @@
             <div id="busca-usuario-salida">
 
             </div>
-        </div class="border border-2 rounded-3 friends__container">
-        <section class="friends__header">
+        </div class="seach__section">
+        <section class="friends__header seach__section">
             <h2> Amigos</h2>
         </section>
         <section class="friends__list__container"> {{!-- List friends block--}}
@@ -114,14 +93,12 @@
                 {{#each friendsSelected as |friendData| }} {{!-- Item list--}}
 
 
-                <li class="list-group-item  friend__info"> {{!-- Friend Item list--}}
+                <li class="list-group-item  friends__info"> {{!-- Friend Item list--}}
                     <div class="input-group">
-                        <input type="text" class="form-control" placeholder="{{friend.userName}}"
+                        <input type="text" class="form-control friends__text" placeholder="{{friend.userName}}"
                             aria-label="{{friendData.friend.userName}}" disabled readonly>
-                        <a class="btn btn-primary" style="background-color: #3c98e9;"
-                            href="/page/{{friendData.profile.[0]._id}}">Perfil</a>
-                        <a class="btn btn-primary" style="background-color: #3c98e9;"
-                            href="/dashboard/deletefriend/{{friendData.id}}">Eliminar</a>
+                        <a class="btn friends_button" href="/page/{{friendData.profile.[0]._id}}">Perfil</a>
+                        <a class="btn friends_button"  href="/dashboard/deletefriend/{{friendData.id}}">Eliminar</a>
 
 
                     </div>
@@ -134,6 +111,7 @@
 
         </div>
     </section>
+
 </main>
 
 </div>
