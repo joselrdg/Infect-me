@@ -1,5 +1,5 @@
 <div class="container-fluid px-0 pb-5"
-    style="font-family: {{font}}; background-image: url('{{bkgImgBODY}}'); background-color: {{bkgBODY}}; color: {{txtColorBODY}}">
+    style="font-family: {{font}}; background-image: url('{{bkgImgBODY}}');{{#if bkgBodycolorOn}}background-color: {{bkgBODY}};{{/if}}color: {{txtColorBODY}}">
     {{> profile}}
 
     <div class=" container my-4">
@@ -30,7 +30,7 @@
 
     {{#each body as |container| }}
     <div class="px-0"
-        style="font-family: {{font}}; margin-bottom: {{margin}}px; background-color: {{bkgBODY}}; color: {{txtColorBODY}}">
+        style="font-family: {{font}}; margin-bottom: {{margin}}px;{{#if bkgBodycolorOn}} background-color: {{bkgBODY}};{{/if}}color: {{txtColorBODY}}">
         {{> profile}}
         <div id="{{id}}" class="__commets"></div>
         {{!-- <a class="__like btn btn-outline " data-containerId="${body}" data-commentId="${_id}" data-action="like"

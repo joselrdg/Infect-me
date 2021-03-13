@@ -261,6 +261,11 @@ module.exports.doDeletePlaylist = (req, res, next) => {
 
 const checkBox = (body) => {
   console.log(body)
+  if (body.bkgBodycolorOn === 'on') {
+    body.bkgBodycolorOn = true;
+  } else {
+    body.bkgBodycolorOn = false;
+  };
   if (body.comment === 'on') {
     body.comment = true;
   } else {
@@ -301,5 +306,6 @@ const checkBox = (body) => {
   } else {
     body.fluid = false;
   };
+  console.log(body)
   return body;
 };

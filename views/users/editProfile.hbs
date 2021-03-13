@@ -188,7 +188,6 @@
                                                     class="form-control my-3 __editForm"
                                                     placeholder="Un segundo título">
                                             </div>
-
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
@@ -259,6 +258,12 @@
                                     </div>
                                     <div class="row">
                                         <div class="col">
+                                             <div class="custom-control custom-checkbox">
+                                                <input type="checkbox" name="bkgBodycolorOn" class="custom-control-input" {{#if
+                                                    bkgBodycolorOn}}checked{{/if}}>
+                                                <label class="custom-control-label mx-2" for="col2">Selecciona para
+                                                    mostrar el color del cuerpo.</label>
+                                            </div>
 
                                             <div class="custom-control custom-checkbox">
                                                 <input type="checkbox" name="col2" class="custom-control-input" {{#if

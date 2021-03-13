@@ -25,6 +25,10 @@ const profileSchema = new mongoose.Schema(
             type: String,
             default: '#001a33'
         },
+        bkgBodycolorOn: {
+            type: Boolean,
+            default: true
+        },
         txtColorBODY: {
             type: String,
             default: '#fdcf1b'
@@ -52,7 +56,7 @@ const profileSchema = new mongoose.Schema(
         },
         imageOne: {
             type: String,
-            default: '/images/unicorn.png'
+            default: '/images/logo-white.png'
         },
         imgWidthOne: {
             type: String,
