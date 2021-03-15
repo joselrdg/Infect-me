@@ -80,61 +80,49 @@ passport.use('local-Auth', new LocalStrategy(
 ) // localStrategy instance
 );
 
-
-passport.use('google-auth', new GoogleStrategy(
-    configGg,
-    (accessToken, refreshToken, profile, next) => {
-        const googleID = profile.id;
-        const email = profile.emails[0] ? profile.emails[0].value : undefined;
-        if (googleID && email) {
-            User.findOne({
-                $or: [
-                    { email: email },
-                    { 'social.google.googleID': googleID }
-                ]
-            })
-                .then(user => {
-                    if (!user) {
-                        const newUserInstance = new User({
-                            userName: profile.displayName,
-                            email,
-                            password: 'Aa1' + mongoose.Types.ObjectId(),
-                            social: {
-                                google: {
-                                    googleID,
-                                    access_token: accessToken,
-                                    refresh_token: refreshToken
-                                }
-                            },
-                            picture: profile._json.picture,
-                            active: true
-                        })
-                        return newUserInstance.save()
-                            .then(newUser => next(null, newUser))
-                    } else {
-                        next(null, user)
-                    }
-                })
-                .catch(next)
-        } else {
-            next(null, null, { error: 'Error conectando con Google OAuth' })
-        }
-    }
-))
-
-
-// passport.use('youtube-auth', new YoutubeV3Strategy(
+// passport.use('google-auth', new GoogleStrategy(
 //     configGg,
 //     (accessToken, refreshToken, profile, next) => {
-//         console.log('----estamos en youtube passport------')
-//         const googleID = profile.id;
-//         if (googleID && refreshToken) {
-//             next(null, user)
-//         } else {
-//             next(null, null, { error: 'Error conectando con Google OAuth' })
-//         }
+//         console.log('google auth')
+//         console.log(profile)
+        // const googleID = profile.id;
+        // const email = profile.emails[0] ? profile.emails[0].value : undefined;
+        // if (googleID && email) {
+        //     User.findOne({
+        //         $or: [
+        //             { email: email },
+        //             { 'social.google.googleID': googleID }
+        //         ]
+        //     })
+        //         .then(user => {
+        //             if (!user) {
+        //                 const newUserInstance = new User({
+        //                     userName: profile.displayName,
+        //                     email,
+        //                     password: 'Aa1' + mongoose.Types.ObjectId(),
+        //                     social: {
+        //                         google: {
+        //                             googleID,
+        //                             access_token: accessToken,
+        //                             refresh_token: refreshToken
+        //                         }
+        //                     },
+        //                     picture: profile._json.picture,
+        //                     active: true
+        //                 })
+        //                 return newUserInstance.save()
+        //                     .then(newUser => next(null, newUser))
+        //             } else {
+        //                 next(null, user)
+        //             }
+        //         })
+        //         .catch(next)
+        // } else {
+        //     next(null, null, { error: 'Error conectando con Google OAuth' })
+        // }
 //     }
 // ))
+
 
 passport.use('youtube-auth', new YoutubeV3Strategy(
     configGg,
@@ -164,17 +152,25 @@ passport.use('youtube-auth', new YoutubeV3Strategy(
                         })
 
                         console.log('nuevo usuario')
-                        console.log(profile.items)
                         return newUserInstance.save()
-                        .then(newUser => next(null, newUser))
+                            .then(newUser => next(null, newUser))
                     } else {
-                        user.social.google.refresh_token = refreshToken;
-                        if (!user.social.google.accessToken) {
-                            user.social.google.accessToken = accessToken;
-                            user.picture = profile._json.picture;
+                        if (user.social.google.access_token == accessToken) {
+                            console.log('ya estaba el usuario')
+                            next(null, user)
+                        } else {
+                            if(user.picture = '/images/userIcon.png'){
+                                user.picture = (profile._json.items[0].snippet.thumbnails.default.url);
+                            }
+                            console.log(profile._json.items[0])
+                            user.social.google.access_token = accessToken;
+                            user.social.google.refresh_token = refreshToken;
+                            User.findByIdAndUpdate(user._id, user)
+                                .then(user => {
+                                    console.log('se actualiza token')
+                                    next(null, user)
+                                })
                         }
-                        console.log('ya estaba el usuario')
-                        next(null, user)
                     }
                 })
                 .catch(next)

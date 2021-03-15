@@ -79,7 +79,7 @@ module.exports.editHead = (req, res, next) => {
 
 module.exports.doEditHead = (req, res, next) => {
   let body = req.body;
-  console.log(req.body)
+  console.log(body)
   body = checkBox(body);
   const query = { user: req.user._id };
   Profile.findOneAndUpdate(query, body, { new: true })
@@ -260,7 +260,6 @@ module.exports.doDeletePlaylist = (req, res, next) => {
 
 
 const checkBox = (body) => {
-  console.log(body)
   if (body.bkgBodycolorOn === 'on') {
     body.bkgBodycolorOn = true;
   } else {

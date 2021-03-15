@@ -33,10 +33,8 @@ module.exports.comments = (req, res, next) => {
     const query = {
         body: req.params.id
     }
-    console.log('estamos en comments')
     Comment.find(query)
         .then(comments => {
-            console.log(comments)
             res.json(comments)
         })
         .catch((e) => next(e));
@@ -98,20 +96,20 @@ module.exports.page = (req, res, next) => {
         res.redirect('/profile')
     } else {
         Profile.findById(id)
-        .populate('body')
-        .then((p) => {
-            const idU = req.user._id
-            const esta = p.followers.indexOf(idU)
-            if (esta) {
-                p.follow = true;
-            } else {
-                p.follow = false;
-            }
-            p.userN = req.currentUser.userName;
-            p.picture = req.currentUser.picture
-            res.render('users/profile', p);
-        })
-        .catch((e) => next(e));
+            .populate('body')
+            .then((p) => {
+                const idU = req.user._id
+                const esta = p.followers.indexOf(idU)
+                if (esta) {
+                    p.follow = true;
+                } else {
+                    p.follow = false;
+                }
+                p.userN = req.currentUser.userName;
+                p.picture = req.currentUser.picture
+                res.render('users/profile', p);
+            })
+            .catch((e) => next(e));
     }
 }
 module.exports.create = (req, res, next) => {
@@ -210,7 +208,6 @@ module.exports.createBody = ((req, res, next) => {
 
 module.exports.doCreateBody = (req, res, next) => {
     let body = checkBox(req.body);
-    console.log(body)
     const query = { _id: req.params.id, user: req.currentUser._id }
     Profile.findOne({ _id: req.params.id, user: req.currentUser._id })
         .then((profile) => {
@@ -272,7 +269,7 @@ module.exports.deletePage = (req, res, next) => {
 module.exports.pagesCategory = (req, res, next) => {
     const category = categories.filter(category => { return category.index === req.params.index })
 
-  
+
     Pages.find({ category: category[0].index })
         .populate('profile')
         .then((pages) => {
@@ -282,9 +279,9 @@ module.exports.pagesCategory = (req, res, next) => {
                 picture: req.currentUser.picture,
                 pages: pages,
                 categoryFilter: category[0].description,
-                
+
             }
-            
+
             res.render('users/pagescategory', pagesCategory)
 
         })
@@ -294,6 +291,11 @@ module.exports.pagesCategory = (req, res, next) => {
 
 
 const checkBox = (body) => {
+    if (body.bkgBodycolorOn === 'on') {
+        body.bkgBodycolorOn = true;
+    } else {
+        body.bkgBodycolorOn = false;
+    };
     if (body.comment === 'on') {
         body.comment = true;
     } else {
