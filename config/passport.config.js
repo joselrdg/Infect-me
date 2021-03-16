@@ -159,7 +159,6 @@ passport.use('youtube-auth', new YoutubeV3Strategy(
                         if (user.picture = '/images/userIcon.png') {
                             user.picture = (profile._json.items[0].snippet.thumbnails.default.url);
                         }
-                        console.log(profile._json.items[0])
                         user.social.google.access_token = accessToken;
                         user.social.google.refresh_token = refreshToken;
                         User.findByIdAndUpdate(user._id, user)
