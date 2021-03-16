@@ -90,7 +90,8 @@ module.exports.doLoginGoogle = (req, res, next) => {
       } else {
         req.login(user, loginErr => {
           if (loginErr) { next(loginErr) }
-          else {res.redirect('/profile') }
+          else {console.log(user); res.redirect('/profile') }
+          
         })
       }
     })(req, res, next)
