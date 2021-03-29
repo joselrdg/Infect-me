@@ -148,7 +148,7 @@ Distributed under the MIT License. See `LICENSE` for more information.
 <!-- CONTACT -->
 ## Contact
 
-José Luis Rodríguez , [![Gmail Badge](https://img.shields.io/badge/-Gmail-c14438?style=flat-square&logo=Gmail&logoColor=white&link=mailto:shuklaraghav321.com)](mailto:josesietepicos@gmail.com)
+José Luis Rodríguez , [josesietepicos@gmail.com](mailto:josesietepicos@gmail.com)
 
 Project Link: [https://github.com/joselrdg/Infect-me](https://github.com/joselrdg/Infect-me)
 
@@ -161,5 +161,3 @@ Project Link: [https://infectme.herokuapp.com/](https://infectme.herokuapp.com/)
 * []()
 * []()
 * []() -->
-
-
