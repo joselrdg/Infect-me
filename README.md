@@ -152,7 +152,7 @@ José Luis Rodríguez , [josesietepicos@gmail.com](mailto:josesietepicos@gmail.c
 
 Project Link: [https://github.com/joselrdg/Infect-me](https://github.com/joselrdg/Infect-me)
 
-Project Link: [https://infectme.herokuapp.com/](https://infectme.herokuapp.com/)
+Demo Link: [https://infectme.herokuapp.com/](https://infectme.herokuapp.com/)
 
 
 <!-- ACKNOWLEDGEMENTS -->
